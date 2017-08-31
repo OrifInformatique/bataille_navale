@@ -1,0 +1,18 @@
+objets-Bataille_Naval
+
+un double tableau de 10*10 Case /ou un simple tableau de 100 Case
+
+
+la classe Case qui contient :{   //avec les valeurs par défaut
+
+	int scoreIA = 0;//pour donner plus d'importance à l'aléatoire de l'ia  (voir ia-Bataille_Naval.txt)
+
+	char         X; (A-J)
+	int(ou byte) Y; (1-10)
+
+	bool bateau = false; //si la case est sous un bateau
+	bool touche = false; //si la case est touché
+	bool coule  = false; //si la case est coulé
+
+	//possiblement des variables de statistiques comme le numéro de quand la case à été touché...
+}
