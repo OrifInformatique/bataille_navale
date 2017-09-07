@@ -4,12 +4,30 @@
 
 public class Case {
     // Attributes
-    public boolean hited;
-    // TODO : Ship Attribute (EXACT data type have to be determined)
+    private boolean touched;
+    private String ship;
 
     // Constructors
     public Case(){
-        this.hited = false;
-        // TODO : Initialise Ship
+        this.touched = false;
+        this.ship = "None";
+    }
+    
+    // Setters
+    public void setTouched(boolean setHited){
+        this.touched = setHited;
+    }
+    
+    public void setShip(String setShip){
+        this.ship = setShip;
+    }
+    
+    // Getters
+    public boolean getTouched(){
+        return this.touched;
+    }
+    
+    public String getShip(){
+        return this.ship;
     }
 }

@@ -4,17 +4,33 @@
 
 public class Grid {
     // Attributes
-    public Case[][] nbCases;
-    public String playerName;
+    private Case[][] CasesGrid;
+    private String playerName;
 
     // Constructors
     Grid(){
-        this.nbCases = new Case[10][10];
+        this.CasesGrid = new Case[10][10];
         this.playerName = "None";
     }
 
     Grid(String Name){
-        this.nbCases = new Case[10][10];
+        this.CasesGrid = new Case[10][10];
         this.playerName = Name;
     }
+
+    // Setters
+
+    public void setPlayerName(String setPlayerName){
+        this.playerName = setPlayerName;
+    }
+
+    // Getters
+    public Case getCase(byte vertical,byte horizontal){
+        return this.CasesGrid[vertical][horizontal];
+    }
+
+    public String getPlayerName(){
+        return this.playerName;
+    }
+
 }

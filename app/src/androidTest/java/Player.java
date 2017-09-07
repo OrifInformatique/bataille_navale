@@ -4,9 +4,9 @@
 
 public class Player {
     // Attributes
-    public String name;
-    public String color;
-    public Grid playerGrid;
+    private String name;
+    private String color;
+    private Grid playerGrid;
 
     // Constructors
     Player(){
@@ -19,5 +19,27 @@ public class Player {
         this.name = Name;
         this.color = Color;
         this.playerGrid = new Grid(this.name);
+    }
+
+    // Setters
+    public void setName(String setName){
+        this.name = setName;
+    }
+
+    public void setColor(String setColor){
+        this.color = setColor;
+    }
+
+    // Getters
+    public String getName(){
+        return this.name;
+    }
+
+    public String getColor(){
+        return this.color;
+    }
+
+    public Grid getPlayerGrid(){
+        return this.playerGrid;
     }
 }
