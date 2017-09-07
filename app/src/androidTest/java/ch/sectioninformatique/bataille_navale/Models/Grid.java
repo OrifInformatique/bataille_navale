@@ -1,3 +1,5 @@
+package ch.sectioninformatique.bataille_navale.Models;
+
 /**
  * Created by ToRe on 01.09.2017.
  */

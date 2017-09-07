@@ -1,20 +1,23 @@
+package ch.sectioninformatique.bataille_navale.Models;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
 public class Ship {
     // Attributes
-    private byte nbCases;
-    private String DefaultOrientation;
-    private byte nbHit;
+    protected byte nbCases;
+    protected String DefaultOrientation;
+    protected byte nbHit;
+
     // Constructors
-    Ship(){
+    public Ship(){
         this.nbCases = 0;
         this.DefaultOrientation = "up";
         this.nbHit = 0;
     }
 
-    Ship(byte cases,String orientation){
+    public Ship(byte cases,String orientation){
         this.nbCases = cases;
         this.DefaultOrientation = orientation;
         this.nbHit = 0;
