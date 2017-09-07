@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">bataille_navale</string>
+    <string name="app_name">Bataille Navale</string>
+    <string name="LabelMenu">Menu</string>
+    <string name="PlayButton">Jouer</string>
+    <string name="SettingsButton">Option</string>
+    <string name="CloseButton">Quitter</string>
+    <string name="ReturnButton">Retour</string>
 </resources>
