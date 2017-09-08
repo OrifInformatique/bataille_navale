@@ -7,12 +7,12 @@ package ch.sectioninformatique.bataille_navale.Models;
 public class Case {
     // Attributes
     private boolean touched;
-    private String ship;
+    private Ship ship;
 
     // Constructors
     public Case(){
         this.touched = false;
-        this.ship = "None";
+        this.ship = null;
     }
     
     // Setters
@@ -20,7 +20,7 @@ public class Case {
         this.touched = setHited;
     }
     
-    public void setShip(String setShip){
+    public void setShip(Ship setShip){
         this.ship = setShip;
     }
     
@@ -29,7 +29,13 @@ public class Case {
         return this.touched;
     }
     
-    public String getShip(){
+    public Ship getShip(){
+        return this.ship;
+    }
+
+    // Methods
+    public Ship touchedCase(){
+        this.touched = true;
         return this.ship;
     }
 }

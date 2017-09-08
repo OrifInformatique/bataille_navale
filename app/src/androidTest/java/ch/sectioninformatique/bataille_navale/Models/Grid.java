@@ -7,23 +7,23 @@ package ch.sectioninformatique.bataille_navale.Models;
 public class Grid {
     // Attributes
     private Case[][] CasesGrid;
-    private String playerName;
+    private Player player;
 
     // Constructors
     Grid(){
         this.CasesGrid = new Case[10][10];
-        this.playerName = "None";
+        this.player = null;
     }
 
-    Grid(String Name){
+    Grid(Player setPlayer){
         this.CasesGrid = new Case[10][10];
-        this.playerName = Name;
+        this.player = setPlayer;
     }
 
     // Setters
 
-    public void setPlayerName(String setPlayerName){
-        this.playerName = setPlayerName;
+    public void setPlayer(Player setPlayer){
+        this.player = setPlayer;
     }
 
     // Getters
@@ -31,8 +31,8 @@ public class Grid {
         return this.CasesGrid[vertical][horizontal];
     }
 
-    public String getPlayerName(){
-        return this.playerName;
+    public Player getPlayer(){
+        return this.player;
     }
 
 }

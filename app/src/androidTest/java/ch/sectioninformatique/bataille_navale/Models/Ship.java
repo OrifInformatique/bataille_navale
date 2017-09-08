@@ -48,4 +48,14 @@ public class Ship {
     public byte getNbHit(){
         return this.nbHit;
     }
+
+    // Methods
+    public boolean isSinked(){
+
+        if(this.nbCases == this.nbHit){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
