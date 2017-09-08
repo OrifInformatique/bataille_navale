@@ -6,69 +6,1078 @@
     android:layout_height="match_parent"
     tools:context="ch.sectioninformatique.bataille_navale.SetGameActivity">
 
-    <Button
-        android:id="@+id/ReturnButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_weight="2"
-        android:fontFamily="serif-monospace"
-        android:text="@string/ReturnButton"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_weight="1"
-        android:text="@string/NextButton"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toRightOf="@+id/ReturnButton"
-        app:layout_constraintRight_toRightOf="parent" />
-
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/SetShipHelpMessagePlayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:labelFor="@+id/PseudoEditText"
             android:text="@string/SetShipHelpMessagePlayer1"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:labelFor="@+id/PseudoEditText"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="349dp" />
 
         <EditText
             android:id="@+id/PseudoEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/Player1"
             android:inputType="textPersonName"
-            android:text="@string/Player1"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="265dp" />
 
     </LinearLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorPlayer1"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:ignore="UnusedAttribute">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:gravity="center"
+                android:text=""
+                tools:ignore="HardcodedText"/>
+
+            <TextView
+                android:id="@+id/textViewA"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="A"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewB"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="B"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewC"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="C"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewD"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="D"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewE"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="E"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewF"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="F"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewG"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="G"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewH"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="H"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewI"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="I"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/textViewJ"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="J"
+                tools:ignore="HardcodedText" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="1"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_A1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_A10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="2"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_B1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_B10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="3"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_C1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_C10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="4"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_D1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_D10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="5"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_E1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_E10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="6"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_F1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"/>
+
+            <Button
+                android:id="@+id/btnGridSet_F2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_F3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_F4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_F5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_F6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_F7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_F8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_F9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_F10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="7"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_G1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_G10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="8"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_H1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_H10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="9"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_I1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_I10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor"
+                android:gravity="center"
+                android:text="10"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btnGridSet_J1"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J2"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J3"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J4"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J5"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J6"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J7"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J8"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J9"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+
+            <Button
+                android:id="@+id/btnGridSet_J10"
+                android:layout_width="@string/cellSetSize"
+                android:layout_height="@string/cellSetSize"
+                android:layout_margin="@string/cellSetMargin"
+                android:background="@color/cellSetColor" />
+        </TableRow>
+
+    </TableLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/constraintLayout2">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="@string/NextButton"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@+id/ReturnButton"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/ReturnButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="2"
+            android:fontFamily="serif-monospace"
+            android:text="@string/ReturnButton"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

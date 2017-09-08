@@ -2,7 +2,7 @@
     <string name="app_name">Bataille Navale</string>
     <string name="LabelMenu">Menu</string>
     <string name="PlayButton">Jouer</string>
-    <string name="SettingsButton">Option</string>
+    <string name="SettingsButton">Options</string>
     <string name="CloseButton">Quitter</string>
     <string name="ReturnButton">Retour</string>
     <string name="NextButton">Suivant</string>
@@ -12,5 +12,8 @@
     <string name="ColorPlayer1">Couleur du joueur 1</string>
     <string name="ColorPlayer2">Couleur du joueur 2</string>
     <string name="MenuTitle">Menu</string>
-
+    <!-- <Cells settings -->
+        <string name="cellSetSize">30dp</string>
+        <string name="cellSetMargin">1dp</string>
+    <!-- /> -->
 </resources>
