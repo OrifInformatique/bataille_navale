@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">bataille_navale</string>
+    <string name="app_name">Bataille Navale</string>
+    <string name="LabelMenu">Menu</string>
+    <string name="PlayButton">Jouer</string>
+    <string name="SettingsButton">Option</string>
+    <string name="CloseButton">Quitter</string>
+    <string name="ReturnButton">Retour</string>
+    <string name="NextButton">Suivant</string>
+    <string name="Player1">Joueur 1</string>
+    <string name="SetShipHelpMessagePlayer1">C\'est au tour du premier joueur de placer ses bateaux</string>
+    <string name="SetShipHelpMessagePlayer2">C\'est au tour du deuxième joueur de placer ses bateaux</string>
+    <string name="ColorPlayer1">Couleur du joueur 1</string>
+    <string name="ColorPlayer2">Couleur du joueur 2</string>
+    <string name="MenuTitle">Menu</string>
+
 </resources>
