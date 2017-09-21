@@ -1,9 +1,9 @@
 objets-Bataille_Naval
 
-un double tableau de 10*10 Case /ou un simple tableau de 100 Case
+un double tableau de 10*10 case /ou un simple tableau de 100 ch.case
 
 
-la classe Case qui contient :{   //avec les valeurs par défaut
+la classe case qui contient :{   //avec les valeurs par défaut
 
 	int scoreIA = 0;//pour donner plus d'importance à l'aléatoire de l'ia  (voir ia-Bataille_Naval.txt)
 
