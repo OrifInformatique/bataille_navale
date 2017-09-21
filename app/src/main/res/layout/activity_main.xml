@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ch.sectioninformatique.bataille_navale.MainActivity">
+    tools:context="ch.sectioninformatique.bataille_navale.Activities.MainActivity">
 
     <LinearLayout
         android:layout_width="0dp"

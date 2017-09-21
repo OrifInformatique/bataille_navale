@@ -1,4 +1,4 @@
-package ch.sectioninformatique.bataille_navale;
+package ch.sectioninformatique.bataille_navale.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +8,11 @@ import android.widget.Button;
 
 import java.util.Random;
 
-public class SettingActivity extends AppCompatActivity {
-    final Button randomColor = (Button) findViewById(R.id.ColorPlayer1Button);
+import ch.sectioninformatique.bataille_navale.R;
 
+public class SettingActivity extends AppCompatActivity {
+    /*final Button randomColor = (Button) findViewById(R.id.ColorPlayer1Button);
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,7 @@ public class SettingActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+/*
         randomColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,9 +37,9 @@ public class SettingActivity extends AppCompatActivity {
                 int color = (A & 0xff) << 24 | (R & 0xff) << 16 | (G & 0xff) << 8 | (B & 0xff);
 
 
-
             }
         });
+        */
     }
 
 

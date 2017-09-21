@@ -1,10 +1,12 @@
-package ch.sectioninformatique.bataille_navale;
+package ch.sectioninformatique.bataille_navale.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import ch.sectioninformatique.bataille_navale.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,13 +24,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         Button settingGame = (Button) findViewById(R.id.settingButton);
         settingGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent);
+                startActivity(intent) ;
             }
         });
 

@@ -1,7 +1,9 @@
-package ch.sectioninformatique.bataille_navale;
+package ch.sectioninformatique.bataille_navale.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import ch.sectioninformatique.bataille_navale.R;
 
 public class EndGameActivity extends AppCompatActivity {
 

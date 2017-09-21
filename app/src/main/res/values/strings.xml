@@ -12,8 +12,4 @@
     <string name="ColorPlayer1">Couleur du joueur 1</string>
     <string name="ColorPlayer2">Couleur du joueur 2</string>
     <string name="MenuTitle">Menu</string>
-    <!-- <Cells settings -->
-        <string name="cellSetSize">30dp</string>
-        <string name="cellSetMargin">1dp</string>
-    <!-- /> -->
 </resources>
