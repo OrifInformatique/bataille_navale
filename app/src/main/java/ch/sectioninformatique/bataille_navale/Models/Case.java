@@ -6,7 +6,13 @@ package ch.sectioninformatique.bataille_navale.Models;
 
 public class Case {
     // Attributes
+    /**
+     * Describe if that Case has been already touched.
+     */
     private boolean touched;
+    /**
+     * That Case's Ship, is null if don't contain a Ship.
+     */
     private Ship ship;
 
     // Constructors
@@ -14,10 +20,15 @@ public class Case {
         this.touched = false;
         this.ship = null;
     }
+
+    public Case(Ship ship){
+        this.touched = false;
+        this.ship = ship;
+    }
     
     // Setters
-    public void setTouched(boolean setHited){
-        this.touched = setHited;
+    public void setTouched(boolean setTouched){
+        this.touched = setTouched;
     }
     
     public void setShip(Ship setShip){
@@ -34,8 +45,20 @@ public class Case {
     }
 
     // Methods
+
+    /**
+     * Mark this case.
+     * If this Case contain a Ship, then the Ship will be hit
+     *
+     * @return The Ship who is on the Case, null if don't contain a Ship.
+     */
     public Ship touchedCase(){
         this.touched = true;
+
+        if(this.ship != null){
+            this.ship.hitShip();
+        }
+
         return this.ship;
     }
 }

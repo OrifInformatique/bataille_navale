@@ -6,28 +6,34 @@ package ch.sectioninformatique.bataille_navale.Models;
 
 public class Grid {
     // Attributes
+    /**
+     * That Grid's  10x10 Array of Cases
+     */
     private Case[][] CasesGrid;
+    /**
+     * That Grid's Player.
+     */
     private Player player;
+    private final int gridLength = 10;
 
     // Constructors
-    Grid(){
-        this.CasesGrid = new Case[10][10];
+    public Grid(){
+        this.CasesGrid = new Case[this.gridLength][this.gridLength];
         this.player = null;
     }
 
-    Grid(Player setPlayer){
-        this.CasesGrid = new Case[10][10];
+    public Grid(Player setPlayer){
+        this.CasesGrid = new Case[this.gridLength][this.gridLength];
         this.player = setPlayer;
     }
 
     // Setters
-
     public void setPlayer(Player setPlayer){
         this.player = setPlayer;
     }
 
     // Getters
-    public Case getCase(byte vertical,byte horizontal){
+    public Case getCase(int vertical,int horizontal){
         return this.CasesGrid[vertical][horizontal];
     }
 
