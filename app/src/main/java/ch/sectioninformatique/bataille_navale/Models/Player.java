@@ -1,23 +1,33 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import android.graphics.Color;
 /**
  * Created by ToRe on 01.09.2017.
  */
 
 public class Player {
     // Attributes
+    /**
+     * That Player's Name.
+     */
     private String name;
-    private String color;
+    /**
+     * That Player's Color.
+     */
+    private Color color;
+    /**
+     * That Player's Grid.
+     */
     private Grid playerGrid;
 
     // Constructors
-    Player(){
+    public Player(){
         this.name = "None";
-        this.color = "None";
+        this.color = new Color();
         this.playerGrid = new Grid();
     }
 
-    Player(String Name,String Color){
+    public Player(String Name,Color Color){
         this.name = Name;
         this.color = Color;
         this.playerGrid = new Grid(this);
@@ -28,7 +38,7 @@ public class Player {
         this.name = setName;
     }
 
-    public void setColor(String setColor){
+    public void setColor(Color setColor){
         this.color = setColor;
     }
 
@@ -37,7 +47,7 @@ public class Player {
         return this.name;
     }
 
-    public String getColor(){
+    public Color getColor(){
         return this.color;
     }
 

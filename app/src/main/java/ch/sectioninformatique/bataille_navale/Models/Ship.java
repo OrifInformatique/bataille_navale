@@ -6,20 +6,33 @@ package ch.sectioninformatique.bataille_navale.Models;
 
 public class Ship {
     // Attributes
-    protected byte nbCases;
-    protected String DefaultOrientation;
-    protected byte nbHit;
+    /**
+     * That Ship's number of occupied Cases.
+     */
+    private byte nbCases;
+    /**
+     * This Ship's Orientation.
+     * 'U' for Up.
+     * 'D' for Down.
+     * 'L' for Left.
+     * 'R' for Right.
+     */
+    private char Orientation;
+    /**
+     * That Ship's number of times it got a hit.
+     */
+    private byte nbHit;
 
     // Constructors
     public Ship(){
         this.nbCases = 0;
-        this.DefaultOrientation = "up";
+        this.Orientation = 'U';
         this.nbHit = 0;
     }
 
-    public Ship(byte cases,String orientation){
+    public Ship(byte cases,char orientation){
         this.nbCases = cases;
-        this.DefaultOrientation = orientation;
+        this.Orientation = orientation;
         this.nbHit = 0;
     }
 
@@ -28,8 +41,8 @@ public class Ship {
         this.nbCases = setNbCases;
     }
 
-    public void setDefaultOrientation(String setDefaultOrientation){
-        this.DefaultOrientation = setDefaultOrientation;
+    public void setDefaultOrientation(char setOrientation){
+        this.Orientation = setOrientation;
     }
 
     public void setNbHit(byte setNbHit){
@@ -41,8 +54,8 @@ public class Ship {
         return this.nbCases;
     }
 
-    public String getDefaultOrientation(){
-        return this.DefaultOrientation;
+    public char getDefaultOrientation(){
+        return this.Orientation;
     }
 
     public byte getNbHit(){
@@ -50,12 +63,27 @@ public class Ship {
     }
 
     // Methods
-    public boolean isSinked(){
+
+    /**
+     * Check if this Ship got enough hits to sink.
+     * @return True if the Ship got enough hits to sink, False if not.
+     */
+    public boolean isSunken(){
 
         if(this.nbCases == this.nbHit){
             return true;
-        }else{
+        }else if(this.nbCases < this.nbHit){
+            return true;
+        }else {
             return false;
         }
     }
+
+    /**
+     * Hit this Ship, increase this Ship's hit counter.
+     */
+    public void hitShip(){
+        this.nbHit++;
+    }
+
 }
