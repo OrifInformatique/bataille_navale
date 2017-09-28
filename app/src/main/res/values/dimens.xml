@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="cellSetSize">40dp</dimen>
+    <dimen name="cellSetSize">10dp</dimen>
+    <dimen name="GridSize">300dp</dimen>
     <dimen name="cellSetMargin">1dp</dimen>
 </resources>

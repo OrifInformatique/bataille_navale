@@ -4,7 +4,7 @@
     <string name="PlayButton">Jouer</string>
     <string name="SettingsButton">Options</string>
     <string name="CloseButton">Quitter</string>
-    <string name="ReturnButton">Retour</string>
+    <string name="ReturnButton">◄</string>
     <string name="NextButton">Suivant</string>
     <string name="Player1">Joueur 1</string>
     <string name="SetShipHelpMessagePlayer1">C\'est au tour du premier joueur de placer ses bateaux</string>

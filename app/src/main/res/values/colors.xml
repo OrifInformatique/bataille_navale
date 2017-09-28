@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#0066BB</color>
     <color name="colorPrimaryDark">#004488</color>
-    <color name="colorAccent">#00AAEE</color>
+    <color name="colorAccent">#0099dd</color>
     <color name="colorPlayer1">#0066ff</color>
     <color name="colorPlayer2">#ff6600</color>
     <color name="cellSetColor">#d0d0d0</color>

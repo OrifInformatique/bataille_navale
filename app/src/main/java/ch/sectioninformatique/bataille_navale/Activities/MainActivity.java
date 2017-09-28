@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SetGameActivity.class);
                 startActivity(intent);
+
             }
         });
         Button settingGame = (Button) findViewById(R.id.settingButton);

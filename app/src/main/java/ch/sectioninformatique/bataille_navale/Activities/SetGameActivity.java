@@ -4,22 +4,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.content.Intent;
-import android.widget.Button;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TableRow.LayoutParams;
 
-import ch.sectioninformatique.bataille_navale.R;
+import static ch.sectioninformatique.bataille_navale.R.*;
 
 public class SetGameActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_game);
+        setContentView(layout.activity_set_game);
 
-        Button returnButton = (Button) findViewById(R.id.ReturnButton);
+        final TableLayout grid = (TableLayout) findViewById(id.Grid);
+
+        Button returnButton = (Button) findViewById(id.ReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,12 +26,16 @@ public class SetGameActivity extends AppCompatActivity {
             }
         });
 
-/*      Button returnButton2 = (Button) findViewById(R.id.ReturnButton);
-        returnButton2.setOnClickListener(new View.OnClickListener() {
+        Button nextButton = (Button) findViewById(id.NextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public  void onClick(View v){
+                grid.getLayoutParams().height = grid.getWidth();
+                grid.requestLayout();
+                //grid.setBackgroundColor(getResources().getColor(color.colorPlayer1)) ;
             }
-        });*/
-    }
+        });
+        }
+        /*final TableLayout grid = (TableLayout) findViewById(id.Grid);
+        grid.setBackgroundColor(getResources().getColor(color.colorPlayer2)) ;*/
 }
