@@ -68,7 +68,7 @@ public class Ship {
      * Check if this Ship got enough hits to sink.
      * @return True if the Ship got enough hits to sink, False if not.
      */
-    public boolean isSunken(){
+    public boolean isSinking(){
 
         if(this.nbCases == this.nbHit){
             return true;

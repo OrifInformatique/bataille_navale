@@ -30,7 +30,7 @@ public class Player {
     public Player(String Name,Color Color){
         this.name = Name;
         this.color = Color;
-        this.playerGrid = new Grid(this);
+        this.playerGrid = new Grid();
     }
 
     // Setters
