@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import ch.sectioninformatique.bataille_navale.Models.ModelsTest;
 import ch.sectioninformatique.bataille_navale.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ModelsTest TestM1 = new ModelsTest();
 
         Button startGame = (Button) findViewById(R.id.playButton);
         startGame.setOnClickListener(new View.OnClickListener() {
