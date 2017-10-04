@@ -1,15 +1,32 @@
 <resources>
+    <!--Titres-->
     <string name="app_name">Bataille Navale</string>
-    <string name="LabelMenu">Menu</string>
+    <string name="MenuTitle">Menu</string>
+
+    <!--Choix du menu-->
     <string name="PlayButton">Jouer</string>
     <string name="SettingsButton">Options</string>
     <string name="CloseButton">Quitter</string>
+
+    <!--Boutons redondants-->
     <string name="ReturnButton">◄</string>
     <string name="NextButton">Suivant</string>
+
+    <!--propre à chaque joueurs-->
     <string name="Player1">Joueur 1</string>
-    <string name="SetShipHelpMessagePlayer1">C\'est au tour du premier joueur de placer ses bateaux</string>
-    <string name="SetShipHelpMessagePlayer2">C\'est au tour du deuxième joueur de placer ses bateaux</string>
+    <string name="Player2">Joueur 2</string>
     <string name="ColorPlayer1">Couleur du joueur 1</string>
     <string name="ColorPlayer2">Couleur du joueur 2</string>
-    <string name="MenuTitle">Menu</string>
+
+    <string name="WinMessage">à Gagné</string>
+    <string name="LooseMessage">à Perdus</string>
+
+    <!--Barre se trouvant dessus le nom du joueur donnant un indice sur ce que doit faire le joueur-->
+    <string name="InputNamePlayer1">Nom du premier joueur</string>
+    <string name="InputNamePlayer2">Nom du deuxième joueur</string>
+    <string name="NoTextPlaced">Veuillez entrer votre nom !</string>
+    <string name="SetShipHelpMessagePlayerStart">C\'est à</string>
+    <string name="SetShipHelpMessagePlayerEnd">de placer ses bateaux</string>
+
+
 </resources>
