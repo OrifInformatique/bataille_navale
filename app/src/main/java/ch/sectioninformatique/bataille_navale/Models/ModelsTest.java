@@ -12,7 +12,8 @@ public class ModelsTest {
     private Ship S1;
 
     public ModelsTest(){
-        Player P1 = new Player("Player 1", new Color());
+        Color PlayerColor = new Color();
+        Player P1 = new Player("Player 1", PlayerColor);
         Ship S1 = new Ship((byte)3,'U');
 
         P1.getPlayerGrid().getCase(0,0).setShip(S1);
