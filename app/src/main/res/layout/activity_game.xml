@@ -13,11 +13,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/button">
+        app:layout_constraintBottom_toTopOf="@+id/ReturnButton">
         <TableLayout
             android:id="@+id/GridP1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginTop="8dp"
             android:background="@color/colorPlayer1"
@@ -48,7 +48,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="A" />
 
@@ -58,7 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="B" />
 
@@ -68,7 +68,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="C" />
 
@@ -78,7 +78,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="D" />
 
@@ -88,7 +88,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="E" />
 
@@ -98,7 +98,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="F" />
 
@@ -108,7 +108,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="G" />
 
@@ -118,7 +118,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="H" />
 
@@ -128,7 +128,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="I" />
 
@@ -138,7 +138,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="J" />
             </TableRow>
@@ -157,7 +157,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="1" />
 
@@ -256,7 +256,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="2" />
 
@@ -356,7 +356,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="3" />
 
@@ -455,7 +455,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="4" />
 
@@ -555,7 +555,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="5" />
 
@@ -655,7 +655,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="6" />
 
@@ -754,7 +754,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="7" />
 
@@ -853,7 +853,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="8" />
 
@@ -953,7 +953,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="9" />
 
@@ -1052,7 +1052,7 @@
                     android:layout_column="0"
                     android:layout_margin="@dimen/cellSetMargin"
                     android:layout_weight="1"
-                    android:background="@color/cellVoid"
+                    android:background="@color/cellText"
                     android:gravity="center"
                     android:text="10" />
 
@@ -1137,1135 +1137,14 @@
                     android:background="@color/cellVoid" />
             </TableRow>
         </TableLayout>
-        <TableLayout
-            android:id="@+id/GridP2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorPlayer1"
 
-            android:padding="2dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-            tools:ignore="HardcodedText">
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:visibility="invisible"/>
-
-                <TextView
-                    android:id="@+id/textViewP2_A"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="A" />
-
-                <TextView
-                    android:id="@+id/textViewP2_B"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="B" />
-
-                <TextView
-                    android:id="@+id/textViewP2_C"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="C" />
-
-                <TextView
-                    android:id="@+id/textViewP2_D"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="D" />
-
-                <TextView
-                    android:id="@+id/textViewP2_E"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="E" />
-
-                <TextView
-                    android:id="@+id/textViewP2_F"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="F" />
-
-                <TextView
-                    android:id="@+id/textViewP2_G"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="G" />
-
-                <TextView
-                    android:id="@+id/textViewP2_H"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="H" />
-
-                <TextView
-                    android:id="@+id/textViewP2_I"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="I" />
-
-                <TextView
-                    android:id="@+id/textViewP2_J"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="J" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="1" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_A10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="2" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_B10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="3" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_C10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="4" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_D10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="5" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_E10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="6" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_F10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="7" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_G10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="8" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_H10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="9" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_I10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
-
-                <TextView
-                    android:id="@+id/textViewP2_10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_column="0"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid"
-                    android:gravity="center"
-                    android:text="10" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-
-                <Button
-                    android:id="@+id/btnGridSetP2_J10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/cellSetMargin"
-                    android:layout_weight="1"
-                    android:background="@color/cellVoid" />
-            </TableRow>
-        </TableLayout>
 
 
 
     </LinearLayout>
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/ReturnButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="50dp"
         android:layout_height="50dp"
