@@ -4,12 +4,12 @@
         android:id="@+id/one"
         android:title="Red"/>
     <item
+        android:id="@+id/four"
+        android:title="Yellow"/>
+    <item
         android:id="@+id/two"
         android:title="Green"/>
     <item
         android:id="@+id/three"
         android:title="Bleu"/>
-    <item
-        android:id="@+id/four"
-        android:title="Yellow"/>
 </menu>

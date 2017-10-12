@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/colorPlayer1"
+                android:background="@color/color1"
 
                 android:padding="2dp"
                 app:layout_constraintLeft_toLeftOf="parent"

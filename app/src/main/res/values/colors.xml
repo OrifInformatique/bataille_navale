@@ -5,27 +5,27 @@
     <color name="colorAccent">#0099dd</color>
 
     <color name="backgroundColor">#ffffff</color>
-    <color name="colorPlayer1">#0066ff</color>
-    <color name="colorPlayer2">#ff6600</color>
 
     <color name="cellText">#a0b0d0</color>
     <color name="cellVoid">#60a0e0</color>
     <color name="cellDesactive">#7090b0</color>
     <color name="cellStartShip">#808080</color>
-    <color name="cellShip">#c0c000</color>
     <color name="cellProposal">#0080C0</color>
     <color name="cellTouchShip">#f06040</color>
     <color name="cellDestroyShip">#f00000</color>
     <color name="cellMissed">#4080c0</color>
+    <color name="cellShip">#c0c000</color>
 
-    <color name="test1">#ff0000</color>
-    <color name="test2">#00ff00</color>
-    <color name="test3">#0000ff</color>
+    <color name="ship1">#b84</color>
+    <color name="ship2">#bb4</color>
+    <color name="ship3">#8b4</color>
+    <color name="ship4">#4b8</color>
+    <color name="ship5">#48b</color>
 
     <color name="color1">#FF1A1A</color>
-    <color name="color2">#1AFF1A</color>
-    <color name="color3">#1A1AFF</color>
-    <color name="color4">#FFFF1A</color>
+    <color name="color2">#FFFF1A</color>
+    <color name="color3">#1AFF1A</color>
+    <color name="color4">#1A1AFF</color>
 
 
 </resources>

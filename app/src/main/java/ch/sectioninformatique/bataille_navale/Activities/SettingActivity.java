@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.PopupMenu;
 import android.view.MenuItem;
-import android.widget.Toast;
-import java.util.Random;
 
 import ch.sectioninformatique.bataille_navale.R;
 
@@ -75,7 +73,7 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
-    public class ButtonP1Listener implements OnClickListener{
+    private class ButtonP1Listener implements OnClickListener{
 
         public void onClick(View v){
             //Creating the instance of PopupMenu
@@ -91,20 +89,20 @@ public class SettingActivity extends AppCompatActivity {
                             ButtonP1.setBackgroundResource(R.color.color1);
                             P1Color = R.color.color1;
                             break;
-                        case 'G':
+                        case 'Y':
                             ButtonP1.setBackgroundResource(R.color.color2);
                             P1Color = R.color.color2;
                             break;
-                        case 'B':
+                        case 'G':
                             ButtonP1.setBackgroundResource(R.color.color3);
                             P1Color = R.color.color3;
                             break;
-                        case 'Y':
+                        case 'B':
                             ButtonP1.setBackgroundResource(R.color.color4);
                             P1Color = R.color.color4;
                             break;
                         default:
-                            ButtonP1.setBackgroundResource(R.color.colorPlayer1);
+                            ButtonP1.setBackgroundResource(R.color.color1);
 
                     }
                     //Toast.makeText(SettingActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
@@ -116,7 +114,7 @@ public class SettingActivity extends AppCompatActivity {
         }
     }
 
-    public class ButtonP2Listener implements OnClickListener{
+    private class ButtonP2Listener implements OnClickListener{
 
         public void onClick(View v){
             //Creating the instance of PopupMenu
@@ -132,20 +130,20 @@ public class SettingActivity extends AppCompatActivity {
                             ButtonP2.setBackgroundResource(R.color.color1);
                             P2Color = R.color.color1;
                             break;
-                        case 'G':
+                        case 'Y':
                             ButtonP2.setBackgroundResource(R.color.color2);
                             P2Color = R.color.color2;
                             break;
-                        case 'B':
+                        case 'G':
                             ButtonP2.setBackgroundResource(R.color.color3);
                             P2Color = R.color.color3;
                             break;
-                        case 'Y':
+                        case 'B':
                             ButtonP2.setBackgroundResource(R.color.color4);
                             P2Color = R.color.color4;
                             break;
                         default:
-                            ButtonP2.setBackgroundResource(R.color.colorPlayer2);
+                            ButtonP2.setBackgroundResource(R.color.color2);
 
                     }
                     //Toast.makeText(SettingActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();

@@ -17,10 +17,16 @@ public class MainActivity extends AppCompatActivity {
     Player Player1 = new Player();
     Player Player2 = new Player();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //default colors
+        Player1.setColor(R.color.color1);
+        Player2.setColor(R.color.color2);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
@@ -36,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SetGameActivity.class);
                 intent.putExtra("param", 1);
+                intent.putExtra("colorP1", Player1.getColor());
+                intent.putExtra("colorP2", Player2.getColor());
                 startActivityForResult(intent, 1);
             }
         });
