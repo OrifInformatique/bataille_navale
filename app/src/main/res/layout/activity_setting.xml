@@ -4,65 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     tools:context="ch.sectioninformatique.bataille_navale.Activities.SettingActivity">
 
-    <TextView
-        android:id="@+id/TitleSettingLabel"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="serif-monospace"
-        android:text="@string/SettingsButton"
-        android:textAlignment="center"
-        android:textSize="60sp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="0dp"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ReturnButton">
 
-    <Button
-        android:id="@+id/ColorPlayer1Button"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPlayer1"
-        android:text="@string/ColorPlayer1"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitleSettingLabel" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/ColorPlayer2Button"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPlayer2"
-        android:text="@string/ColorPlayer2"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ColorPlayer1Button" />
+            <TextView
+                android:id="@+id/TitleSettingLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="serif-monospace"
+                android:text="@string/SettingsButton"
+                android:textAlignment="center"
+                android:textSize="50sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/ColorPlayer1Button"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/color1"
+                android:text="@string/ColorPlayer1"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSettingLabel" />
+
+            <Button
+                android:id="@+id/ColorPlayer2Button"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/color2"
+                android:text="@string/ColorPlayer2"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ColorPlayer1Button" />
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/ReturnButton"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
