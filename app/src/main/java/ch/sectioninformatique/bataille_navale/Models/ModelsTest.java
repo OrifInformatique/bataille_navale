@@ -12,7 +12,7 @@ public class ModelsTest {
     private Ship S1;
 
     public ModelsTest(){
-        Color PlayerColor = new Color();
+        int PlayerColor = 0;
         Player P1 = new Player("Player 1", PlayerColor);
         Ship S1 = new Ship((byte)3,'U');
 

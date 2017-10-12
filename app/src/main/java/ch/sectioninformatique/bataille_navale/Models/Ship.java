@@ -1,11 +1,21 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import android.util.Log;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
 public class Ship {
     // Attributes
+    /**
+     * That Ship's maximal number of Cases.
+     */
+    private final int nbMinCases = 2;
+    /**
+     * That Ship's minimal number of Cases.
+     */
+    private final int nbMaxCases = 5;
     /**
      * That Ship's number of occupied Cases.
      */
@@ -73,6 +83,7 @@ public class Ship {
         if(this.nbCases == this.nbHit){
             return true;
         }else if(this.nbCases < this.nbHit){
+            Log.d("IsSinking","The number of Hit is above the number of Cases !");
             return true;
         }else {
             return false;
@@ -83,7 +94,11 @@ public class Ship {
      * Hit this Ship, increase this Ship's hit counter.
      */
     public void hitShip(){
-        this.nbHit++;
+        if(this.nbHit < this.nbCases){
+            this.nbHit++;
+        }else{
+            Log.d("IsSinking","The number of Hit is above the number of Cases !");
+        }
     }
 
 }

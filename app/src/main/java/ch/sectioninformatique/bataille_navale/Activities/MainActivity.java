@@ -14,12 +14,21 @@ import ch.sectioninformatique.bataille_navale.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    Player Player1 = new Player();
+    Player Player2 = new Player();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            Player1.setColor(extras.getInt("P1Color"));
+            Player2.setColor(extras.getInt("P2Color"));
+        }
 
+      //  ModelsTest TestM1 = new ModelsTest();
 
         Button startGame = (Button) findViewById(R.id.playButton);
         startGame.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                intent.putExtra("P1Color", Player1.getColor());
+                intent.putExtra("P2Color", Player2.getColor());
                 startActivity(intent) ;
             }
         });

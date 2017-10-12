@@ -11,11 +11,6 @@ public class Grid {
      */
     private Case[][] CasesGrid;
     /**
-     * That Grid's Player.
-     * May not be required actually.
-     */
-    //private Player player;
-    /**
      * That Gird's vertical and horizontal dimensions
      */
     private final int gridLength = 10;
@@ -33,32 +28,10 @@ public class Grid {
             }
             j++;
         }
-
-//        for(int i = 0; i < gridLength; i++){
-//            for (int j = 0; j < gridLength;j++){
-//                CasesGrid[i][j] = new Case();
-//            }
-//        }
-        //this.player = null;
     }
-
-//    public Grid(Player setPlayer){
-//        this.CasesGrid = new Case[this.gridLength][this.gridLength];
-//        //this.player = setPlayer;
-//    }
-
-    // Setters
-//    public void setPlayer(Player setPlayer){
-//        this.player = setPlayer;
-//    }
 
     // Getters
     public Case getCase(int vertical,int horizontal){
         return this.CasesGrid[vertical][horizontal];
     }
-
-//    public Player getPlayer(){
-//        return this.player;
-//    }
-
 }
