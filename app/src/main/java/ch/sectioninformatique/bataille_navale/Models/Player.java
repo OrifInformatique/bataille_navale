@@ -14,7 +14,7 @@ public class Player {
     /**
      * That Player's Color.
      */
-    private Color color;
+    private int color;
     /**
      * That Player's Grid.
      */
@@ -23,13 +23,13 @@ public class Player {
     // Constructors
     public Player(){
         this.name = "None";
-        this.color = new Color();
+        this.color = 0;
         this.playerGrid = new Grid();
     }
 
-    public Player(String Name,Color Color){
+    public Player(String Name,int color){
         this.name = Name;
-        this.color = Color;
+        this.color = color;
         this.playerGrid = new Grid();
     }
 
@@ -38,7 +38,7 @@ public class Player {
         this.name = setName;
     }
 
-    public void setColor(Color setColor){
+    public void setColor(int setColor){
         this.color = setColor;
     }
 
@@ -47,7 +47,7 @@ public class Player {
         return this.name;
     }
 
-    public Color getColor(){
+    public int getColor(){
         return this.color;
     }
 
