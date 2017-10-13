@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("P1Color", Player1.getColor());
                 intent.putExtra("P2Color", Player2.getColor());
                 startActivity(intent) ;
+                finish();
             }
         });
 

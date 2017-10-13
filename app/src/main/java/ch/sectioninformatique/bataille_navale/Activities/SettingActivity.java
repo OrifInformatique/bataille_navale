@@ -32,10 +32,10 @@ public class SettingActivity extends AppCompatActivity {
         ButtonP2.setOnClickListener(new ButtonP2Listener());
 
         if(extras != null && extras.getInt("P1Color") != 0 && extras.getInt("P2Color") != 0){
-            ButtonP1.setBackgroundResource(extras.getInt("P1Color"));
-            ButtonP2.setBackgroundResource(extras.getInt("P2Color"));
             P1Color = extras.getInt("P1Color");
             P2Color = extras.getInt("P2Color");
+            ButtonP1.setBackgroundResource(P1Color);
+            ButtonP2.setBackgroundResource(P2Color);
         }
 
         Button returnButton = (Button) findViewById(R.id.ReturnButton);
@@ -66,27 +66,29 @@ public class SettingActivity extends AppCompatActivity {
             //registering popup with OnMenuItemClickListener
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
+                    int chosenColor = 0;
                     switch((item.getTitle().charAt(0))){
                         case 'R':
-                            ButtonP1.setBackgroundResource(R.color.color1);
-                            P1Color = R.color.color1;
+                            chosenColor = R.color.color1;
                             break;
                         case 'Y':
-                            ButtonP1.setBackgroundResource(R.color.color2);
-                            P1Color = R.color.color2;
+                            chosenColor = R.color.color2;
                             break;
                         case 'G':
-                            ButtonP1.setBackgroundResource(R.color.color3);
-                            P1Color = R.color.color3;
+                            chosenColor = R.color.color3;
                             break;
                         case 'B':
-                            ButtonP1.setBackgroundResource(R.color.color4);
-                            P1Color = R.color.color4;
+                            chosenColor = R.color.color4;
                             break;
                         default:
                             ButtonP1.setBackgroundResource(R.color.color1);
-
                     }
+
+                    if(chosenColor != P2Color){
+                        P1Color = chosenColor;
+                        ButtonP1.setBackgroundResource(P1Color);
+                    }
+
                     //Toast.makeText(SettingActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
                     return true;
                 }
@@ -107,27 +109,29 @@ public class SettingActivity extends AppCompatActivity {
             //registering popup with OnMenuItemClickListener
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
+                    int chosenColor = 0;
                     switch((item.getTitle().charAt(0))){
                         case 'R':
-                            ButtonP2.setBackgroundResource(R.color.color1);
-                            P2Color = R.color.color1;
+                            chosenColor = R.color.color1;
                             break;
                         case 'Y':
-                            ButtonP2.setBackgroundResource(R.color.color2);
-                            P2Color = R.color.color2;
+                            chosenColor = R.color.color2;
                             break;
                         case 'G':
-                            ButtonP2.setBackgroundResource(R.color.color3);
-                            P2Color = R.color.color3;
+                            chosenColor = R.color.color3;
                             break;
                         case 'B':
-                            ButtonP2.setBackgroundResource(R.color.color4);
-                            P2Color = R.color.color4;
+                            chosenColor = R.color.color4;
                             break;
                         default:
                             ButtonP2.setBackgroundResource(R.color.color2);
-
                     }
+
+                    if(chosenColor != P1Color){
+                        P2Color = chosenColor;
+                        ButtonP2.setBackgroundResource(P2Color);
+                    }
+
                     //Toast.makeText(SettingActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
                     return true;
                 }
