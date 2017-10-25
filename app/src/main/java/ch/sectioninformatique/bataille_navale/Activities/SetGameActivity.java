@@ -12,9 +12,10 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+
+import ch.sectioninformatique.bataille_navale.Models.Ship;
 
 import static ch.sectioninformatique.bataille_navale.R.color;
 import static ch.sectioninformatique.bataille_navale.R.id;
@@ -23,8 +24,15 @@ import static ch.sectioninformatique.bataille_navale.R.string;
 
 public class SetGameActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<Integer> nbrCaseShip = new ArrayList<>(Arrays.asList(2, 3, 3, 4, 5));
-    //ArrayList<Integer> colorShip = new ArrayList<>(Arrays.asList(getResources().getColor(color.ship1),getResources().getColor(color.ship2),getResources().getColor(color.ship3),getResources().getColor(color.ship4),getResources().getColor(color.ship5)));
+    Ship ships[] =new Ship[5];
+    boolean placed[]= {false,false,false,false,false};
+    /*ArrayList<Integer> colorShip = new ArrayList<>(Arrays.asList(
+            color.ship1,
+            color.ship2,
+            color.ship3,
+            color.ship4,
+            color.ship5));*/
+    int numColor = 0;
     //int nbrCaseShip[] = {2, 3, 3, 4, 5};
     String col[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     String row[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
@@ -36,6 +44,12 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_set_game);
+
+        ships[0]=new Ship((byte)2,'U', color.ship1);
+        ships[1]=new Ship((byte)3,'U', color.ship2);
+        ships[2]=new Ship((byte)3,'U', color.ship3);
+        ships[3]=new Ship((byte)4,'U', color.ship4);
+        ships[4]=new Ship((byte)5,'U', color.ship5);
 
         //les différents éléments graphiques modifiés
         final EditText pseudoText = (EditText) findViewById(id.PseudoEditText);
@@ -124,7 +138,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                     for (int y = 0; y < 10; y++) {
                         for (int x = 0; x < 10; x++) {
                             if (Objects.equals(getResources().getResourceEntryName(thisButton.getId()), "btnGridSet_" + col[x] + "" + row[y])) {
-                                setOtorisedCases(x, y);
+                                setAuthorizedCases(x, y);
                                 phase = 2;
                             }
                         }
@@ -149,62 +163,90 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
     // cette fonction vérifie que toutes les cases entre le point x1 y1 et x2 y2 ne sont pas des cases ship
     public boolean testPossibleShip(int x1, int y1, int x2, int y2) {
         boolean ok = true;
-        int x = x2, y = y2;
-        while (x != x1 || y != y1) {
-            String a = "" + ((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y], "id", getPackageName())).getBackground()).getColor();
-            String b = "" + getResources().getColor(color.cellShip);
-            if (Objects.equals(a, b)) {
-                ok = false;
+        while (x2 != x1 || y2 != y1) {
+            String a = "" + ((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x2] + row[y2], "id", getPackageName())).getBackground()).getColor();
+            for (Ship ship : ships) {
+                String b = "" + getResources().getColor(ship.getColorShip());
+                if (Objects.equals(a, b)) {
+                    ok = false;
+                }
             }
-            if (x > x1) {
-                x--;
-            } else if (x < x1) {
-                x++;
-            } else if (y > y1) {
-                y--;
-            } else if (y < y1) {
-                y++;
+
+            if (x2 > x1) {
+                x2--;
+            } else if (x2 < x1) {
+                x2++;
+            } else if (y2 > y1) {
+                y2--;
+            } else if (y2 < y1) {
+                y2++;
             }
         }
         return ok;
     }
-    public void setOtorisedCases(int x, int y) {
-        for (int aNbrCaseShip : nbrCaseShip) {
-            //définit la couleur des 4 (ou moins) cases à i case du button x y
-            //si elle existe (index entre 0 et 9)
-            //si la couleur de la case est libre (getResources().getColor(color.cellVoid))
-            //si la couleur de la case d'avant est : (getResources().getColor(color.cellShip))
-            //                                     ou(getResources().getColor(color.cellStartShip))
-            // si startship + lenghShip est encore à l'intérieure de la grie alors...
-            if ((x + aNbrCaseShip - 1) <= 9 && (x + aNbrCaseShip - 1) >= 0) {
-                if (testPossibleShip(x, y, (x + aNbrCaseShip - 1), y)) {
-                    (findViewById(getResources().getIdentifier("btnGridSet_" + col[x + (aNbrCaseShip - 1)] + row[y], "id", getPackageName()))).setBackgroundResource(color.cellProposal);
+    public void setAuthorizedCases(int x, int y) {
+
+        for (int i = ships.length-1;i>=0;i--) {
+
+                int shipLength= ships[i].getNbCases();
+
+                if ((x + shipLength - 1) <= 9 && (x + shipLength - 1) >= 0) {
+                    if (testPossibleShip(x, y, (x + shipLength - 1), y)) {
+                        if (placed[i]){
+                            findViewById(getResources().getIdentifier("btnGridSet_" + col[x + shipLength - 1] + row[y], "id", getPackageName())).setBackgroundResource(color.cellNoProposal);
+                        }else{
+                            findViewById(getResources().getIdentifier("btnGridSet_" + col[x + shipLength - 1] + row[y], "id", getPackageName())).setBackgroundResource(color.cellProposal);
+                        }
+                    }else if(((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x + (shipLength - 1)] + row[y], "id", getPackageName())).getBackground()).getColor() == getResources().getColor(color.cellVoid)){
+                        findViewById(getResources().getIdentifier("btnGridSet_" + col[x + shipLength - 1] + row[y], "id", getPackageName())).setBackgroundResource(color.cellNoAccessible);
+                    }
                 }
-            }
-            if ((x + 1 - aNbrCaseShip) <= 9 && (x + 1 - aNbrCaseShip) >= 0) {
-                if (testPossibleShip(x, y, (x - aNbrCaseShip + 1), y)) {
-                    (findViewById(getResources().getIdentifier("btnGridSet_" + col[x + (1 - aNbrCaseShip)] + row[y], "id", getPackageName()))).setBackgroundResource(color.cellProposal);
+                if ((x + 1 - shipLength) <= 9 && (x + 1 - shipLength) >= 0) {
+                    if (testPossibleShip(x, y, (x - shipLength + 1), y)) {
+                        if (placed[i]){
+                            (findViewById(getResources().getIdentifier("btnGridSet_" + col[x + (1 - shipLength)] + row[y], "id", getPackageName()))).setBackgroundResource(color.cellNoProposal);
+                        }else{
+                            findViewById(getResources().getIdentifier("btnGridSet_" + col[x + 1 - shipLength] + row[y], "id", getPackageName())).setBackgroundResource(color.cellProposal);
+                        }
+                    }else if(((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x + (1 - shipLength)] + row[y], "id", getPackageName())).getBackground()).getColor() == getResources().getColor(color.cellVoid)){
+                        findViewById(getResources().getIdentifier("btnGridSet_" + col[x + 1 - shipLength] + row[y], "id", getPackageName())).setBackgroundResource(color.cellNoAccessible);
+                    }
                 }
-            }
-            if ((y + aNbrCaseShip - 1) <= 9 && (y + aNbrCaseShip - 1) >= 0) {
-                if (testPossibleShip(x, y, x, (y + aNbrCaseShip - 1))) {
-                    (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (aNbrCaseShip - 1)], "id", getPackageName()))).setBackgroundResource(color.cellProposal);
+                if ((y + shipLength - 1) <= 9 && (y + shipLength - 1) >= 0) {
+                    if (testPossibleShip(x, y, x, (y + shipLength - 1))) {
+
+                        if (placed[i]){
+                            (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (shipLength - 1)], "id", getPackageName()))).setBackgroundResource(color.cellNoProposal);
+                        }else{
+                            (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (shipLength - 1)], "id", getPackageName()))).setBackgroundResource(color.cellProposal);
+                        }
+                    }else if(((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (shipLength - 1)], "id", getPackageName())).getBackground()).getColor() == getResources().getColor(color.cellVoid)){
+                        (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (shipLength - 1)], "id", getPackageName()))).setBackgroundResource(color.cellNoAccessible);
+                    }
                 }
-            }
-            if ((y + 1 - aNbrCaseShip) <= 9 && (y + 1 - aNbrCaseShip) >= 0) {
-                if (testPossibleShip(x, y, x, (y - aNbrCaseShip + 1))) {
-                    (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (1 - aNbrCaseShip)], "id", getPackageName()))).setBackgroundResource(color.cellProposal);
+                if ((y + 1 - shipLength) <= 9 && (y + 1 - shipLength) >= 0) {
+                    if (testPossibleShip(x, y, x, (y - shipLength + 1))) {
+                        if ( placed[i]) {
+                            (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (1 - shipLength)], "id", getPackageName()))).setBackgroundResource(color.cellNoProposal);
+                        } else{
+                            (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (1 - shipLength)], "id", getPackageName()))).setBackgroundResource(color.cellProposal);
+                        }
+                    }else if(((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (1 - shipLength)], "id", getPackageName())).getBackground()).getColor() == getResources().getColor(color.cellVoid)){
+                        (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y + (1 - shipLength)], "id", getPackageName()))).setBackgroundResource(color.cellNoAccessible);
+                    }
                 }
-            }
+
         }
     }
 
     public void GridClean() {
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
-                if (((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y], "id", getPackageName())).getBackground()).getColor() == getResources().getColor(color.cellProposal)) {
-                    (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y], "id", getPackageName()))).setBackgroundResource(color.cellVoid);
-                } else if (((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y], "id", getPackageName())).getBackground()).getColor() == getResources().getColor(color.cellStartShip)) {
+                int colorCase =((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y], "id", getPackageName())).getBackground()).getColor();
+                if (  colorCase == getResources().getColor(color.cellProposal)
+                   || colorCase == getResources().getColor(color.cellStartShip)
+                   || colorCase == getResources().getColor(color.cellNoAccessible)
+                   || colorCase == getResources().getColor(color.cellNoProposal)) {
                     (findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y], "id", getPackageName()))).setBackgroundResource(color.cellVoid);
                 }
             }
@@ -212,7 +254,9 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
     }
     public void completeShip(Button thisButton) {
         //thisButton.setBackgroundResources(color.cellShip);
-
+        for (int i = 0;i <= ships.length-1;i++) {
+            Log.d("qwe    ship "+i,ships[i].getNbCases()+":"+ placed[i]);
+        }
         int shipStartX = 0;
         int shipStartY = 0;
         int shipEndX = 0;
@@ -223,45 +267,70 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 if (((ColorDrawable) findViewById(getResources().getIdentifier("btnGridSet_" + col[x] + row[y], "id", getPackageName())).getBackground()).getColor() == getResources().getColor(color.cellStartShip)) {
                     shipStartX = x;
                     shipStartY = y;
+                    Log.d("xy ", x+":"+y);
                 } else if (Objects.equals(getResources().getResourceEntryName(thisButton.getId()), "btnGridSet_" + col[x] + row[y])) {
                     shipEndX = x;
                     shipEndY = y;
+                    Log.d("xy ", x+":"+y);
                 }
             }
         }
-        //util pour les tests ((TextView) findViewById(id.SetShipHelpMessagePlayer)).setText(getResources().getResourceEntryName(thisButton.getId())+"/r/n "+shipStartX+":"+shipStartY+" || "+shipEndX+":"+shipEndY);
-        int y = 0;
+        Ship theShip= null;
+        int shipLength=Math.abs((shipStartX-shipEndX)+(shipStartY-shipEndY))+1;
+        Log.d("asdf    test0","absolue(("+shipStartX+"-"+shipEndX+")+("+shipStartY+"-"+shipEndY+"))+1 = "+shipLength+"(shipLength)");
+
+        int test=0;
+        for (int i = 0; i < ships.length; i++) {
+            Ship aship = ships[i];//on parcour les 5 bateaux,
+            Log.d("asdf", "1  " + aship.getColorShip());
+            if (aship.getNbCases() == shipLength) {//si il est égal a la taille du bateau,
+                Log.d("asdf", "2");
+                if (!placed[i]){
+                    Log.d("asdf", "3");
+                    theShip = ships[i];//on redéfini le bateau
+                    test = i;
+                }
+                /*for (int y = i; y < ships.length - 1&&!placed[y]; y++) {
+                    Log.d("asdf", "3");
+                }*/
+            }
+        }
+        Log.d("asdf    test1","Ship :"+theShip.getNbCases()+"size:"+shipLength);
         if (shipStartX == shipEndX) {
             if (shipStartY < shipEndY) {
                 for (int i = shipStartY; i <= shipEndY; i++) {
-                    findViewById(getResources().getIdentifier("btnGridSet_" + col[shipStartX] + row[i], "id", getPackageName())).setBackgroundResource(color.cellShip);
-                    y++;
+                    findViewById(getResources().getIdentifier("btnGridSet_" + col[shipStartX] + row[i], "id", getPackageName())).setBackgroundResource(theShip.getColorShip());
+                    theShip.setDefaultOrientation('D');
+                    placed[test]=true;
                 }
+                numColor++;
             } else {
                 for (int i = shipStartY; i >= shipEndY; i--) {
-                    findViewById(getResources().getIdentifier("btnGridSet_" + col[shipStartX] + row[i], "id", getPackageName())).setBackgroundResource(color.cellShip);
-                    y++;
+                    findViewById(getResources().getIdentifier("btnGridSet_" + col[shipStartX] + row[i], "id", getPackageName())).setBackgroundResource(theShip.getColorShip());
+                    theShip.setDefaultOrientation('U');
+                    placed[test]=true;
                 }
+                numColor++;
             }
-        } else if (shipStartY == shipEndY) {
+        } else {
             if (shipStartX < shipEndX) {
                 for (int i = shipStartX; i <= shipEndX; i++) {
-                    findViewById(getResources().getIdentifier("btnGridSet_" + col[i] + row[shipStartY], "id", getPackageName())).setBackgroundResource(color.cellShip);
-                    y++;
+                    findViewById(getResources().getIdentifier("btnGridSet_" + col[i] + row[shipStartY], "id", getPackageName())).setBackgroundResource(theShip.getColorShip());
+                    theShip.setDefaultOrientation('R');
+                    placed[test]=true;
                 }
+                numColor++;
             } else {
                 for (int i = shipStartX; i >= shipEndX; i--) {
-                    findViewById(getResources().getIdentifier("btnGridSet_" + col[i] + row[shipStartY], "id", getPackageName())).setBackgroundResource(color.cellShip);
-                    y++;
+                    findViewById(getResources().getIdentifier("btnGridSet_" + col[i] + row[shipStartY], "id", getPackageName())).setBackgroundResource(theShip.getColorShip());
+                    theShip.setDefaultOrientation('L');
+                    placed[test]=true;
                 }
+                numColor++;
             }
         }
-        for (int i = 0; i < nbrCaseShip.size(); i++) {
-            Log.d("i", "" + i);
-            if (nbrCaseShip.get(i) == y) {
-                nbrCaseShip.remove(i);
-                y = 0;
-            }
+        for (int i = 0;i <= ships.length-1;i++) {
+            Log.d("qwe 2  ship+"+i,ships[i].getNbCases()+"+"+ placed[i]+" + ("+shipLength);
         }
     }
     public void RestartActivity() {
@@ -284,9 +353,15 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }
         }*/
-        helpText.setText(5 - nbrCaseShip.size() + "/5");
+        int i = 0;
+        for (boolean aPlaced : placed){
+            if(aPlaced){
+                i++;
+            }
+        }
         //retourne True si il n'y a plus de bateaux a placer
-        return nbrCaseShip.size() == 0;
+        helpText.setText(i + "/5");
+        return 5-i == 0;
     }
 }
 

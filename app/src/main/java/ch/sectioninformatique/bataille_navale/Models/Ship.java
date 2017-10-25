@@ -32,17 +32,23 @@ public class Ship {
      * That Ship's number of times it got a hit.
      */
     private byte nbHit;
+    /**
+     * The color the boat has on the grie
+     */
+    private int color;
 
     // Constructors
     public Ship(){
         this.nbCases = 0;
         this.Orientation = 'U';
+        this.color = 0;
         this.nbHit = 0;
     }
 
-    public Ship(byte cases,char orientation){
+    public Ship(byte cases,char orientation, int color){
         this.nbCases = cases;
         this.Orientation = orientation;
+        this.color = color;
         this.nbHit = 0;
     }
 
@@ -59,6 +65,10 @@ public class Ship {
         this.nbHit = setNbHit;
     }
 
+    public void setColorShip(int color){
+        this.color = color;
+    }
+
     // Getters
     public byte getNbCases(){
         return this.nbCases;
@@ -70,6 +80,10 @@ public class Ship {
 
     public byte getNbHit(){
         return this.nbHit;
+    }
+
+    public int getColorShip(){
+        return this.color;
     }
 
     // Methods

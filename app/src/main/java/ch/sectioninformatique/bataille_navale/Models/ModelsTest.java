@@ -3,6 +3,8 @@ package ch.sectioninformatique.bataille_navale.Models;
 import android.graphics.Color;
 import android.util.Log;
 
+import ch.sectioninformatique.bataille_navale.R;
+
 /**
  * Created by ToRe on 22.09.2017.
  */
@@ -14,7 +16,7 @@ public class ModelsTest {
     public ModelsTest(){
         int PlayerColor = 0;
         Player P1 = new Player("Player 1", PlayerColor);
-        Ship S1 = new Ship((byte)3,'U');
+        Ship S1 = new Ship((byte)3,'U', R.color.ship2);
 
         P1.getPlayerGrid().getCase(0,0).setShip(S1);
         P1.getPlayerGrid().getCase(1,0).setShip(S1);

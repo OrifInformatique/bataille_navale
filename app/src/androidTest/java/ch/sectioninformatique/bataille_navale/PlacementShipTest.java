@@ -7,21 +7,18 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import ch.sectioninformatique.bataille_navale.Models.Ship;
 
-/**
- * Instrumentation test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+import static org.junit.Assert.assertEquals;
+
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class PlacementShipTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("ch.sectioninformatique.bataille_navale", appContext.getPackageName());
+        assertEquals("", new Ship((byte)3,'R', R.color.color1));
 
     }
 }
