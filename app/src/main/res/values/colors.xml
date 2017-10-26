@@ -9,8 +9,8 @@
     <color name="cellText">#a0b0d0</color>
     <color name="cellVoid">        #00BBFF</color>
     <color name="cellProposal">    #0088FF</color>
-    <color name="cellNoProposal">  #606060</color>
-    <color name="cellNoAccessible">#707070</color>
+    <color name="cellNoProposal">  #f06060</color>
+    <color name="cellNoAccessible">#f03030</color>
     <color name="cellStartShip">   #808080</color>
     <color name="cellDisabled">#ff0</color><!--7090b0-->
     <color name="cellTouchShip">#f06040</color>
@@ -18,11 +18,11 @@
     <color name="cellMissed">#4080c0</color>
     <color name="cellShip">#c0c000</color>
 
-    <color name="ship1">#04c</color>
-    <color name="ship2">#169</color>
-    <color name="ship3">#286</color>
+    <color name="ship1">#c40</color>
+    <color name="ship2">#961</color>
+    <color name="ship3">#682</color>
     <color name="ship4">#3a3</color>
-    <color name="ship5">#4c0</color>
+    <color name="ship5">#0c4</color>
 
     <color name="color1">#FF1A1A</color>
     <color name="color2">#FFFF1A</color>
