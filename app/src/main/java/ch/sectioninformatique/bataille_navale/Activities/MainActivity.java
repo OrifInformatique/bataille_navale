@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import java.util.HashSet;
 
-import ch.sectioninformatique.bataille_navale.Models.ModelsTest;
 import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.R;
 
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
             Player2.setColor(extras.getInt("P2Color"));
         }
 
-      //  ModelsTest TestM1 = new ModelsTest();
 
         Button startGame = (Button) findViewById(R.id.playButton);
         startGame.setOnClickListener(new View.OnClickListener() {
