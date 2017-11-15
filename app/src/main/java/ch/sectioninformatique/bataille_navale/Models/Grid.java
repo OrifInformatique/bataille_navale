@@ -47,7 +47,7 @@ public class Grid {
      * @param startRow The Row from where the Ship start to be placed
      * @throws Exception If the Ship went out of the Grid Or if the Orientation if impossible
      */
-    public void addShip(Ship ship, int startCol, int startRow) throws Exception{
+    public void addShip(Ship ship, int startCol, int startRow) /*throws Exception*/{
         char orientation = ship.getDefaultOrientation();
         int nbCases = ship.getNbCases();
         int testRow = startRow;
@@ -68,7 +68,8 @@ public class Grid {
                     testRow--;
                     break;
                 default:
-                    throw new Exception();
+                    //throw new Exception("Orientation Incorrect 1");
+                    throw new IllegalArgumentException("Orientation Incorrect 1");
             }
         }
 
@@ -92,11 +93,13 @@ public class Grid {
                         startRow--;
                         break;
                     default:
-                        throw new Exception();
+                        //throw new Exception("Orientation Incorrect 2");
+                        throw new IllegalArgumentException("Orientation Incorrect 2");
                 }
             }
         }else{
-            throw new Exception();
+            //throw new Exception("Out of grid");
+            throw new ArrayIndexOutOfBoundsException("Out of grid");
         }
     }
 
