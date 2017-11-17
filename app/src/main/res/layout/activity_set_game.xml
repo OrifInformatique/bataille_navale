@@ -55,11 +55,11 @@
                 <EditText
                     android:id="@+id/PseudoEditText"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/Player1"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"

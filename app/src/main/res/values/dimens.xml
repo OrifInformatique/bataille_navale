@@ -2,5 +2,5 @@
 <resources>
     <dimen name="cellSetSize">10dp</dimen>
     <dimen name="GridSize">300dp</dimen>
-    <dimen name="cellSetMargin">1dp</dimen>
+    <dimen name="cellSetMargin">2dp</dimen>
 </resources>
