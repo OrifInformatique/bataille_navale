@@ -16,7 +16,7 @@ public class Case {
     private Ship ship;
 
     // Constructors
-    public Case(){
+    Case(){
         this.touched = false;
         this.ship = null;
     }
@@ -61,4 +61,8 @@ public class Case {
 
         return this.ship;
     }
+
+
+
+    public boolean isShipPlaced(){ return (this.ship != null); }
 }

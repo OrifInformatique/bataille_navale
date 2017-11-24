@@ -48,6 +48,7 @@
 
         <Button
             android:id="@+id/playButton"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -55,7 +56,8 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@color/colorAccent"
+            android:background="@color/buttonMainStart"
+            android:textColor="@color/buttonTexts"
             android:fontFamily="serif-monospace"
             android:text="@string/PlayButton"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -73,7 +75,8 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="14dp"
-            android:background="@color/colorAccent"
+            android:background="@color/buttonMainSettings"
+            android:textColor="@color/buttonTexts"
             android:fontFamily="serif-monospace"
             android:text="@string/SettingsButton"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -91,7 +94,8 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:background="@color/colorAccent"
+            android:background="@color/buttonMainQuit"
+            android:textColor="@color/buttonTexts"
             android:fontFamily="serif-monospace"
             android:text="@string/CloseButton"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"

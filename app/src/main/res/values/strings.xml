@@ -21,12 +21,21 @@
     <string name="WinMessage">à Gagné</string>
     <string name="LooseMessage">à Perdus</string>
 
+    <string name="touch">Touché !</string>
+    <string name="cast">Coulé !!</string>
+    <string name="missed">Raté</string>
+    <string name="playMessage1">C\'est à </string>
+    <string name="playMessage2"> de jouer</string>
+
+
+
     <!--Barre se trouvant dessus le nom du joueur donnant un indice sur ce que doit faire le joueur-->
     <string name="InputNamePlayer1">Nom du premier joueur</string>
     <string name="InputNamePlayer2">Nom du deuxième joueur</string>
     <string name="NoTextPlaced">Veuillez entrer votre nom !</string>
     <string name="SetShipHelpMessagePlayerStart">C\'est à</string>
     <string name="SetShipHelpMessagePlayerEnd">de placer ses bateaux</string>
+    <string name="LunchButtonText">Tirer!</string>
 
 
 </resources>

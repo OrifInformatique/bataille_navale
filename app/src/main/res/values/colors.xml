@@ -4,25 +4,34 @@
     <color name="colorPrimaryDark">#004488</color>
     <color name="colorAccent">#0099dd</color>
 
+    <color name="buttonTexts">#eeeeff</color>
+    <color name="buttonMainStart">#4488ff</color>
+    <color name="buttonMainSettings">#2244bb</color>
+    <color name="buttonMainQuit">#000088</color>
+    <color name="buttonReturn">#ff4444</color>
+    <color name="buttonNext">#0088ff</color>
+    <color name="buttonLunch">#dd6600</color>
+    <color name="buttonLunchInAction">#0033ff</color>
+    <color name="buttonNoEnabled">#888888</color>
+
     <color name="backgroundColor">#ffffff</color>
 
-    <color name="cellText">#a0b0d0</color>
-    <color name="cellVoid">        #00B0F0</color>
-    <color name="cellProposal">    #00B040</color>
-    <color name="cellStartShip">   #4080B0</color>
-    <color name="cellNoProposal">  #AF5757</color>
-    <color name="cellNoAccessible">#af8383</color>
-    <color name="cellDisabled">#ff0</color><!--7090b0-->
-    <color name="cellTouchShip">#f06040</color>
-    <color name="cellDestroyShip">#f00000</color>
-    <color name="cellMissed">#4080c0</color>
-    <color name="cellShip">#c0c000</color>
+    <color name="cellText">          #a0b0d0</color>
+    <color name="cellVoid">          #00B0F0</color>
+    <color name="cellProposal">      #00B040</color>
+    <color name="cellStartShip">     #4080B0</color>
+    <color name="cellNoProposal">    #AF5757</color>
+    <color name="cellNoAccessible">  #af8383</color>
+    <color name="cellTouchShip">     #bbff0000</color>
+    <color name="cellDestroyShip">   #bb220000</color>
+    <color name="cellMissed">        #bb4488cc</color>
+    <color name="cellSelectForLunch">#88880000</color>
 
-    <color name="ship1">#47D</color>
-    <color name="ship2">#39B</color>
-    <color name="ship3">#2B9</color>
-    <color name="ship4">#1D7</color>
-    <color name="ship5">#0F5</color>
+    <color name="ship1">#BB4433FF</color>
+    <color name="ship2">#BB3366CC</color>
+    <color name="ship3">#BB229999</color>
+    <color name="ship4">#BB11CC66</color>
+    <color name="ship5">#BB00FF33</color>
 
     <color name="color1">#ff1a1a</color>
     <color name="color2">#FFFF1A</color>

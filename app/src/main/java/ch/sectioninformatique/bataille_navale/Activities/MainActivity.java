@@ -1,20 +1,18 @@
 package ch.sectioninformatique.bataille_navale.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-
-import java.util.HashSet;
 
 import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.R;
 
 public class MainActivity extends AppCompatActivity {
-
     Player Player1 = new Player();
     Player Player2 = new Player();
+
 
 
 
@@ -33,15 +31,13 @@ public class MainActivity extends AppCompatActivity {
             Player2.setColor(extras.getInt("P2Color"));
         }
 
-
         Button startGame = (Button) findViewById(R.id.playButton);
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SetGameActivity.class);
-                intent.putExtra("param", 1);
-                intent.putExtra("colorP1", Player1.getColor());
-                intent.putExtra("colorP2", Player2.getColor());
+                intent.putExtra("param", 0);
+                intent.putExtra("playerColor", new int[]{Player1.getColor(),Player2.getColor()} );
                 startActivityForResult(intent, 1);
             }
         });

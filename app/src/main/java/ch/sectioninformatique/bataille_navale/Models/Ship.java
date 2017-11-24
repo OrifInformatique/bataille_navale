@@ -36,6 +36,11 @@ public class Ship {
      * The color the boat has on the grie
      */
     private int color;
+    /**
+     * The start Coordinates (0-9)
+     */
+    private int x;
+    private int y;
 
     // Constructors
     public Ship(){
@@ -43,6 +48,8 @@ public class Ship {
         this.Orientation = 'U';
         this.color = 0;
         this.nbHit = 0;
+        this.x = 0;
+        this.y = 0;
     }
 
     public Ship(byte cases,char orientation, int color){
@@ -50,6 +57,17 @@ public class Ship {
         this.Orientation = orientation;
         this.color = color;
         this.nbHit = 0;
+        this.x = 0;
+        this.y = 0;
+    }
+
+    public Ship(byte cases,char orientation, int color, int x, int y){
+        this.nbCases = cases;
+        this.Orientation = orientation;
+        this.color = color;
+        this.nbHit = 0;
+        this.x = x;
+        this.y = y;
     }
 
     // Setters
@@ -69,6 +87,14 @@ public class Ship {
         this.color = color;
     }
 
+    public void setX(int x){
+        this.x = x;
+    }
+
+    public void setY(int y){
+        this.y = y;
+    }
+
     // Getters
     public byte getNbCases(){
         return this.nbCases;
@@ -86,6 +112,10 @@ public class Ship {
         return this.color;
     }
 
+    public int getX(){return  this.x;}
+
+    public int getY(){return  this.y;}
+
     // Methods
 
     /**
@@ -94,11 +124,11 @@ public class Ship {
      */
     public boolean isSinking(){
 
-        if(this.nbCases == this.nbHit){
+        if(nbHit == nbCases){
             return true;
-        }else if(this.nbCases < this.nbHit){
-            Log.d("IsSinking","The number of Hit is above the number of Cases !");
-            return true;
+        }else if(nbCases < nbHit){
+            Log.d("isSinking()!","The number of Hit is above the number of Cases !");
+            return false;
         }else {
             return false;
         }
@@ -108,10 +138,8 @@ public class Ship {
      * Hit this Ship, increase this Ship's hit counter.
      */
     public void hitShip(){
-        if(this.nbHit < this.nbCases){
-            this.nbHit++;
-        }else{
-            Log.d("IsSinking","The number of Hit is above the number of Cases !");
+        if(nbHit < nbCases){
+            nbHit++;
         }
     }
 

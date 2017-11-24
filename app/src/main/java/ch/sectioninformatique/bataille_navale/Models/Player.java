@@ -1,6 +1,5 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
-import android.graphics.Color;
 /**
  * Created by ToRe on 01.09.2017.
  */
