@@ -23,7 +23,7 @@
     <color name="cellNoProposal">    #AF5757</color>
     <color name="cellNoAccessible">  #af8383</color>
     <color name="cellTouchShip">     #bbff0000</color>
-    <color name="cellDestroyShip">   #bb220000</color>
+
     <color name="cellMissed">        #bb4488cc</color>
     <color name="cellSelectForLunch">#88880000</color>
 

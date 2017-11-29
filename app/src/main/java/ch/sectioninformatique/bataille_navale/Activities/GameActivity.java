@@ -15,21 +15,11 @@ import android.widget.TextView;
 import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.Models.Ship;
 import ch.sectioninformatique.bataille_navale.R;
-import static ch.sectioninformatique.bataille_navale.R.string;
 
 import static ch.sectioninformatique.bataille_navale.R.id;
 import static ch.sectioninformatique.bataille_navale.R.layout;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
-    //todo ABCDEFG... affiché 2 fois sous la grie dans GameActivity
-    //todo return button sur EndGameActivity
-    //todo animation et timing de la transition
-    //todo demander pour la règle Rejouer aprés un coup réussi
-    //todo Afficher corectement le nom
-    //todo margin de la grie
-    //todo bug si non choisis de couleur sans mode débogage (crash sur SetGameActivity)
-
-
     String cols[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     String rows[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     int nbrShip = 5;
@@ -53,8 +43,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGrid.setBackgroundColor(ContextCompat.getColor(this, player[playerTurn].getColor()));
         gameGrid.setVisibility(View.VISIBLE);
         infoText = (TextView) findViewById(id.InfoText);
-
-        infoText.setText(getResources().getText(string.playMessage1)+" "+player[playerTurn].getName()+" "+getResources().getText(string.playMessage2));
+        infoText.setText(getResources().getText(R.string.playMessage1)+" "+player[playerNotTurn].getName()+" "+getResources().getText(R.string.playMessage2));
     }
 
     @Override
@@ -74,6 +63,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 lunchButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         LunchMissile(player[playerTurn]);
 
                     }
@@ -100,13 +90,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
+
     }
 
-    public void Transition() {
+   /*// public void Transition() {
 
         Button lunchButton = (Button) findViewById(id.LunchButton);
-        lunchButton.setBackgroundColor(ContextCompat.getColor(this,R.color.buttonLunchInAction));
-        lunchButton.requestLayout();
+        lunchButton.setBackgroundColor(ContextCompat.getColor(this,R.color.buttonNext));
+        lunchButton.setText(R.string.NextButton);
 
 
 
@@ -127,7 +118,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         gameGrid.setBackgroundColor(ContextCompat.getColor(this, player[playerTurn].getColor()));
 
         gameGrid.requestLayout();
-    }
+         }*/
 
     public void LoadGrid(Player thisPlayer){
         for (int x = 0; x < rows.length;x++) {
@@ -137,12 +128,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }else{
                     if (thisPlayer.getPlayerGrid().getCase(x,y).isShipPlaced()){
                         if(thisPlayer.getPlayerGrid().getCase(x,y).getShip().isSinking()) {
-                            gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellDestroyShip));
+                            gridButton[x][y].setBackgroundColor(player[playerTurn].getPlayerGrid().getCase(x,y).getShip().getColorShip());
+
                         }else{
                             gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this,R.color.cellTouchShip));
+
                         }
                     }else{
                         gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this,R.color.cellMissed));
+
                     }
                 }
             }
@@ -188,8 +182,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         player[0].setName((String) extras.get("player1Name"));
         player[1].setName((String) extras.get("player2Name"));
-
-
+        TextView infoText = (TextView) findViewById(id.InfoText);
 
         int[] tmpColor =  ((int[])extras.get("playerColor"));
 
@@ -232,43 +225,101 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int counter = 0;
         for (int x = 0; x < rows.length; x++){
             for(int y = 0; y < cols.length; y++){
-
-                if (((ColorDrawable) gridButton[x][y].getBackground()).getColor()==ContextCompat.getColor(this,R.color.cellDestroyShip)){counter++;}
+                if (player[playerTurn].getPlayerGrid().getCase(x,y).isShipPlaced()){
+                    if (((ColorDrawable) gridButton[x][y].getBackground()).getColor()==player[playerTurn].getPlayerGrid().getCase(x,y).getShip().getColorShip()){
+                        counter++;
+                    }
+                }
             }
         }
         return counter == 17;
 
     }
+    public void EnableButton(boolean enabled){
+        for (int x = 0; x < rows.length; x++){
+            for(int y = 0; y < cols.length; y++) {
+                gridButton[x][y].setEnabled(enabled);
+            }
+        }
+    }
     public void LunchMissile(Player targetPlayer) {
         Button lunchButton = (Button) findViewById(id.LunchButton);
-        lunchButton.setEnabled(false);
-        lunchButton.setBackgroundColor(getResources().getColor(R.color.buttonNoEnabled));
-        for (int x = 0; x < rows.length;x++){
-            for(int y = 0; y < cols.length;y++){
-                if (((ColorDrawable)gridButton[x][y].getBackground()).getColor() == getResources().getColor(R.color.cellSelectForLunch)){
-                    if (targetPlayer.getPlayerGrid().getCase(x,y).isShipPlaced()){
-                        targetPlayer.getPlayerGrid().getCase(x,y).touchedCase();
-                        if (targetPlayer.getPlayerGrid().getCase(x,y).getShip().isSinking()){
-                            sinkShip();
-                        }
-                    }else{
-                        targetPlayer.getPlayerGrid().getCase(x,y).touchedCase();
+        if (lunchButton.getText() == getResources().getText(R.string.NextButton)){
+            if (CheckWin()){
+                Intent intent = new Intent(GameActivity.this, EndGameActivity.class);
+                intent.putExtra("WinnerName", "");
+                intent.putExtra("WinnerColor", "");
+                intent.putExtra("NumberOfHit", "");
+                intent.putExtra("NumberOfHit", "");
+                startActivityForResult(intent, 1);
+                finish();
+            }else {
+                int tmp = playerNotTurn;
+                playerNotTurn = playerTurn;
+                playerTurn = tmp;
 
+
+                BounceInterpolator bounceInterpolator = new BounceInterpolator();
+                ObjectAnimator anim;
+                if (playerTurn != 0){
+                    anim = ObjectAnimator.ofFloat(gameGrid, "translationX", 1000, 0 );
+                }else{
+                    anim = ObjectAnimator.ofFloat(gameGrid, "translationX", -1000, 0 );
+                }
+                anim.setInterpolator(bounceInterpolator);
+                anim.setDuration(1000);
+                anim.start();
+
+                lunchButton.setText(R.string.LunchButtonText);
+                lunchButton.setBackgroundColor(getResources().getColor(R.color.buttonNoEnabled));
+                lunchButton.setEnabled(false);
+
+
+                LoadGrid(player[playerTurn]);
+                infoText.setText(getResources().getText(R.string.playMessage1)+" "+player[playerNotTurn].getName()+" "+getResources().getText(R.string.playMessage2));
+                gameGrid.setBackgroundColor(ContextCompat.getColor(this, player[playerTurn].getColor()));
+                EnableButton(true);
+            }
+        }else{
+            lunchButton.setBackgroundColor(getResources().getColor(R.color.buttonNoEnabled));
+            BounceInterpolator bounceInterpolator = new BounceInterpolator();
+            ObjectAnimator anim;
+            anim = ObjectAnimator.ofFloat(gameGrid, "rotation", 5 , 0);
+            for (int x = 0; x < rows.length;x++){
+                for(int y = 0; y < cols.length;y++){
+                    if (((ColorDrawable)gridButton[x][y].getBackground()).getColor() == getResources().getColor(R.color.cellSelectForLunch)) {
+                        if (targetPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {
+                            targetPlayer.getPlayerGrid().getCase(x, y).touchedCase();
+
+                            TextView infoText = (TextView) findViewById(id.InfoText);
+
+                            if (targetPlayer.getPlayerGrid().getCase(x, y).getShip().isSinking()) {
+                                infoText.setText(R.string.cast);
+                                anim = ObjectAnimator.ofFloat(gameGrid, "rotationX", 360, 100, 50,10,0);
+                                anim.setDuration(2000);
+                            } else {
+                                infoText.setText(R.string.touch);
+                                anim = ObjectAnimator.ofFloat(gameGrid, "rotationX", 0, 20, 50,10,0);
+                                anim.setDuration(1000);
+                            }
+                        } else {
+                            targetPlayer.getPlayerGrid().getCase(x, y).touchedCase();
+                            infoText.setText(R.string.missed);
+                            anim = ObjectAnimator.ofFloat(gameGrid, "alpha",  1,0,1);
+                            anim.setDuration(1000);
+                        }
                     }
                 }
             }
+
+            //anim.setInterpolator(bounceInterpolator);
+            anim.start();
+            LoadGrid(player[playerTurn]);
+            lunchButton.setBackgroundColor(ContextCompat.getColor(this,R.color.buttonNext));
+            lunchButton.setText(R.string.NextButton);
+            EnableButton(false);
         }
-        LoadGrid(player[playerTurn]);
-        if (CheckWin()){
-            Intent intent = new Intent(GameActivity.this, EndGameActivity.class);
-            // statistiques intent.putExtra("stats", "laurent à gagné");
-            startActivityForResult(intent, 1);
-        }else{
-            Transition();
-        }
-    }
-    public void sinkShip(){
-        //todo afficher message Coulé!
+
     }
     public void CleanSelection(){
         for (int x = 0; x < rows.length;x++){

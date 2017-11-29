@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SetGameActivity.class);
                 intent.putExtra("param", 0);
+                if (Player1.getColor()==0 || Player2.getColor()==0){
+                    Player1.setColor(R.color.color1);
+                    Player2.setColor(R.color.color2);
+                }
                 intent.putExtra("playerColor", new int[]{Player1.getColor(),Player2.getColor()} );
                 startActivityForResult(intent, 1);
             }

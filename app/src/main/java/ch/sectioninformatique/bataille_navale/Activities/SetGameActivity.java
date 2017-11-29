@@ -1,5 +1,6 @@
 package ch.sectioninformatique.bataille_navale.Activities;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -88,8 +89,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
 
         }
         //endregion
-
         gridButton = constructGrid(gameGrid, this);
+
 
         //region set action of returnButton
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +131,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                         }
 
                         intent.putExtra("playerColor", (int[]) extras.get("playerColor"));
-                        intent.putExtra("playerName", player.getName());
+                        intent.putExtra("playerName", ""+player.getName());
                         intent.putExtra("shipLength", shipLength);
                         intent.putExtra("shipOrientation", shipOrientation);
                         intent.putExtra("shipColor", shipColor);
@@ -159,8 +160,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                         }
 
                         intent.putExtra("playerColor",  (int[]) extras.get("playerColor"));
-                        intent.putExtra("player1Name",  (String) extras.get("p1_Name"));
-                        intent.putExtra("player2Name",  player.getName());
+                        intent.putExtra("player1Name",  (String) extras.get("playerName"));
+                        intent.putExtra("player2Name",  ""+player.getName());
                         intent.putExtra("p1shipLength", (byte[]) extras.get("shipLength"));
                         intent.putExtra("p2shipLength", shipLength);
                         intent.putExtra("p1shipOrientation", (char[]) extras.get("shipOrientation"));
@@ -176,15 +177,17 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                         finish();
                     }
                 } else if (pseudoText.isEnabled()) {
-                    if (!(pseudoText.getText().toString().equals(""))) {
-                        player.setName(""+pseudoText.getText());
+                    String pseudoPlayer = pseudoText.getText().toString();
+                    if (!Objects.equals(pseudoPlayer, "")) {
+
+                        player.setName(pseudoPlayer);
                         gameGrid.setVisibility(View.VISIBLE);
                         gameGrid.requestLayout();
                         pseudoText.getLayoutParams().height = 0;
                         pseudoText.setEnabled(false);
                         pseudoText.requestLayout();
 
-                        helpText.setText(getResources().getText(string.SetShipHelpMessagePlayerStart) + " " + pseudoText.getText() + " " + getResources().getText(string.SetShipHelpMessagePlayerEnd));
+                        helpText.setText(getResources().getText(string.SetShipHelpMessagePlayerStart) + " " + player.getName() + " " + getResources().getText(string.SetShipHelpMessagePlayerEnd));
 
                     } else {
                         helpText.setText(getResources().getText(string.NoTextPlaced));
@@ -433,11 +436,21 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         TextView rowOfChar[] = new TextView[rows.length];
         TextView columnOfNumber[] = new TextView[cols.length];
 
-
         View cellGrid[] = new View[(rows.length + 1) * (cols.length + 1)];
-        LinearLayout.LayoutParams cellLP = new LinearLayout.LayoutParams((int) side, (int) side);
-        cellLP.setMargins((int) margin/2,(int) margin/2, (int) margin/2, (int) margin/2);
-        screenWidth = (cellLP.width+(cellLP.rightMargin+cellLP.leftMargin))*cellSideNumber;
+
+        LinearLayout.LayoutParams cellLP = new LinearLayout.LayoutParams((int)side, (int)side);
+        /*cellLP.setMargins((int) margin/2,(int) margin/2, (int) margin/2, (int) margin/2);
+        cellLP.leftMargin = (int) margin/2;
+        cellLP.topMargin = (int) margin/2;
+        cellLP.rightMargin = (int) margin/2;
+        cellLP.bottomMargin = (int) margin/2;*/
+
+        LinearLayout.LayoutParams LabelLP = new LinearLayout.LayoutParams((int)side+(int)margin, (int)side+(int)margin);
+
+
+        screenWidth = (LabelLP.width)*cellSideNumber;
+
+
         LinearLayout.LayoutParams gridLP = new LinearLayout.LayoutParams((int) screenWidth, (int) screenWidth);
 
         //endregion
@@ -451,17 +464,18 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
 
         //region cell properties
         space.setVisibility(View.GONE);
+        space.setLayoutParams(LabelLP);
         cellGrid[indexCell] = space;
         indexCell++;
         for (int Col = 0; Col < rows.length; Col++) {
             rowOfChar[Col] = new TextView(thisActivity);
             rowOfChar[Col].setTag("TextView_" + rows[Col]);   // = android:id="@+id/TextView_A"
             rowOfChar[Col].setText(rows[Col]);
-            rowOfChar[Col].setHeight((int) side);
-            rowOfChar[Col].setWidth((int) side);
+            rowOfChar[Col].setHeight((int) side+(int)margin);
+            rowOfChar[Col].setWidth((int) side+(int)margin);
             rowOfChar[Col].setGravity(Gravity.CENTER);
             rowOfChar[Col].setBackgroundColor(thisActivity.getResources().getColor(R.color.cellText));
-            rowOfChar[Col].setLayoutParams(cellLP);
+            rowOfChar[Col].setLayoutParams(LabelLP);
             cellGrid[indexCell] = rowOfChar[Col];
             indexCell++;
         }
@@ -469,11 +483,11 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             columnOfNumber[Row] = new TextView(thisActivity);
             columnOfNumber[Row].setTag("TextView_" + cols[Row]);
             columnOfNumber[Row].setText(cols[Row]);
-            columnOfNumber[Row].setHeight((int) side);
-            columnOfNumber[Row].setWidth((int) side);
+            columnOfNumber[Row].setHeight((int) side+(int)margin);
+            columnOfNumber[Row].setWidth((int) side+(int)margin);
             columnOfNumber[Row].setGravity(Gravity.CENTER);
             columnOfNumber[Row].setBackgroundColor(thisActivity.getResources().getColor(R.color.cellText));
-            columnOfNumber[Row].setLayoutParams(cellLP);
+            columnOfNumber[Row].setLayoutParams(LabelLP);
             cellGrid[indexCell] = columnOfNumber[Row];
             indexCell++;
             for (int Col = 0; Col < cols.length; Col++) {
@@ -496,17 +510,24 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
 
         //region cell add to game grid
         for (View aCellGrid : cellGrid) {
-            aCellGrid.setPadding(0, 0, 0, 0);
+
+            aCellGrid.setPadding((int) margin/2,(int) margin/2, (int) margin/2, (int) margin/2);
             aCellGrid.setTop(0);
             aCellGrid.setBottom(0);
-            aCellGrid.setLayoutParams(cellLP);
             aCellGrid.requestLayout();
             gameGrid.addView(aCellGrid);
         }
 
         gameGrid.requestLayout();
         gameGrid.setVisibility(View.INVISIBLE);
+
+        ObjectAnimator anim;
+        anim = ObjectAnimator.ofFloat(gridButton, "translationY", 1000, 100, 50,10,0);
+        anim.setDuration(5000);
+        anim.start();
+
         //endregion
+
         return gridButton;
     }
 }
