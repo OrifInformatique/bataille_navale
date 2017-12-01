@@ -2,6 +2,8 @@ package ch.sectioninformatique.bataille_navale.Activities;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -97,7 +99,13 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View v) {
                 if (!placed[0] && !placed[1] && !placed[2] && !placed[3] && !placed[4]) {
-                    finish();
+                    if(pseudoText.isEnabled()){
+                        AlertReturnButton();
+                    }else{
+                        GridReset();
+                        gameGrid.setVisibility(View.INVISIBLE);
+                        pseudoText.setEnabled(true);
+                    }
                 } else {
                     GridReset();
                 }
@@ -226,7 +234,20 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
 
         }
     }
+    public void AlertReturnButton(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+        builder
+                .setMessage(R.string.returnAlert)
+                .setNegativeButton(R.string.returnNo,null)
+                .setPositiveButton(R.string.returnYes, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .create()
+                .show();
+    }
     public boolean testPossibleShip(int x1, int y1, int x2, int y2) {// cette fonction vérifie que toutes les cases entre le point x1 y1 et x2 y2 ne sont pas des cases ship
         boolean ok = true;
         while (x2 != x1 || y2 != y1) {
@@ -439,11 +460,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         View cellGrid[] = new View[(rows.length + 1) * (cols.length + 1)];
 
         LinearLayout.LayoutParams cellLP = new LinearLayout.LayoutParams((int)side, (int)side);
-        /*cellLP.setMargins((int) margin/2,(int) margin/2, (int) margin/2, (int) margin/2);
-        cellLP.leftMargin = (int) margin/2;
-        cellLP.topMargin = (int) margin/2;
-        cellLP.rightMargin = (int) margin/2;
-        cellLP.bottomMargin = (int) margin/2;*/
+
 
         LinearLayout.LayoutParams LabelLP = new LinearLayout.LayoutParams((int)side+(int)margin, (int)side+(int)margin);
 
@@ -496,11 +513,10 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 gridButton[Row][Col].setId(Integer.parseInt(Row + "00" + Col));
                 gridButton[Row][Col].setHeight((int) side);
                 gridButton[Row][Col].setWidth((int) side);
-                gridButton[Row][Col].setGravity(Gravity.CENTER);
+                gridButton[Row][Col].setGravity(Gravity.FILL);
                 gridButton[Row][Col].setBackgroundColor(thisActivity.getResources().getColor(color.cellVoid));
                 gridButton[Row][Col].setOnClickListener((View.OnClickListener) thisActivity);
                 gridButton[Row][Col].setLayoutParams(cellLP);
-
                 cellGrid[indexCell] = gridButton[Row][Col];
                 indexCell++;
             }
@@ -521,9 +537,9 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         gameGrid.requestLayout();
         gameGrid.setVisibility(View.INVISIBLE);
 
-        ObjectAnimator anim;
-        anim = ObjectAnimator.ofFloat(gridButton, "translationY", 1000, 100, 50,10,0);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(gridButton, "translationY", 1000, 100, 50,10,0);
         anim.setDuration(5000);
+        anim.setStartDelay(3000);
         anim.start();
 
         //endregion

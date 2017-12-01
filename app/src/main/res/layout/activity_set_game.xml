@@ -43,7 +43,7 @@
 
                     android:id="@+id/SetShipHelpMessagePlayer"
                     android:layout_width="0dp"
-                    android:layout_height="21dp"
+                    android:layout_height="wrap_content"
                     android:labelFor="@+id/PseudoEditText"
                     android:text="@string/InputNamePlayer1"
                     android:textAlignment="center"
@@ -60,6 +60,7 @@
                     android:ems="10"
                     android:hint="@string/Player1"
                     android:inputType="textPersonName"
+                    android:maxLength="40"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"

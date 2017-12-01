@@ -11,6 +11,7 @@
     <!--Boutons redondants-->
     <string name="ReturnButton">◄</string>
     <string name="NextButton">Suivant</string>
+    <string name="LunchButtonText">Tirer!</string>
 
     <!--propre à chaque joueurs-->
     <string name="Player1">Joueur 1</string>
@@ -18,17 +19,23 @@
     <string name="ColorPlayer1">Couleur du joueur 1</string>
     <string name="ColorPlayer2">Couleur du joueur 2</string>
 
-    <string name="WinMessage">à Gagné</string>
-    <string name="LooseMessage">à Perdus</string>
+    <string name="returnAlert">Êtes-vous sûre de vouloir retourner au menu ?</string>
+    <string name="returnYes">Oui</string>
+    <string name="returnNo">Non</string>
 
     <string name="touch">Touché !</string>
     <string name="cast">Coulé !!</string>
     <string name="missed">Raté</string>
 
+    <string name="startMessage1">C\'est </string>
+    <string name="startMessage2"> qui commence!</string>
     <string name="playMessage1">C\'est à </string>
     <string name="playMessage2"> de jouer</string>
 
-
+    <string name="WinMessage"> à Gagné</string>
+    <string name="statsNbrHit">Nombre de coups :</string>
+    <string name="statsHitList">Liste des coups :</string>
+    <string name="statsTime">Durée de la partie :</string>
 
     <!--Barre se trouvant dessus le nom du joueur donnant un indice sur ce que doit faire le joueur-->
     <string name="InputNamePlayer1">Nom du premier joueur</string>
@@ -36,7 +43,6 @@
     <string name="NoTextPlaced">Veuillez entrer votre nom !</string>
     <string name="SetShipHelpMessagePlayerStart">C\'est à</string>
     <string name="SetShipHelpMessagePlayerEnd">de placer ses bateaux</string>
-    <string name="LunchButtonText">Tirer!</string>
 
 
 </resources>
