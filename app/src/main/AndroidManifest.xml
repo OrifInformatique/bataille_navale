@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ch.sectioninformatique.bataille_navale">
 
     <application
@@ -11,18 +12,23 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".Activities.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activities.SetGameActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.SettingActivity" />
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Activities.SettingActivity"
+            tools:ignore="InnerclassSeparator" />
         <activity android:name=".Activities.GameActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator" />
         <activity android:name=".Activities.EndGameActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator" />
     </application>
 </manifest>
