@@ -75,7 +75,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         int[] tmpPlayerColor = ((int[]) extras.get("playerColor"));
         assert tmpPlayerColor != null;
 
-        player.setColor(ContextCompat.getColor(this, tmpPlayerColor[nbrPlayer]));
+        player.setColor(ContextCompat.getColor(this, tmpPlayerColor[nbrPlayer%2]));
         //endregion
 
         //region player who plays properties
@@ -84,12 +84,12 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         if (nbrPlayer == 1) {
             helpText.setText(getResources().getText(string.InputNamePlayer2));
             pseudoText.setHint(getResources().getText(string.Player2));
-        } else if (nbrPlayer != 0){
+        } /*else if (nbrPlayer != 0){
             helpText.setText(nbrPlayer);
             //gameGrid.setBackgroundColor(Color.BLACK);
             gameGrid.requestLayout();
 
-        }
+        }*/
         //endregion
         gridButton = constructGrid(gameGrid, this);
 
@@ -139,7 +139,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                         }
 
                         intent.putExtra("playerColor", (int[]) extras.get("playerColor"));
-                        intent.putExtra("playerName", ""+player.getName());
+                        intent.putExtra("playerName", "" + player.getName());
                         intent.putExtra("shipLength", shipLength);
                         intent.putExtra("shipOrientation", shipOrientation);
                         intent.putExtra("shipColor", shipColor);
@@ -147,6 +147,35 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                         intent.putExtra("shipStartY", shipStartY);
 
                         startActivityForResult(intent, 1);
+                    } else if (nbrPlayer == 2) {
+
+                        Intent intent = new Intent(SetGameActivity.this, MultiplayersGameActivity.class);
+
+                        byte[] shipLength = new byte[ships.length];
+                        char[] shipOrientation = new char[ships.length];
+                        int[] shipColor = new int[ships.length];
+                        int[] shipStartX = new int[ships.length];
+                        int[] shipStartY = new int[ships.length];
+
+                        for (int i = 0; i < ships.length; i++) {
+                            shipLength[i] = ships[i].getNbCases();
+                            shipOrientation[i] = ships[i].getDefaultOrientation();
+                            shipColor[i] = ships[i].getColorShip();
+                            shipStartX[i] = ships[i].getX();
+                            shipStartY[i] = ships[i].getY();
+                        }
+
+                        intent.putExtra("playerColor",  (int[]) extras.get("playerColor"));
+                        intent.putExtra("player1Name",  ""+player.getName());
+                        intent.putExtra("p1shipLength", shipLength);
+                        intent.putExtra("p1shipOrientation", shipOrientation);
+                        intent.putExtra("p1shipColor",  shipColor);
+                        intent.putExtra("p1shipStartX", shipStartX);
+                        intent.putExtra("p1shipStartY", shipStartY);
+                        intent.putExtra("ServerURL", extras.getString("ServerURL"));
+
+                        startActivityForResult(intent, 1);
+                        finish();
                     } else {
                         Bundle extras = getIntent().getExtras();
                         assert extras != null;

@@ -5,6 +5,7 @@
 
     <!--Choix du menu-->
     <string name="PlayButton">Jouer</string>
+    <string name="MultiButton">Multijoueurs</string>
     <string name="SettingsButton">Options</string>
     <string name="CloseButton">Quitter</string>
 
@@ -22,6 +23,7 @@
     <string name="returnAlert">Êtes-vous sûre de vouloir retourner au menu ?</string>
     <string name="returnYes">Oui</string>
     <string name="returnNo">Non</string>
+    <string name="returnOk">OK</string>
 
     <string name="touch">Touché !</string>
     <string name="cast">Coulé !!</string>
@@ -44,5 +46,9 @@
     <string name="SetShipHelpMessagePlayerStart">C\'est à</string>
     <string name="SetShipHelpMessagePlayerEnd">de placer ses bateaux</string>
 
+    <!--Multijoueurs-->
+    <string name="WaitPlayer">Attente d\'un autre joueur</string>
+    <string name="DecoPlayer">Votre adversaire s\'est déconnecté.</string>
+    <string name="defaultServerURL">http://192.168.4.148:8080</string>
 
 </resources>

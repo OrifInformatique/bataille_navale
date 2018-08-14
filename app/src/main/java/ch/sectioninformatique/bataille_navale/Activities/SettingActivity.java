@@ -3,9 +3,11 @@ package ch.sectioninformatique.bataille_navale.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.view.MenuItem;
 
@@ -15,8 +17,18 @@ public class SettingActivity extends AppCompatActivity {
 
     Button ButtonP1;
     Button ButtonP2;
+    EditText ServerURL;
     int P1Color;
     int P2Color;
+
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        intent.putExtra("P1Color",P1Color);
+        intent.putExtra("P2Color",P2Color);
+        intent.putExtra("ServerURL", ServerURL.getText().toString());
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +43,17 @@ public class SettingActivity extends AppCompatActivity {
         ButtonP2 = (Button) findViewById(R.id.ColorPlayer2Button);
         ButtonP2.setOnClickListener(new ButtonP2Listener());
 
+        ServerURL = (EditText) findViewById(R.id.ServerURL);
+
         if(extras != null && extras.getInt("P1Color") != 0 && extras.getInt("P2Color") != 0){
             P1Color = extras.getInt("P1Color");
             P2Color = extras.getInt("P2Color");
             ButtonP1.setBackgroundResource(P1Color);
             ButtonP2.setBackgroundResource(P2Color);
+        }
+
+        if(extras != null && !extras.getString("ServerURL").isEmpty()){
+            ServerURL.setText(extras.getString("ServerURL"));
         }
 
         Button returnButton = (Button) findViewById(R.id.ReturnButton);
@@ -45,6 +63,7 @@ public class SettingActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 intent.putExtra("P1Color",P1Color);
                 intent.putExtra("P2Color",P2Color);
+                intent.putExtra("ServerURL", ServerURL.getText().toString());
                 startActivity(intent);
                 finish();
             }
