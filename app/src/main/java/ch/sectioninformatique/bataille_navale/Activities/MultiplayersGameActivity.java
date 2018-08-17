@@ -63,29 +63,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
     public void onStart() {
         super.onStart();
 
-        statTime = System.currentTimeMillis();
-        colorPlayer = findViewById(id.colorPlayer);
-        gameGrid = findViewById(R.id.GameGrid);
-        gridButton = SetGameActivity.constructGrid(gameGrid, this);
-        lunchButton = findViewById(R.id.LunchButton);
-
         mSocket.connect();
-
-        CreatePlayers1();
-
-
-        dialog = new ProgressDialog(MultiplayersGameActivity.this);
-        dialog.setMessage(getResources().getText(R.string.WaitPlayer));
-        dialog.setIndeterminate(true);
-        dialog.setCancelable(false);
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-           @Override
-           public void onCancel(DialogInterface dialogInterface) {
-               dialog.hide();
-               RandomSelectPlayer();
-           }
-        });
-        dialog.show();
 
         /*
 
@@ -128,6 +106,22 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_game);
 
+        dialog = new ProgressDialog(MultiplayersGameActivity.this);
+        dialog.setMessage(getResources().getText(R.string.WaitPlayer));
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                dialog.hide();
+                if(mSocket.connected()) {
+                    statTime = System.currentTimeMillis();
+                    RandomSelectPlayer();
+                }
+            }
+        });
+        dialog.show();
+
         Bundle extras = getIntent().getExtras();
         ServerURL = getResources().getText(R.string.defaultServerURL).toString();
         if(extras != null && !extras.getString("ServerURL").isEmpty()) {
@@ -137,6 +131,31 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         try {
             mSocket = IO.socket(ServerURL);
 
+            mSocket.once(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
+                @Override
+                public void call(Object... args) {
+                    mSocket.disconnect();
+                    mSocket.off();
+
+                    dialog.cancel();
+
+                    Looper.prepare();
+
+                    AlertDialog.Builder alert  = new AlertDialog.Builder(MultiplayersGameActivity.this);
+                    alert.setMessage(getResources().getText(R.string.Timeout));
+                    alert.setPositiveButton(getResources().getText(R.string.returnOk), new AlertDialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+                    alert.setCancelable(false);
+                    alert.create().show();
+
+                    Looper.loop();
+                }
+            });
+
             mSocket.once("player", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
@@ -144,12 +163,6 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                     randomNumber = (int)args[1];
 
                     CreatePlayers2(dataReceive);
-                }
-
-                public void onDestroy(){
-                    MultiplayersGameActivity.super.onDestroy();
-                    mSocket.disconnect();
-                    mSocket.off("player", this);
                 }
             });
 
@@ -168,12 +181,6 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
 
                     dialog.cancel();
                 }
-
-                public void onDestroy(){
-                    MultiplayersGameActivity.super.onDestroy();
-                    mSocket.disconnect();
-                    mSocket.off("lunchMissile", this);
-                }
             });
 
             mSocket.on("next", new Emitter.Listener() {
@@ -181,17 +188,16 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                 public void call(Object... args) {
                     dialog.cancel();
                 }
-
-                public void onDestroy(){
-                    MultiplayersGameActivity.super.onDestroy();
-                    mSocket.disconnect();
-                    mSocket.off("next", this);
-                }
             });
 
-            mSocket.on("deco", new Emitter.Listener() {
+            mSocket.once("deco", new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
+                    mSocket.disconnect();
+                    mSocket.off();
+
+                    dialog.cancel();
+
                     Looper.prepare();
 
                     AlertDialog.Builder alert  = new AlertDialog.Builder(MultiplayersGameActivity.this);
@@ -199,7 +205,6 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                     alert.setPositiveButton(getResources().getText(R.string.returnOk), new AlertDialog.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            mSocket.disconnect();
                             finish();
                         }
                     });
@@ -207,12 +212,6 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                     alert.create().show();
 
                     Looper.loop();
-                }
-
-                public void onDestroy(){
-                    MultiplayersGameActivity.super.onDestroy();
-                    mSocket.disconnect();
-                    mSocket.off("deco", this);
                 }
             });
 
@@ -225,6 +224,15 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                 AlertReturnButton();
             }
         });
+
+        colorPlayer = findViewById(id.colorPlayer);
+        gameGrid = findViewById(R.id.GameGrid);
+        gridButton = SetGameActivity.constructGrid(gameGrid, this);
+        lunchButton = findViewById(R.id.LunchButton);
+
+
+        CreatePlayers1();
+
     }
 
     public void onBackPressed(){
@@ -239,6 +247,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                 .setPositiveButton(R.string.returnYes, new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface dialog, int id) {
                         mSocket.disconnect();
+                        mSocket.off();
                         finish();
                     }
                 })
@@ -454,22 +463,13 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
     }
 
     public boolean CheckWin(){
-        int counter = 0;//rows.length*cols.length;
-        for (Ship aShip : shipsPlayer[playerTurn]){
-            counter+=aShip.getNbCases();
-        }
-
-        for (int x = 0; x < rows.length; x++){
-            for(int y = 0; y < cols.length; y++){
-                if (player[playerTurn].getPlayerGrid().getCase(x,y).isShipPlaced()){
-                    if(player[playerTurn].getPlayerGrid().getCase(x,y).getShip().isSinking()){
-                        counter--;
-                    }
-                }
+        boolean allSinking = true;
+        for (Ship aShip : shipsPlayer[playerTurn]) {
+            if (!aShip.isSinking()) {
+                allSinking = false;
             }
         }
-        return counter == 0;
-
+        return allSinking;
     }
     public void EnableButton(boolean enabled){
         for (int x = 0; x < rows.length; x++){

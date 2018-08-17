@@ -50,5 +50,6 @@
     <string name="WaitPlayer">Attente d\'un autre joueur</string>
     <string name="DecoPlayer">Votre adversaire s\'est déconnecté.</string>
     <string name="defaultServerURL">http://192.168.4.148:8080</string>
+    <string name="Timeout">Délai de connexion dépassé</string>
 
 </resources>
