@@ -22,17 +22,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/ReturnButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="8dp"
         android:background="@color/buttonReturn"
-        android:fontFamily="serif-monospace"
-        android:text="@string/ReturnButton"
-        android:textColor="@color/buttonTexts"
-        android:textSize="20sp"
+        android:src="@drawable/ic_door"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />

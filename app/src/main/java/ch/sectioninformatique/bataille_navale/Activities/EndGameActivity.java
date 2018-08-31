@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -59,7 +60,7 @@ public class EndGameActivity extends AppCompatActivity {
 
 
         tvWin.setText(NameWinner+" "+ getResources().getText(R.string.WinMessage));
-        final Button returnButton = findViewById(R.id.ReturnButton);
+        final ImageButton returnButton = findViewById(R.id.ReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

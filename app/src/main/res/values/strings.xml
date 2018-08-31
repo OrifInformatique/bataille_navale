@@ -30,7 +30,7 @@
     <string name="missed">Raté</string>
 
     <string name="startMessage1">C\'est </string>
-    <string name="startMessage2"> qui commence!</string>
+    <string name="startMessage2"> qui commence !</string>
     <string name="playMessage1">C\'est à </string>
     <string name="playMessage2"> de jouer</string>
 
@@ -51,5 +51,10 @@
     <string name="DecoPlayer">Votre adversaire s\'est déconnecté.</string>
     <string name="defaultServerURL">http://192.168.4.148:8080</string>
     <string name="Timeout">Délai de connexion dépassé</string>
+
+    <string name="startMessageYou">C\'est vous qui commencez !</string>
+    <string name="playMessageYou">C\'est à vous de jouer</string>
+    <string name="startMessageHim">C\'est lui qui commence !</string>
+    <string name="playMessageHim">C\'est à votre adversaire de jouer</string>
 
 </resources>

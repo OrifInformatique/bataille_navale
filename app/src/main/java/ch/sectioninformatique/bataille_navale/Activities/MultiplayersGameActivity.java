@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Looper;
@@ -18,6 +19,7 @@ import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import ch.sectioninformatique.bataille_navale.Models.Player;
@@ -48,10 +50,10 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
     Button[][] gridButton = new Button[10][10];
     int playerTurn = 0;
     int playerNotTurn = 1;
-    TextView infoText;
+    TextView[] infoText = new TextView[2];
     int statShot = 0;
     long statTime;
-    FrameLayout colorPlayer;
+    FrameLayout[] colorPlayer = new FrameLayout[2];
     Button lunchButton;
 
     ProgressDialog dialog;
@@ -80,23 +82,27 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         final Button thisButton = (Button) v;
 
         if (phase == 1){
-            if (((ColorDrawable) thisButton.getBackground()).getColor()==getResources().getColor(R.color.cellVoid)){
-                CleanSelection();
-
+            if(playerNotTurn == 0){
                 thisButton.setBackgroundColor(ContextCompat.getColor(this, R.color.cellSelectForLunch));
+            } else {
+                if (((ColorDrawable) thisButton.getBackground()).getColor() == getResources().getColor(R.color.cellVoid)) {
+                    CleanSelection();
 
-                lunchButton.setEnabled(true);
-                lunchButton.setBackgroundColor(getResources().getColor(R.color.buttonLunch));
-                lunchButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        LunchMissile(player[playerTurn]);
-                    }
-                });
-            }else if(((ColorDrawable) thisButton.getBackground()).getColor()==getResources().getColor(R.color.cellSelectForLunch)){
-                CleanSelection();
-                lunchButton.setEnabled(false);
-                lunchButton.setBackgroundColor(getResources().getColor(R.color.buttonNoEnabled));
+                    thisButton.setBackgroundColor(ContextCompat.getColor(this, R.color.cellSelectForLunch));
+
+                    lunchButton.setEnabled(true);
+                    lunchButton.setBackgroundColor(getResources().getColor(R.color.buttonLunch));
+                    lunchButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            LunchMissile(player[playerNotTurn]);
+                        }
+                    });
+                } else if (((ColorDrawable) thisButton.getBackground()).getColor() == getResources().getColor(R.color.cellSelectForLunch)) {
+                    CleanSelection();
+                    lunchButton.setEnabled(false);
+                    lunchButton.setBackgroundColor(getResources().getColor(R.color.buttonNoEnabled));
+                }
             }
         }
     }
@@ -131,7 +137,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         try {
             mSocket = IO.socket(ServerURL);
 
-            mSocket.once(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
+            /*mSocket.once(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
                     mSocket.disconnect();
@@ -154,7 +160,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
 
                     Looper.loop();
                 }
-            });
+            });*/
 
             mSocket.once("player", new Emitter.Listener() {
                 @Override
@@ -217,7 +223,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
 
         } catch (URISyntaxException e) {}
 
-        final Button returnButton =  findViewById(id.ReturnButton);
+        final ImageButton returnButton =  findViewById(id.ReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,7 +231,8 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
             }
         });
 
-        colorPlayer = findViewById(id.colorPlayer);
+        colorPlayer[0] = findViewById(id.colorPlayerLeft);
+        colorPlayer[1] = findViewById(id.colorPlayerRight);
         gameGrid = findViewById(R.id.GameGrid);
         gridButton = SetGameActivity.constructGrid(gameGrid, this);
         lunchButton = findViewById(R.id.LunchButton);
@@ -257,26 +264,42 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
 
     public void RandomSelectPlayer(){
 
-        infoText = findViewById(id.InfoText);
-        colorPlayer  = findViewById(id.colorPlayer);
+        infoText[0] = findViewById(id.InfoTextLeft);
+        infoText[1] = findViewById(id.InfoTextRight);
         lunchButton = (Button) findViewById(id.LunchButton);
 
         final int color[] = {
                 ContextCompat.getColor(this,player[0].getColor()),
+                Color.GRAY,
                 ContextCompat.getColor(this,player[1].getColor())};
         ValueAnimator animator = ValueAnimator.ofInt(0, randomNumber);
-
 
         animator.setDuration(5000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int i=(Integer.parseInt(valueAnimator.getAnimatedValue().toString())+1)%2;
-                infoText.setText(getResources().getText(R.string.startMessage1)+" "+player[i].getName()+"\n "+getResources().getText(R.string.startMessage2));
-                colorPlayer.setBackgroundColor(color[i]);
+                colorPlayer[0].setBackgroundColor(color[i]);
+                colorPlayer[1].setBackgroundColor(color[i+1]);
             }
         });
         animator.setStartDelay(2000);
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+                infoText[0].setText(getResources().getText(R.string.startMessageYou));
+                infoText[1].setText(getResources().getText(R.string.startMessageHim));
+            }
+            @Override
+            public void onAnimationEnd(Animator animator) {
+            }
+            @Override
+            public void onAnimationCancel(Animator animator) {
+            }
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+            }
+        });
         animator.start();
 
         ObjectAnimator anim = ObjectAnimator.ofFloat(lunchButton, "alpha",  0,0,0,1);
@@ -298,16 +321,15 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         });
         anim.start();
 
-
-        playerNotTurn = randomNumber%2;
-        playerTurn = (randomNumber+1)%2;
+        playerTurn = randomNumber%2;
+        playerNotTurn = (randomNumber+1)%2;
 
 
 
     }
 
     public void EndAnimationRandomPlayer(){
-        LoadGrid(player[playerTurn]);
+        LoadGrid(player[playerNotTurn]);
         lunchButton.setBackgroundColor(ContextCompat.getColor(this,R.color.buttonNext));
         lunchButton.setText(R.string.NextButton);
         lunchButton.setEnabled(true);
@@ -315,30 +337,45 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         lunchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LunchMissile(player[playerTurn]);
+                LunchMissile(player[playerNotTurn]);
             }
         });
-        LunchMissile(player[playerTurn]);
+        LunchMissile(player[playerNotTurn]);
     }
     public void LoadGrid(Player thisPlayer){
         for (int x = 0; x < rows.length;x++) {
             for (int y = 0; y < cols.length; y++) {
-                if(!thisPlayer.getPlayerGrid().getCase(x,y).getTouched()){
-                    gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this,R.color.cellVoid));
-                }else{
-                    if (thisPlayer.getPlayerGrid().getCase(x,y).isShipPlaced()){
-                        if(thisPlayer.getPlayerGrid().getCase(x,y).getShip().isSinking()) {
-                            gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this,player[playerTurn].getPlayerGrid().getCase(x,y).getShip().getColorShip()));
-
-                        }else{
-                            gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this,R.color.cellTouchShip));
+                if (playerNotTurn == 0) {
+                    if (!thisPlayer.getPlayerGrid().getCase(x, y).getTouched()) {
+                        if (thisPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {
+                            gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, player[playerNotTurn].getPlayerGrid().getCase(x, y).getShip().getColorShip()));
+                        } else {
+                            gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellVoid));
+                        }
+                    } else {
+                        if (thisPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {
+                            gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellTouchShip));
+                        } else {
+                            gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellMissed));
 
                         }
-                    }else{
-                        gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this,R.color.cellMissed));
-
                     }
+                } else {
+                    if (!thisPlayer.getPlayerGrid().getCase(x, y).getTouched()) {
+                        gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellVoid));
+                    } else {
+                        if (thisPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {
+                            if (thisPlayer.getPlayerGrid().getCase(x, y).getShip().isSinking()) {
+                                gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, thisPlayer.getPlayerGrid().getCase(x, y).getShip().getColorShip()));
+                            } else {
+                                gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellTouchShip));
 
+                            }
+                        } else {
+                            gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellMissed));
+
+                        }
+                    }
                 }
             }
         }
@@ -464,7 +501,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
 
     public boolean CheckWin(){
         boolean allSinking = true;
-        for (Ship aShip : shipsPlayer[playerTurn]) {
+        for (Ship aShip : shipsPlayer[playerNotTurn]) {
             if (!aShip.isSinking()) {
                 allSinking = false;
             }
@@ -479,19 +516,19 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         }
     }
     public void LunchMissile(Player targetPlayer) {
-        Button lunchButton = (Button) findViewById(id.LunchButton);
+        final Button lunchButton = (Button) findViewById(id.LunchButton);
         if (lunchButton.getText() == getResources().getText(R.string.NextButton)){
             if (CheckWin()){
                 statTime = System.currentTimeMillis() - statTime ;
                 Intent intent = new Intent(MultiplayersGameActivity.this, EndGameActivity.class);
-                intent.putExtra("WinnerName", player[playerNotTurn].getName());
-                intent.putExtra("WinnerColor", player[playerNotTurn].getColor());
+                intent.putExtra("WinnerName", player[playerTurn].getName());
+                intent.putExtra("WinnerColor", player[playerTurn].getColor());
                 intent.putExtra("StatShot", statShot);
                 intent.putExtra("ListOfHit", "");
                 intent.putExtra("StatTime", statTime);
                 startActivityForResult(intent, 1);
                 finish();
-            }else {
+            } else {
                 Play();
             }
         }else{
@@ -502,7 +539,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
             for (int x = 0; x < rows.length;x++){
                 for(int y = 0; y < cols.length;y++){
                     if (((ColorDrawable)gridButton[x][y].getBackground()).getColor() == getResources().getColor(R.color.cellSelectForLunch)) {
-                        if(playerTurn == 1) {
+                        if(playerTurn == 0) {
                             JSONObject coordinates = new JSONObject();
                             try {
                                 coordinates.put("x", x);
@@ -515,21 +552,20 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                         if (targetPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {
                             targetPlayer.getPlayerGrid().getCase(x, y).touchedCase();
                             statShot++;
-                            TextView infoText = (TextView) findViewById(id.InfoText);
 
                             if (targetPlayer.getPlayerGrid().getCase(x, y).getShip().isSinking()) {
-                                infoText.setText(R.string.cast);
-                                anim = ObjectAnimator.ofFloat(gameGrid, "rotationX", 360, 100, 50,10,0);
+                                infoText[playerTurn].setText(R.string.cast);
+                                anim = ObjectAnimator.ofFloat(gameGrid, "rotationX", 360, 100, 50, 10, 0);
                                 anim.setDuration(2000);
                             } else {
-                                infoText.setText(R.string.touch);
-                                anim = ObjectAnimator.ofFloat(gameGrid, "rotationX", 0, 20, 50,10,0);
+                                infoText[playerTurn].setText(R.string.touch);
+                                anim = ObjectAnimator.ofFloat(gameGrid, "rotationX", 0, 20, 50, 10, 0);
                                 anim.setDuration(1000);
                             }
                         } else {
                             targetPlayer.getPlayerGrid().getCase(x, y).touchedCase();
-                            infoText.setText(R.string.missed);
-                            anim = ObjectAnimator.ofFloat(gameGrid, "alpha",  1,0,1);
+                            infoText[playerTurn].setText(R.string.missed);
+                            anim = ObjectAnimator.ofFloat(gameGrid, "alpha", 1, 0, 1);
                             anim.setDuration(1000);
                         }
                     }
@@ -542,7 +578,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                 }
                 @Override
                 public void onAnimationEnd(Animator animator) {
-                    LunchMissile(player[playerTurn]);
+                    lunchButton.performClick();
                 }
                 @Override
                 public void onAnimationCancel(Animator animator) {
@@ -552,7 +588,6 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                 }
             });
 
-            LoadGrid(player[playerTurn]);
             //lunchButton.setBackgroundColor(ContextCompat.getColor(this,R.color.buttonNext));
             lunchButton.setText(R.string.NextButton);
             lunchButton.setEnabled(false);
@@ -572,9 +607,13 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
 
         ObjectAnimator anim1;
         ObjectAnimator anim2 =  ObjectAnimator.ofFloat(gameGrid, "translationY", -600,-100,15,20,0);
-        if (playerTurn != 0){
+        if (playerTurn == 0){
+            colorPlayer[1].setBackgroundColor(Color.GRAY);
+            colorPlayer[0].setBackgroundColor(ContextCompat.getColor(this, player[0].getColor()));
             anim1 = ObjectAnimator.ofFloat(gameGrid, "translationX", 800, 600,300,0 );
         }else{
+            colorPlayer[0].setBackgroundColor(Color.GRAY);
+            colorPlayer[1].setBackgroundColor(ContextCompat.getColor(this, player[1].getColor()));
             anim1 = ObjectAnimator.ofFloat(gameGrid, "translationX", -800, -600,-300,0 );
         }
         AnimatorSet as = new AnimatorSet();
@@ -588,12 +627,15 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
 
 
 
-        LoadGrid(player[playerTurn]);
+        LoadGrid(player[playerNotTurn]);
         gameGrid.setBackgroundColor(ContextCompat.getColor(this,player[playerTurn].getColor()));
-        infoText.setText(getResources().getText(R.string.playMessage1)+" "+player[playerNotTurn].getName()+" "+getResources().getText(R.string.playMessage2));
-        colorPlayer.setBackgroundColor(ContextCompat.getColor(this,player[playerNotTurn].getColor()));
+        infoText[0].setText(getResources().getText(R.string.playMessageYou));
+        infoText[1].setText(getResources().getText(R.string.playMessageHim));
 
-        if(playerTurn == 0) {
+        if(playerTurn == 1) {
+
+            lunchButton.setBackgroundColor(getResources().getColor(R.color.buttonNoEnabled));
+
             EnableButton(false);
             dialog = new ProgressDialog(MultiplayersGameActivity.this);
             dialog.setIndeterminate(true);
@@ -601,9 +643,8 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
             dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialogInterface) {
-                    dialog.hide();
                     gridButton[x][y].performClick();
-                    LunchMissile(player[playerTurn]);
+                    lunchButton.performClick();
                     mSocket.emit("next");
                 }
             });

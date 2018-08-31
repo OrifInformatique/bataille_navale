@@ -15,6 +15,7 @@ import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import ch.sectioninformatique.bataille_navale.Models.Player;
@@ -48,7 +49,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
 
         statTime = System.currentTimeMillis();
-        colorPlayer = findViewById(id.colorPlayer);
+        colorPlayer = findViewById(id.colorPlayerLeft);
         gameGrid = findViewById(R.id.GameGrid);
         gridButton = SetGameActivity.constructGrid(gameGrid, this);
         lunchButton = findViewById(R.id.LunchButton);
@@ -97,7 +98,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_game);
 
-        final Button returnButton =  findViewById(id.ReturnButton);
+        final ImageButton returnButton =  findViewById(id.ReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,8 +123,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void RandomSelectPlayer(){
 
         int randomNumber = (int)(Math.random()*10)+20;//(between 20 et 30)
-        infoText = findViewById(id.InfoText);
-        colorPlayer  = findViewById(id.colorPlayer);
+        infoText = findViewById(id.InfoTextLeft);
+        colorPlayer  = findViewById(id.colorPlayerLeft);
         lunchButton = (Button) findViewById(id.LunchButton);
 
         final int color[] = {
@@ -319,7 +320,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         if (targetPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {
                             targetPlayer.getPlayerGrid().getCase(x, y).touchedCase();
                             statShot++;
-                            TextView infoText = (TextView) findViewById(id.InfoText);
+                            TextView infoText = (TextView) findViewById(id.InfoTextLeft);
 
                             if (targetPlayer.getPlayerGrid().getCase(x, y).getShip().isSinking()) {
                                 infoText.setText(R.string.cast);

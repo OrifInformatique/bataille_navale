@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,6 +44,11 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
     public int phase = 1;
     public int nbrPlayer;
     //[no Player][x/y][which ship][]
+    private EditText pseudoText = null;
+    private TextView helpText = null;
+    private GridLayout gameGrid = null;
+    private ImageButton returnButton = null;
+    private Button nextButton = null;
     //endregion
 
     @Override
@@ -61,11 +67,11 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         //endregion
 
         //region variable declaration
-        final EditText pseudoText = (EditText) findViewById(id.PseudoEditText);
-        final TextView helpText = (TextView) findViewById(id.SetShipHelpMessagePlayer);
-        final GridLayout gameGrid = (GridLayout) findViewById(id.GameGrid);
-        Button returnButton = (Button) findViewById(id.ReturnButton);
-        Button nextButton = (Button) findViewById(id.NextButton);
+        pseudoText = (EditText) findViewById(id.PseudoEditText);
+        helpText = (TextView) findViewById(id.SetShipHelpMessagePlayer);
+        gameGrid = (GridLayout) findViewById(id.GameGrid);
+        returnButton = (ImageButton) findViewById(id.ReturnButton);
+        nextButton = (Button) findViewById(id.NextButton);
         //endregion
 
         //region recuperation of intent
@@ -263,6 +269,11 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
 
         }
     }
+
+    public void onBackPressed(){
+        returnButton.performClick();
+    }
+
     public void AlertReturnButton(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

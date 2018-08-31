@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.view.MenuItem;
 
@@ -56,7 +57,7 @@ public class SettingActivity extends AppCompatActivity {
             ServerURL.setText(extras.getString("ServerURL"));
         }
 
-        Button returnButton = (Button) findViewById(R.id.ReturnButton);
+        ImageButton returnButton = (ImageButton) findViewById(R.id.ReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
