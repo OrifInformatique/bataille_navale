@@ -268,21 +268,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     public boolean CheckWin(){
-        int counter = rows.length*cols.length;
-        for (Ship aShip : shipsPlayer[playerTurn]){
-            counter+=aShip.getNbCases();
-        }
-
-        for (int x = 0; x < rows.length; x++){
-            for(int y = 0; y < cols.length; y++){
-                if (player[playerTurn].getPlayerGrid().getCase(x,y).isShipPlaced()){
-                    if(player[playerTurn].getPlayerGrid().getCase(x,y).getShip().isSinking()){
-                        counter--;
-                    }
-                }
+        boolean allSinking = true;
+        for (Ship aShip : shipsPlayer[playerNotTurn]) {
+            if (!aShip.isSinking()) {
+                allSinking = false;
             }
         }
-        return counter == 0;
+        return allSinking;
 
     }
     public void EnableButton(boolean enabled){
@@ -299,8 +291,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             if (CheckWin()){
                 statTime = System.currentTimeMillis() - statTime ;
                 Intent intent = new Intent(GameActivity.this, EndGameActivity.class);
-                intent.putExtra("WinnerName", "Laurent");
-                intent.putExtra("WinnerColor", R.color.color1);
+                intent.putExtra("WinnerName", player[playerTurn].getName());
+                intent.putExtra("WinnerColor", player[playerTurn].getColor());
                 intent.putExtra("StatShot", statShot);
                 intent.putExtra("ListOfHit", "");
                 intent.putExtra("StatTime", statTime);
