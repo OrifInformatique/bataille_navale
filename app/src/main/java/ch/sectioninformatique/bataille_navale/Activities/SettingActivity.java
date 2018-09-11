@@ -22,11 +22,15 @@ public class SettingActivity extends AppCompatActivity {
     int P1Color;
     int P2Color;
 
+    final String BUNDLE_P1_COLOR = "P1Color";
+    final String BUNDLE_P2_COLOR = "P2Color";
+    final String BUNDLE_SERVER_URL = "ServerURL";
+
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        intent.putExtra("P1Color",P1Color);
-        intent.putExtra("P2Color",P2Color);
-        intent.putExtra("ServerURL", ServerURL.getText().toString());
+        intent.putExtra(BUNDLE_P1_COLOR,P1Color);
+        intent.putExtra(BUNDLE_P2_COLOR,P2Color);
+        intent.putExtra(BUNDLE_SERVER_URL, ServerURL.getText().toString());
         startActivity(intent);
         finish();
     }
@@ -46,16 +50,24 @@ public class SettingActivity extends AppCompatActivity {
 
         ServerURL = (EditText) findViewById(R.id.ServerURL);
 
-        if(extras != null && extras.getInt("P1Color") != 0 && extras.getInt("P2Color") != 0){
-            P1Color = extras.getInt("P1Color");
-            P2Color = extras.getInt("P2Color");
-            ButtonP1.setBackgroundResource(P1Color);
-            ButtonP2.setBackgroundResource(P2Color);
+        if(savedInstanceState != null){
+            P1Color = savedInstanceState.getInt(BUNDLE_P1_COLOR);
+            P2Color = savedInstanceState.getInt(BUNDLE_P2_COLOR);
+            ServerURL.setText(savedInstanceState.getString(BUNDLE_SERVER_URL));
+
+        }else{
+            if(extras != null && extras.getInt("P1Color") != 0 && extras.getInt("P2Color") != 0){
+                P1Color = extras.getInt("P1Color");
+                P2Color = extras.getInt("P2Color");
+            }
+
+            if(extras != null && !extras.getString("ServerURL").isEmpty()){
+                ServerURL.setText(extras.getString("ServerURL"));
+            }
         }
 
-        if(extras != null && !extras.getString("ServerURL").isEmpty()){
-            ServerURL.setText(extras.getString("ServerURL"));
-        }
+        ButtonP1.setBackgroundResource(P1Color);
+        ButtonP2.setBackgroundResource(P2Color);
 
         ImageButton returnButton = (ImageButton) findViewById(R.id.ReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +81,15 @@ public class SettingActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        outState.putInt(BUNDLE_P1_COLOR,P1Color);
+        outState.putInt(BUNDLE_P2_COLOR,P2Color);
+        outState.putString(BUNDLE_SERVER_URL, ServerURL.getText().toString());
+
+        super.onSaveInstanceState(outState);
     }
 
     public void changeColor(){
