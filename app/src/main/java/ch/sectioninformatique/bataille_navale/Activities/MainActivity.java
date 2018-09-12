@@ -14,7 +14,11 @@ public class MainActivity extends AppCompatActivity {
     Player Player2 = new Player();
     String ServerURL;
 
-
+    public final static String BUNDLE_P1_COLOR = "P1Color";
+    public final static String BUNDLE_P2_COLOR = "P2Color";
+    public final static String BUNDLE_SERVER_URL = "ServerURL";
+    public final static String BUNDLE_PLAYERS_COLOR = "PlayersColor";
+    public final static String BUNDLE_MULTIPLAYER = "Multiplayer";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            Player1.setColor(extras.getInt("P1Color"));
-            Player2.setColor(extras.getInt("P2Color"));
-            ServerURL = extras.getString("ServerURL");
+            Player1.setColor(extras.getInt(BUNDLE_P1_COLOR));
+            Player2.setColor(extras.getInt(BUNDLE_P2_COLOR));
+            ServerURL = extras.getString(BUNDLE_SERVER_URL);
         }
 
         Button startGame = (Button) findViewById(R.id.playButton);
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     Player1.setColor(R.color.color1);
                     Player2.setColor(R.color.color2);
                 }
-                intent.putExtra("playerColor", new int[]{Player1.getColor(),Player2.getColor()} );
+                intent.putExtra(BUNDLE_PLAYERS_COLOR, new int[]{Player1.getColor(),Player2.getColor()} );
                 startActivityForResult(intent, 1);
             }
         });
@@ -58,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     Player1.setColor(R.color.color1);
                     Player2.setColor(R.color.color2);
                 }
-                intent.putExtra("playerColor", new int[]{Player1.getColor(),Player2.getColor()} );
-                intent.putExtra("ServerURL", ServerURL);
-                intent.putExtra("multiplayer", true);
+                intent.putExtra(BUNDLE_PLAYERS_COLOR, new int[]{Player1.getColor(),Player2.getColor()} );
+                intent.putExtra(BUNDLE_SERVER_URL, ServerURL);
+                intent.putExtra(BUNDLE_MULTIPLAYER, true);
                 startActivityForResult(intent, 1);
             }
         });
@@ -71,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-                intent.putExtra("P1Color", Player1.getColor());
-                intent.putExtra("P2Color", Player2.getColor());
-                intent.putExtra("ServerURL", ServerURL);
+                intent.putExtra(BUNDLE_P1_COLOR, Player1.getColor());
+                intent.putExtra(BUNDLE_P2_COLOR, Player2.getColor());
+                intent.putExtra(BUNDLE_SERVER_URL, ServerURL);
                 startActivity(intent) ;
                 finish();
             }

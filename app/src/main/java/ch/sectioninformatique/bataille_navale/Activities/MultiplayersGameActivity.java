@@ -36,6 +36,11 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
+import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_STAT_SHOT;
+import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_STAT_TIME;
+import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_WINNER_NAME;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_PLAYERS_COLOR;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_SERVER_URL;
 import static ch.sectioninformatique.bataille_navale.R.id;
 import static ch.sectioninformatique.bataille_navale.R.layout;
 
@@ -130,8 +135,8 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
 
         Bundle extras = getIntent().getExtras();
         ServerURL = getResources().getText(R.string.defaultServerURL).toString();
-        if(extras != null && !extras.getString("ServerURL").isEmpty()) {
-            ServerURL = extras.getString("ServerURL");
+        if(extras != null && !extras.getString(BUNDLE_SERVER_URL).isEmpty()) {
+            ServerURL = extras.getString(BUNDLE_SERVER_URL);
         }
 
         try {
@@ -404,7 +409,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         player[0].setName((String) extras.get("player1Name"));
         String player1Name = (String)extras.get("player1Name");
 
-        int[] tmpColor =  ((int[])extras.get("playerColor"));
+        int[] tmpColor =  ((int[])extras.get(BUNDLE_PLAYERS_COLOR));
 
         if (tmpColor != null) {
             player[0].setColor(tmpColor[0]);
@@ -521,11 +526,11 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
             if (CheckWin()){
                 statTime = System.currentTimeMillis() - statTime ;
                 Intent intent = new Intent(MultiplayersGameActivity.this, EndGameActivity.class);
-                intent.putExtra("WinnerName", player[playerTurn].getName());
+                intent.putExtra(BUNDLE_WINNER_NAME, player[playerTurn].getName());
                 intent.putExtra("WinnerColor", player[playerTurn].getColor());
-                intent.putExtra("StatShot", statShot);
+                intent.putExtra(BUNDLE_STAT_SHOT, statShot);
                 intent.putExtra("ListOfHit", "");
-                intent.putExtra("StatTime", statTime);
+                intent.putExtra(BUNDLE_STAT_TIME, statTime);
                 startActivityForResult(intent, 1);
                 finish();
             } else {

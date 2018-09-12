@@ -16,6 +16,13 @@ import java.text.DecimalFormat;
 import ch.sectioninformatique.bataille_navale.R;
 
 public class EndGameActivity extends AppCompatActivity {
+    String NameWinner;
+    int statShot;
+    long statTimeValue;
+
+    public static final String BUNDLE_WINNER_NAME = "WinnerName";
+    public static final String BUNDLE_STAT_SHOT = "StatShot";
+    public static final String BUNDLE_STAT_TIME = "StatTime";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,32 +39,36 @@ public class EndGameActivity extends AppCompatActivity {
         final Bundle extras = getIntent().getExtras();
         assert extras != null;
 
-        String NameWinner = (String) extras.get("WinnerName");
-        int statShot = (int) extras.get("StatShot");
-        long statTimeValue = (long) extras.get("StatTime");
-        int delay = 0;
-        int duration = 3000;
-        int between = 500;
+        if(savedInstanceState != null){
+            NameWinner = (String) extras.get(BUNDLE_WINNER_NAME);
+            statShot = (int) extras.get(BUNDLE_STAT_SHOT);
+            statTimeValue = (long) extras.get(BUNDLE_STAT_TIME);
 
+            if (statTimeValue>86400000){
+                statTimeValue=statTimeValue%86400000;
+            }
 
-        if (statTimeValue>86400000){
-            statTimeValue=statTimeValue%86400000;
+            int delay = 0;
+            int duration = 3000;
+            int between = 500;
+
+            ObjectAnimator animatorWin = ObjectAnimator.ofFloat(tvWin, "translationY", 2000,100,15,20, 0);
+            animatorWin.setDuration(duration);
+            animatorWin.start();
+
+            delay+=duration;
+            AnimNumber(statShot, statsNbrHit,tvNbrHit, duration, delay, between);
+            delay+=duration;
+            ObjectAnimator animatorLabel1 = ObjectAnimator.ofFloat(tvHitList, "translationX", -delay, 0);
+            animatorLabel1.setDuration(between+delay+duration/3);
+            animatorLabel1.start();
+            delay+=duration;
+            animTimer(statTimeValue, statsTime,tvTime, duration, delay, between);
+        }else{
+            NameWinner = savedInstanceState.getString(BUNDLE_WINNER_NAME);
+            statShot = savedInstanceState.getInt(BUNDLE_STAT_SHOT);
+            statTimeValue = savedInstanceState.getLong(BUNDLE_STAT_TIME);
         }
-
-        ObjectAnimator animatorWin = ObjectAnimator.ofFloat(tvWin, "translationY", 2000,100,15,20, 0);
-        animatorWin.setDuration(duration);
-        animatorWin.start();
-
-        delay+=duration;
-        AnimNumber(statShot, statsNbrHit,tvNbrHit, duration, delay, between);
-        delay+=duration;
-        ObjectAnimator animatorLabel1 = ObjectAnimator.ofFloat(tvHitList, "translationX", -delay, 0);
-        animatorLabel1.setDuration(between+delay+duration/3);
-        animatorLabel1.start();
-        delay+=duration;
-        animTimer(statTimeValue, statsTime,tvTime, duration, delay, between);
-
-
 
         tvWin.setText(NameWinner+" "+ getResources().getText(R.string.WinMessage));
         final ImageButton returnButton = findViewById(R.id.ReturnButton);
@@ -67,6 +78,15 @@ public class EndGameActivity extends AppCompatActivity {
                 AlertReturnButton();
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        outState.putString(BUNDLE_WINNER_NAME, NameWinner);
+        outState.putInt(BUNDLE_STAT_SHOT, statShot);
+        outState.putLong(BUNDLE_STAT_TIME, statTimeValue);
+
+        super.onSaveInstanceState(outState);
     }
 
     public void AnimNumber(int value, final TextView tv,final TextView label, int duration, int delay, int between){

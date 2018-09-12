@@ -25,6 +25,8 @@ import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.Models.Ship;
 import ch.sectioninformatique.bataille_navale.R;
 
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_PLAYERS_COLOR;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_SERVER_URL;
 import static ch.sectioninformatique.bataille_navale.R.color;
 import static ch.sectioninformatique.bataille_navale.R.id;
 import static ch.sectioninformatique.bataille_navale.R.layout;
@@ -78,7 +80,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         final Bundle extras = getIntent().getExtras();
         assert extras != null;
         nbrPlayer = (int) extras.get("param");
-        int[] tmpPlayerColor = ((int[]) extras.get("playerColor"));
+        int[] tmpPlayerColor = ((int[]) extras.get(BUNDLE_PLAYERS_COLOR));
         assert tmpPlayerColor != null;
 
         player.setColor(ContextCompat.getColor(this, tmpPlayerColor[nbrPlayer%2]));
@@ -144,7 +146,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                             shipStartY[i] = ships[i].getY();
                         }
 
-                        intent.putExtra("playerColor", (int[]) extras.get("playerColor"));
+                        intent.putExtra(BUNDLE_PLAYERS_COLOR, (int[]) extras.get(BUNDLE_PLAYERS_COLOR));
                         intent.putExtra("playerName", "" + player.getName());
                         intent.putExtra("shipLength", shipLength);
                         intent.putExtra("shipOrientation", shipOrientation);
@@ -171,14 +173,14 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                             shipStartY[i] = ships[i].getY();
                         }
 
-                        intent.putExtra("playerColor",  (int[]) extras.get("playerColor"));
+                        intent.putExtra(BUNDLE_PLAYERS_COLOR,  (int[]) extras.get(BUNDLE_PLAYERS_COLOR));
                         intent.putExtra("player1Name",  ""+player.getName());
                         intent.putExtra("p1shipLength", shipLength);
                         intent.putExtra("p1shipOrientation", shipOrientation);
                         intent.putExtra("p1shipColor",  shipColor);
                         intent.putExtra("p1shipStartX", shipStartX);
                         intent.putExtra("p1shipStartY", shipStartY);
-                        intent.putExtra("ServerURL", extras.getString("ServerURL"));
+                        intent.putExtra(BUNDLE_SERVER_URL, extras.getString("ServerURL"));
 
                         startActivityForResult(intent, 1);
                         finish();
@@ -202,7 +204,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                             shipStartY[i] = ships[i].getY();
                         }
 
-                        intent.putExtra("playerColor",  (int[]) extras.get("playerColor"));
+                        intent.putExtra(BUNDLE_PLAYERS_COLOR,  (int[]) extras.get(BUNDLE_PLAYERS_COLOR));
                         intent.putExtra("player1Name",  (String) extras.get("playerName"));
                         intent.putExtra("player2Name",  ""+player.getName());
                         intent.putExtra("p1shipLength", (byte[]) extras.get("shipLength"));

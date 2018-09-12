@@ -14,6 +14,10 @@ import android.view.MenuItem;
 
 import ch.sectioninformatique.bataille_navale.R;
 
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_P1_COLOR;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_P2_COLOR;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_SERVER_URL;
+
 public class SettingActivity extends AppCompatActivity {
 
     Button ButtonP1;
@@ -22,9 +26,6 @@ public class SettingActivity extends AppCompatActivity {
     int P1Color;
     int P2Color;
 
-    final String BUNDLE_P1_COLOR = "P1Color";
-    final String BUNDLE_P2_COLOR = "P2Color";
-    final String BUNDLE_SERVER_URL = "ServerURL";
 
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
@@ -57,12 +58,12 @@ public class SettingActivity extends AppCompatActivity {
 
         }else{
             if(extras != null && extras.getInt("P1Color") != 0 && extras.getInt("P2Color") != 0){
-                P1Color = extras.getInt("P1Color");
-                P2Color = extras.getInt("P2Color");
+                P1Color = extras.getInt(BUNDLE_P1_COLOR);
+                P2Color = extras.getInt(BUNDLE_P2_COLOR);
             }
 
-            if(extras != null && !extras.getString("ServerURL").isEmpty()){
-                ServerURL.setText(extras.getString("ServerURL"));
+            if(extras != null && !extras.getString(BUNDLE_SERVER_URL).isEmpty()){
+                ServerURL.setText(extras.getString(BUNDLE_SERVER_URL));
             }
         }
 
@@ -74,9 +75,9 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("P1Color",P1Color);
-                intent.putExtra("P2Color",P2Color);
-                intent.putExtra("ServerURL", ServerURL.getText().toString());
+                intent.putExtra(BUNDLE_P1_COLOR,P1Color);
+                intent.putExtra(BUNDLE_P2_COLOR,P2Color);
+                intent.putExtra(BUNDLE_SERVER_URL, ServerURL.getText().toString());
                 startActivity(intent);
                 finish();
             }

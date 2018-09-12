@@ -22,6 +22,10 @@ import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.Models.Ship;
 import ch.sectioninformatique.bataille_navale.R;
 
+import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_STAT_SHOT;
+import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_STAT_TIME;
+import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_WINNER_NAME;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_PLAYERS_COLOR;
 import static ch.sectioninformatique.bataille_navale.R.id;
 import static ch.sectioninformatique.bataille_navale.R.layout;
 
@@ -218,9 +222,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i< nbrShip; i++){
 
-            int[] tmp2 = ((int[])extras.get("playerColor"));
+            int[] tmp2 = ((int[])extras.get(BUNDLE_PLAYERS_COLOR));
             assert tmp2 != null;
-            int[] tmp3 = ((int[])extras.get("playerColor"));
+            int[] tmp3 = ((int[])extras.get(BUNDLE_PLAYERS_COLOR));
             assert tmp3 != null;
             shipsPlayer[0][i]= new Ship(tapShipLength1[i],tmpShipOr1[i],tmpShipColor1[i],tmpShipStartX1[i],tmpShipStartY1[i]);
             shipsPlayer[1][i]= new Ship(tapShipLength2[i],tmpShipOr2[i],tmpShipColor2[i],tmpShipStartX2[i],tmpShipStartY2[i]);
@@ -230,7 +234,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         player[0].setName((String) extras.get("player1Name"));
         player[1].setName((String) extras.get("player2Name"));
 
-        int[] tmpColor =  ((int[])extras.get("playerColor"));
+        int[] tmpColor =  ((int[])extras.get(BUNDLE_PLAYERS_COLOR));
 
         if (tmpColor != null) {
             player[0].setColor(tmpColor[0]);
@@ -291,11 +295,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             if (CheckWin()){
                 statTime = System.currentTimeMillis() - statTime ;
                 Intent intent = new Intent(GameActivity.this, EndGameActivity.class);
-                intent.putExtra("WinnerName", player[playerTurn].getName());
+                intent.putExtra(BUNDLE_WINNER_NAME, player[playerTurn].getName());
                 intent.putExtra("WinnerColor", player[playerTurn].getColor());
-                intent.putExtra("StatShot", statShot);
+                intent.putExtra(BUNDLE_STAT_SHOT, statShot);
                 intent.putExtra("ListOfHit", "");
-                intent.putExtra("StatTime", statTime);
+                intent.putExtra(BUNDLE_STAT_TIME, statTime);
                 startActivityForResult(intent, 1);
                 finish();
             }else {
