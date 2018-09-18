@@ -36,11 +36,11 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 
-import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_STAT_SHOT;
-import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_STAT_TIME;
-import static ch.sectioninformatique.bataille_navale.Activities.EndGameActivity.BUNDLE_WINNER_NAME;
 import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_PLAYERS_COLOR;
 import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_SERVER_URL;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_STAT_SHOT;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_STAT_TIME;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_WINNER_NAME;
 import static ch.sectioninformatique.bataille_navale.R.id;
 import static ch.sectioninformatique.bataille_navale.R.layout;
 
