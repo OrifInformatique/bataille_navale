@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String BUNDLE_WINNER_NAME = "WinnerName";
     public static final String BUNDLE_STAT_SHOT = "StatShot";
-    public static final String BUNDLE_STAT_TIME = "StatTime";
+    public static final String BUNDLE_STAT_TIME_VALUE = "StatTimeValue";
     public final static String BUNDLE_P1_COLOR = "P1Color";
     public final static String BUNDLE_P2_COLOR = "P2Color";
     public final static String BUNDLE_SERVER_URL = "ServerURL";

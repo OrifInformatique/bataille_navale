@@ -6,9 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,7 +15,7 @@ import java.text.DecimalFormat;
 import ch.sectioninformatique.bataille_navale.R;
 
 import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_STAT_SHOT;
-import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_STAT_TIME;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_STAT_TIME_VALUE;
 import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_WINNER_NAME;
 
 public class EndGameActivity extends AppCompatActivity {
@@ -25,6 +23,7 @@ public class EndGameActivity extends AppCompatActivity {
     int statShot;
     long statTimeValue;
     CharSequence statTime;
+    final static String BUNDLE_STAT_TIME = "StatTime";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class EndGameActivity extends AppCompatActivity {
         if(savedInstanceState == null){
             NameWinner = (String) extras.get(BUNDLE_WINNER_NAME);
             statShot = (int) extras.get(BUNDLE_STAT_SHOT);
-            statTimeValue = (long) extras.get(BUNDLE_STAT_TIME);
+            statTimeValue = (long) extras.get(BUNDLE_STAT_TIME_VALUE);
 
             if (statTimeValue>86400000){
                 statTimeValue=statTimeValue%86400000;
@@ -67,13 +66,21 @@ public class EndGameActivity extends AppCompatActivity {
             delay+=duration;
             animTimer(statTimeValue, statsTime,tvTime, duration, delay, between);
             statTime = statsTime.getText();
+            statTime = (statTimeValue/3600000)
+                    +"° "+
+                    new DecimalFormat("00").format((statTimeValue/60000)%60)
+                    +"' "+
+                    new DecimalFormat("00").format((statTimeValue/1000)%60)
+                    +"."+
+                    new DecimalFormat("000").format(statTimeValue%1000)
+                    +"\"";
         }else{
             NameWinner = savedInstanceState.getString(BUNDLE_WINNER_NAME);
             statShot = savedInstanceState.getInt(BUNDLE_STAT_SHOT);
-            statTimeValue = savedInstanceState.getLong(BUNDLE_STAT_TIME);
+            statTimeValue = savedInstanceState.getLong(BUNDLE_STAT_TIME_VALUE);
             statsNbrHit.setText(Integer.toString(statShot));
+            statTime = savedInstanceState.getString(BUNDLE_STAT_TIME);
             statsTime.setText(statTime);
-            Log.d("statTime",statTime.toString());
         }
 
         tvWin.setText(NameWinner+" "+ getResources().getText(R.string.WinMessage));
@@ -90,7 +97,8 @@ public class EndGameActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState){
         outState.putString(BUNDLE_WINNER_NAME, NameWinner);
         outState.putInt(BUNDLE_STAT_SHOT, statShot);
-        outState.putLong(BUNDLE_STAT_TIME, statTimeValue);
+        outState.putLong(BUNDLE_STAT_TIME_VALUE, statTimeValue);
+        outState.putString(BUNDLE_STAT_TIME, statTime.toString());
 
         super.onSaveInstanceState(outState);
     }

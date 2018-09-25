@@ -24,7 +24,7 @@ import ch.sectioninformatique.bataille_navale.R;
 
 import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_PLAYERS_COLOR;
 import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_STAT_SHOT;
-import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_STAT_TIME;
+import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_STAT_TIME_VALUE;
 import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_WINNER_NAME;
 import static ch.sectioninformatique.bataille_navale.R.id;
 import static ch.sectioninformatique.bataille_navale.R.layout;
@@ -299,7 +299,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("WinnerColor", player[playerTurn].getColor());
                 intent.putExtra(BUNDLE_STAT_SHOT, statShot);
                 intent.putExtra("ListOfHit", "");
-                intent.putExtra(BUNDLE_STAT_TIME, statTime);
+                intent.putExtra(BUNDLE_STAT_TIME_VALUE, statTime);
                 startActivityForResult(intent, 1);
                 finish();
             }else {
