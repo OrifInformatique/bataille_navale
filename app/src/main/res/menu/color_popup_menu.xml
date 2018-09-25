@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/one"
-        android:title="Red"/>
+        android:id="@+id/red"
+        android:title="@string/colorRed"/>
     <item
-        android:id="@+id/four"
-        android:title="Yellow"/>
+        android:id="@+id/yellow"
+        android:title="@string/colorYellow"/>
     <item
-        android:id="@+id/two"
-        android:title="Green"/>
+        android:id="@+id/green"
+        android:title="@string/colorGreen"/>
     <item
-        android:id="@+id/three"
-        android:title="Bleu"/>
+        android:id="@+id/blue"
+        android:title="@string/colorBlue"/>
 </menu>

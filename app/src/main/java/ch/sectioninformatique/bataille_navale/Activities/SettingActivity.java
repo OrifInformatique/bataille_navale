@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.view.MenuItem;
 
+import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.R;
 
 public class SettingActivity extends AppCompatActivity {
@@ -19,13 +20,13 @@ public class SettingActivity extends AppCompatActivity {
     Button ButtonP1;
     Button ButtonP2;
     EditText ServerURL;
-    int P1Color;
-    int P2Color;
+    Player Player1 = new Player();
+    Player Player2 = new Player();
 
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        intent.putExtra("P1Color",P1Color);
-        intent.putExtra("P2Color",P2Color);
+        intent.putExtra("P1Color", Player1.getColor());
+        intent.putExtra("P2Color", Player2.getColor());
         intent.putExtra("ServerURL", ServerURL.getText().toString());
         startActivity(intent);
         finish();
@@ -47,10 +48,10 @@ public class SettingActivity extends AppCompatActivity {
         ServerURL = (EditText) findViewById(R.id.ServerURL);
 
         if(extras != null && extras.getInt("P1Color") != 0 && extras.getInt("P2Color") != 0){
-            P1Color = extras.getInt("P1Color");
-            P2Color = extras.getInt("P2Color");
-            ButtonP1.setBackgroundResource(P1Color);
-            ButtonP2.setBackgroundResource(P2Color);
+            Player1.setColor(extras.getInt("P1Color"));
+            Player2.setColor(extras.getInt("P2Color"));
+            ButtonP1.setBackgroundResource(Player1.getColor());
+            ButtonP2.setBackgroundResource(Player2.getColor());
         }
 
         if(extras != null && !extras.getString("ServerURL").isEmpty()){
@@ -62,8 +63,8 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("P1Color",P1Color);
-                intent.putExtra("P2Color",P2Color);
+                intent.putExtra("P1Color", Player1.getColor());
+                intent.putExtra("P2Color", Player2.getColor());
                 intent.putExtra("ServerURL", ServerURL.getText().toString());
                 startActivity(intent);
                 finish();
@@ -87,26 +88,22 @@ public class SettingActivity extends AppCompatActivity {
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
                     int chosenColor = 0;
-                    switch((item.getTitle().charAt(0))){
-                        case 'R':
-                            chosenColor = R.color.color1;
-                            break;
-                        case 'Y':
-                            chosenColor = R.color.color2;
-                            break;
-                        case 'G':
-                            chosenColor = R.color.color3;
-                            break;
-                        case 'B':
-                            chosenColor = R.color.color4;
-                            break;
-                        default:
-                            ButtonP1.setBackgroundResource(R.color.color1);
+
+                    if(item.getItemId() == R.id.red){
+                        chosenColor = R.color.color1;
+                    } else if(item.getItemId() == R.id.yellow){
+                        chosenColor = R.color.color2;
+                    } else if(item.getItemId() == R.id.green){
+                        chosenColor = R.color.color3;
+                    } else if(item.getItemId() == R.id.blue){
+                        chosenColor = R.color.color4;
+                    } else {
+                        chosenColor = R.color.color1;
                     }
 
-                    if(chosenColor != P2Color){
-                        P1Color = chosenColor;
-                        ButtonP1.setBackgroundResource(P1Color);
+                    if(chosenColor != Player2.getColor()){
+                        Player1.setColor(chosenColor);
+                        ButtonP1.setBackgroundResource(Player1.getColor());
                     }
 
                     //Toast.makeText(SettingActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
@@ -130,26 +127,22 @@ public class SettingActivity extends AppCompatActivity {
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
                     int chosenColor = 0;
-                    switch((item.getTitle().charAt(0))){
-                        case 'R':
-                            chosenColor = R.color.color1;
-                            break;
-                        case 'Y':
-                            chosenColor = R.color.color2;
-                            break;
-                        case 'G':
-                            chosenColor = R.color.color3;
-                            break;
-                        case 'B':
-                            chosenColor = R.color.color4;
-                            break;
-                        default:
-                            ButtonP2.setBackgroundResource(R.color.color2);
+
+                    if(item.getItemId() == R.id.red){
+                        chosenColor = R.color.color1;
+                    } else if(item.getItemId() == R.id.yellow){
+                        chosenColor = R.color.color2;
+                    } else if(item.getItemId() == R.id.green){
+                        chosenColor = R.color.color3;
+                    } else if(item.getItemId() == R.id.blue){
+                        chosenColor = R.color.color4;
+                    } else {
+                        chosenColor = R.color.color2;
                     }
 
-                    if(chosenColor != P1Color){
-                        P2Color = chosenColor;
-                        ButtonP2.setBackgroundResource(P2Color);
+                    if(chosenColor != Player1.getColor()){
+                        Player2.setColor(chosenColor);
+                        ButtonP2.setBackgroundResource(Player2.getColor());
                     }
 
                     //Toast.makeText(SettingActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();

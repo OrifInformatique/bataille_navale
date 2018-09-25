@@ -57,4 +57,10 @@
     <string name="startMessageHim">C\'est lui qui commence !</string>
     <string name="playMessageHim">C\'est à votre adversaire de jouer</string>
 
+    <!--Noms des couleurs-->
+    <string name="colorRed">Rouge</string>
+    <string name="colorYellow">Jaune</string>
+    <string name="colorGreen">Vert</string>
+    <string name="colorBlue">Bleu</string>
+
 </resources>
