@@ -42,6 +42,9 @@ public class Ship {
     private int x;
     private int y;
 
+    private int order = 0;
+    private boolean placed = false;
+
     // Constructors
     public Ship(){
         this.nbCases = 0;
@@ -95,6 +98,14 @@ public class Ship {
         this.y = y;
     }
 
+    public void setOrder(int y){
+        this.order = order;
+    }
+
+    public void setPlaced(boolean placed){
+        this.placed = placed;
+    }
+
     // Getters
     public byte getNbCases(){
         return this.nbCases;
@@ -115,6 +126,14 @@ public class Ship {
     public int getX(){return  this.x;}
 
     public int getY(){return  this.y;}
+
+    public int getOrder(){
+        return  this.order;
+    }
+
+    public boolean isPlaced(){
+        return  this.placed;
+    }
 
     // Methods
 

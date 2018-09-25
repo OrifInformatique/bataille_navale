@@ -36,7 +36,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
     Player player= new Player();
     Ship ships[] = new Ship[5];
     int numColor = 0;
-    boolean placed[] = {false, false, false, false, false};
+    int order = 0;
     String cols[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     String rows[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
     int gridLength = cols.length;
@@ -104,7 +104,13 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!placed[0] && !placed[1] && !placed[2] && !placed[3] && !placed[4]) {
+                boolean allPlaced = false;
+                for (Ship ship : ships) {
+                    if(ship.isPlaced()){
+                        allPlaced = true;
+                    }
+                }
+                if (!allPlaced) {
                     if(pseudoText.isEnabled()){
                         AlertReturnButton();
                     }else{
@@ -113,7 +119,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                         pseudoText.setEnabled(true);
                     }
                 } else {
-                    GridReset();
+                    DeleteLastShip();
                 }
             }
         });
@@ -316,7 +322,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             int shipLength = ships[i].getNbCases();
             if ((x + shipLength - 1) <= gridLength - 1 && (x + shipLength - 1) >= 0) {
                 if (testPossibleShip(x, y, (x + shipLength - 1), y)) {
-                    if (placed[i]) {
+                    if (ships[i].isPlaced()) {
                         gridButton[x + shipLength - 1][y].setBackgroundResource(color.cellNoProposal);
                     } else {
                         gridButton[x + shipLength - 1][y].setBackgroundResource(color.cellProposal);
@@ -327,7 +333,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             }
             if ((x + 1 - shipLength) <= gridLength - 1 && (x + 1 - shipLength) >= 0) {
                 if (testPossibleShip(x, y, (x - shipLength + 1), y)) {
-                    if (placed[i]) {
+                    if (ships[i].isPlaced()) {
                         gridButton[x + (1 - shipLength)][y].setBackgroundResource(color.cellNoProposal);
                     } else {
                         gridButton[x + (1 - shipLength)][y].setBackgroundResource(color.cellProposal);
@@ -338,7 +344,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             }
             if ((y + shipLength - 1) <= gridLength - 1 && (y + shipLength - 1) >= 0) {
                 if (testPossibleShip(x, y, x, (y + shipLength - 1))) {
-                    if (placed[i]) {
+                    if (ships[i].isPlaced()) {
                         gridButton[x][y + (shipLength - 1)].setBackgroundResource(color.cellNoProposal);
                     } else {
                         gridButton[x][y + (shipLength - 1)].setBackgroundResource(color.cellProposal);
@@ -349,7 +355,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             }
             if ((y + 1 - shipLength) <= gridLength - 1 && (y + 1 - shipLength) >= 0) {
                 if (testPossibleShip(x, y, x, (y - shipLength + 1))) {
-                    if (placed[i]) {
+                    if (ships[i].isPlaced()) {
                         gridButton[x][y + (1 - shipLength)].setBackgroundResource(color.cellNoProposal);
                     } else {
                         gridButton[x][y + (1 - shipLength)].setBackgroundResource(color.cellProposal);
@@ -385,8 +391,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
         phase = 1;
-        for (int i = 0; i < placed.length; i++) {
-            placed[i] = false;
+        for (int i = 0; i < ships.length; i++) {
+            ships[i].setPlaced(false);
         }
     }
 
@@ -414,7 +420,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         for (int i = 0; i < ships.length; i++) {
             Ship aShip = ships[i];
             if (aShip.getNbCases() == shipLength) {
-                if (!placed[i]) {
+                if (!ships[i].isPlaced()) {
                     theShip = ships[i];
                     test = i;
                 }
@@ -428,7 +434,9 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 for (int i = shipStartY; i <= shipEndY; i++) {
                     gridButton[shipStartX][i].setBackgroundResource(theShip.getColorShip());
                     theShip.setDefaultOrientation('U');
-                    placed[test] = true;
+                    ships[test].setPlaced(true);
+                    SetNextOrder(theShip);
+
                 }
                 numColor++;
             } else {
@@ -437,7 +445,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 for (int i = shipStartY; i >= shipEndY; i--) {
                     gridButton[shipStartX][i].setBackgroundResource(theShip.getColorShip());
                     theShip.setDefaultOrientation('D');
-                    placed[test] = true;
+                    ships[test].setPlaced(true);
+                    SetNextOrder(theShip);
                 }
                 numColor++;
             }
@@ -448,7 +457,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 for (int i = shipStartX; i <= shipEndX; i++) {
                     gridButton[i][shipStartY].setBackgroundResource(theShip.getColorShip());
                     theShip.setDefaultOrientation('R');
-                    placed[test] = true;
+                    ships[test].setPlaced(true);
+                    SetNextOrder(theShip);
                 }
                 numColor++;
             } else {
@@ -457,7 +467,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 for (int i = shipStartX; i >= shipEndX; i--) {
                     gridButton[i][shipStartY].setBackgroundResource(theShip.getColorShip());
                     theShip.setDefaultOrientation('L');
-                    placed[test] = true;
+                    ships[test].setPlaced(true);
+                    SetNextOrder(theShip);
                 }
                 numColor++;
             }
@@ -467,8 +478,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
     public boolean testGrid() {
         final TextView helpText = (TextView) findViewById(id.SetShipHelpMessagePlayer);
         int i = 0;
-        for (boolean aPlaced : placed) {
-            if (aPlaced) {
+        for (Ship ship : ships) {
+            if(ship.isPlaced()){
                 i++;
             }
         }
@@ -585,5 +596,75 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         //endregion
 
         return gridButton;
+    }
+
+    public void SetNextOrder(Ship ship){
+        order++;
+        ship.setOrder(order);
+    }
+
+    public void DeleteLastShip(){
+        int maxOrder = 0;
+        for (Ship ship : ships) {
+            int shipOrder = ship.getOrder();
+            if(shipOrder > maxOrder){
+                maxOrder = shipOrder;
+            }
+        }
+
+        for (Ship ship : ships) {
+            if(maxOrder == ship.getOrder()){
+                ship.setOrder(0);
+
+                int shipStartX = ship.getX();
+                int shipStartY = ship.getY();
+
+                int shipEndX = 0;
+                int shipEndY = 0;
+
+                int shipLength = ship.getNbCases();
+
+                switch (ship.getDefaultOrientation()){
+                    case 'R': shipEndX = shipStartX + shipLength;
+                              shipEndY = shipStartY;
+                              break;
+                    case 'L': shipEndX = shipStartX - shipLength;
+                              shipEndY = shipStartY;
+                              break;
+                    case 'U': shipEndY = shipStartY - shipLength;
+                              shipEndX = shipStartX;
+                              break;
+                    case 'D': shipEndY = shipStartY + shipLength;
+                              shipEndX = shipStartX;
+                              break;
+                }
+
+                if (shipStartX == shipEndX) {
+                    if (shipStartY < shipEndY) {
+                        for (int i = shipStartY; i <= shipEndY; i++) {
+                            gridButton[shipStartX][i].setBackgroundResource(color.cellVoid);
+                            ship.setPlaced(false);
+                        }
+                    } else {
+                        for (int i = shipStartY; i >= shipEndY; i--) {
+                            gridButton[shipStartX][i].setBackgroundResource(color.cellVoid);
+                            ship.setPlaced(false);
+                        }
+                    }
+                } else {
+                    if (shipStartX < shipEndX) {
+                        for (int i = shipStartX; i <= shipEndX; i++) {
+                            gridButton[i][shipStartY].setBackgroundResource(color.cellVoid);
+                            ship.setPlaced(false);
+                        }
+                    } else {
+                        for (int i = shipStartX; i >= shipEndX; i--) {
+                            gridButton[i][shipStartY].setBackgroundResource(color.cellVoid);
+                            ship.setPlaced(false);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
