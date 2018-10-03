@@ -1,10 +1,13 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
-public class Grid {
+public class Grid implements Parcelable {
     // Attributes
     /**
      * That Grid's 10x10 Array of Cases
@@ -21,6 +24,36 @@ public class Grid {
 
         clear();
     }
+
+    private Grid(Parcel in){
+        int numOfArrays = in.readInt();
+        CasesGrid = new Case[numOfArrays][];
+        for(int i = 0; i < numOfArrays; i++){
+            CasesGrid[i] = (Case[]) in.readParcelableArray(Case.class.getClassLoader());
+        }
+    }
+
+    public int describeContents(){
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags){
+        int numOfArrays = CasesGrid.length;
+        out.writeInt(numOfArrays);
+        for(int i = 0; i < numOfArrays; i++){
+            out.writeParcelableArray(CasesGrid[i], flags);
+        }
+    }
+
+    public static final Parcelable.Creator<Grid> CREATOR = new Parcelable.Creator<Grid>(){
+        public Grid createFromParcel(Parcel in){
+            return new Grid(in);
+        }
+
+        public Grid[] newArray(int size){
+            return new Grid[size];
+        }
+    };
 
     // Getters
 

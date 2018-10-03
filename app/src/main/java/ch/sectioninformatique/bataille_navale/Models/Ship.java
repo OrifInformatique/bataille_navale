@@ -1,12 +1,14 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 /**
  * Created by ToRe on 01.09.2017.
  */
 
-public class Ship {
+public class Ship  implements Parcelable {
     // Attributes
     /**
      * That Ship's maximal number of Cases.
@@ -69,6 +71,38 @@ public class Ship {
         this.x = x;
         this.y = y;
     }
+
+    private Ship(Parcel in){
+        nbCases = in.readByte();
+        Orientation = in.readString().charAt(0);
+        nbHit = in.readByte();
+        color = in.readInt();
+        x = in.readInt();
+        y = in.readInt();
+    }
+
+    public int describeContents(){
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags){
+        out.writeByte(nbCases);
+        out.writeString(String.valueOf(Orientation));
+        out.writeByte(nbHit);
+        out.writeInt(color);
+        out.writeInt(x);
+        out.writeInt(y);
+    }
+
+    public static final Parcelable.Creator<Ship> CREATOR = new Parcelable.Creator<Ship>(){
+        public Ship createFromParcel(Parcel in){
+            return  new Ship(in);
+        }
+
+        public Ship[] newArray(int size){
+            return new Ship[size];
+        }
+    };
 
     // Setters
     public void setNbCases(byte setNbCases){

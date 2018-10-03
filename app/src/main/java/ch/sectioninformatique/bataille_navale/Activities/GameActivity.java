@@ -46,21 +46,25 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     FrameLayout colorPlayer;
     Button lunchButton;
 
+    final String BUNDLE_PLAYERS = "Player";
+    final String BUNDLE_SHIPS_PLAYER = "ShipsPlayer";
+    final String BUNDLE_PHASE = "Phase";
+    final String BUNDLE_PLAYER_TURN = "PlayerTurn";
+    final String BUNDLE_PLAYER_NOT_TURN = "PlayerNotTurn";
 
-
-
-    public void onStart() {
+    public void onStart(Bundle savedInstanceState) {
         super.onStart();
 
-        statTime = System.currentTimeMillis();
-        colorPlayer = findViewById(id.colorPlayerLeft);
-        gameGrid = findViewById(R.id.GameGrid);
-        gridButton = SetGameActivity.constructGrid(gameGrid, this);
-        lunchButton = findViewById(R.id.LunchButton);
-        CreatePlayers();
+        //if(savedInstanceState == null) {
 
+            statTime = System.currentTimeMillis();
+            colorPlayer = findViewById(id.colorPlayerLeft);
+            gameGrid = findViewById(R.id.GameGrid);
+            gridButton = SetGameActivity.constructGrid(gameGrid, this);
+            lunchButton = findViewById(R.id.LunchButton);
+            CreatePlayers();
 
-        RandomSelectPlayer();
+            RandomSelectPlayer();
         /*
 
         gameGrid.setBackgroundColor(ContextCompat.getColor(this, player[playerNotTurn].getColor()));
@@ -68,6 +72,29 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         infoText = findViewById(id.InfoText);
         infoText.setText(getResources().getText(R.string.playMessage1)+" "+player[playerTurn].getName()+" "+getResources().getText(R.string.playMessage2));
         colorPlayer.setBackgroundColor(ContextCompat.getColor(this,player[playerTurn].getColor()));*/
+
+        /*}else{
+            //player = savedInstanceState.getParcelableArray(BUNDLE_PLAYERS);
+            //shipsPlayer = savedInstanceState.getParcelableArray(BUNDLE_SHIPS_PLAYER);
+            phase = savedInstanceState.getInt(BUNDLE_PHASE);
+            playerTurn = savedInstanceState.getInt(BUNDLE_PLAYER_TURN);
+            playerNotTurn = savedInstanceState.getInt(BUNDLE_PLAYER_NOT_TURN);
+            statShot = savedInstanceState.getInt(BUNDLE_STAT_SHOT);
+            statTime = savedInstanceState.getLong(BUNDLE_STAT_TIME_VALUE);
+        }*/
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        //outState.putParcelableArray(BUNDLE_PLAYERS, player);
+        //outState.putParcelableArray(BUNDLE_SHIPS_PLAYER, shipsPlayer);
+        outState.putInt(BUNDLE_PHASE, phase);
+        outState.putInt(BUNDLE_PLAYER_TURN, playerTurn);
+        outState.putInt(BUNDLE_PLAYER_NOT_TURN, playerNotTurn);
+        outState.putInt(BUNDLE_STAT_SHOT, statShot);
+        outState.putLong(BUNDLE_STAT_TIME_VALUE, statTime);
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override

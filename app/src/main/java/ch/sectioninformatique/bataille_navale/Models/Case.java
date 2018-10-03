@@ -1,10 +1,13 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
-public class Case {
+public class Case implements Parcelable {
     // Attributes
     /**
      * Describe if that Case has been already touched.
@@ -25,7 +28,29 @@ public class Case {
         this.touched = false;
         this.ship = ship;
     }
-    
+
+    private Case(Parcel in){
+
+    }
+
+    public int describeContents(){
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags){
+
+    }
+
+    public static final Parcelable.Creator<Case> CREATOR = new Parcelable.Creator<Case>(){
+        public Case createFromParcel(Parcel in){
+            return new Case(in);
+        }
+
+        public Case[] newArray(int size){
+            return new Case[size];
+        }
+    };
+
     // Setters
     public void setTouched(boolean setTouched){
         this.touched = setTouched;

@@ -1,10 +1,13 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
-public class Player {
+public class Player implements Parcelable {
     // Attributes
     /**
      * That Player's Name.
@@ -31,6 +34,32 @@ public class Player {
         this.color = color;
         this.playerGrid = new Grid();
     }
+
+    public Player(Parcel in){
+        name = in.readString();
+        color = in.readInt();
+        playerGrid = in.readParcelable(Grid.class.getClassLoader());
+    }
+
+    public int describeContents(){
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags){
+        out.writeString(name);
+        out.writeInt(color);
+        out.writeParcelable(playerGrid, flags);
+    }
+
+    public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>(){
+        public Player createFromParcel(Parcel in){
+            return new Player(in);
+        }
+
+        public Player[] newArray(int size){
+            return new Player[size];
+        }
+    };
 
     // Setters
     public void setName(String setName){
