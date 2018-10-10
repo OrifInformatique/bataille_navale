@@ -52,37 +52,24 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     final String BUNDLE_PLAYER_TURN = "PlayerTurn";
     final String BUNDLE_PLAYER_NOT_TURN = "PlayerNotTurn";
 
-    public void onStart(Bundle savedInstanceState) {
+    public void onStart() {
         super.onStart();
 
-        //if(savedInstanceState == null) {
+        colorPlayer = findViewById(id.colorPlayerLeft);
+        gameGrid = findViewById(R.id.GameGrid);
+        gridButton = SetGameActivity.constructGrid(gameGrid, this);
+        lunchButton = findViewById(R.id.LunchButton);
+        CreatePlayers();
 
-            statTime = System.currentTimeMillis();
-            colorPlayer = findViewById(id.colorPlayerLeft);
-            gameGrid = findViewById(R.id.GameGrid);
-            gridButton = SetGameActivity.constructGrid(gameGrid, this);
-            lunchButton = findViewById(R.id.LunchButton);
-            CreatePlayers();
-
-            RandomSelectPlayer();
+        RandomSelectPlayer();
         /*
-
         gameGrid.setBackgroundColor(ContextCompat.getColor(this, player[playerNotTurn].getColor()));
         gameGrid.setVisibility(View.VISIBLE);
         infoText = findViewById(id.InfoText);
         infoText.setText(getResources().getText(R.string.playMessage1)+" "+player[playerTurn].getName()+" "+getResources().getText(R.string.playMessage2));
         colorPlayer.setBackgroundColor(ContextCompat.getColor(this,player[playerTurn].getColor()));*/
 
-        /*}else{
-            //player = savedInstanceState.getParcelableArray(BUNDLE_PLAYERS);
-            //shipsPlayer = savedInstanceState.getParcelableArray(BUNDLE_SHIPS_PLAYER);
-            phase = savedInstanceState.getInt(BUNDLE_PHASE);
-            playerTurn = savedInstanceState.getInt(BUNDLE_PLAYER_TURN);
-            playerNotTurn = savedInstanceState.getInt(BUNDLE_PLAYER_NOT_TURN);
-            statShot = savedInstanceState.getInt(BUNDLE_STAT_SHOT);
-            statTime = savedInstanceState.getLong(BUNDLE_STAT_TIME_VALUE);
-        }*/
-    }
+        }
 
     @Override
     protected void onSaveInstanceState(Bundle outState){
@@ -127,9 +114,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.activity_game);
 
+        if(savedInstanceState == null) {
+            statTime = System.currentTimeMillis();
+        }else{
+            //player = savedInstanceState.getParcelableArray(BUNDLE_PLAYERS);
+            //shipsPlayer = savedInstanceState.getParcelableArray(BUNDLE_SHIPS_PLAYER);
+            phase = savedInstanceState.getInt(BUNDLE_PHASE);
+            playerTurn = savedInstanceState.getInt(BUNDLE_PLAYER_TURN);
+            playerNotTurn = savedInstanceState.getInt(BUNDLE_PLAYER_NOT_TURN);
+            statShot = savedInstanceState.getInt(BUNDLE_STAT_SHOT);
+            statTime = savedInstanceState.getLong(BUNDLE_STAT_TIME_VALUE);
+        }
+
+        setContentView(layout.activity_game);
         final ImageButton returnButton =  findViewById(id.ReturnButton);
+
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
