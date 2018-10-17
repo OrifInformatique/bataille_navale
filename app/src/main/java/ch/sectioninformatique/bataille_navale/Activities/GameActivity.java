@@ -1,5 +1,6 @@
 package ch.sectioninformatique.bataille_navale.Activities;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -106,6 +107,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+    public void onBackPressed(){
+        AlertReturnButton();
+    }
+
     public void AlertReturnButton(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
@@ -147,12 +153,37 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         ObjectAnimator anim = ObjectAnimator.ofFloat(lunchButton, "alpha",  0,0,0,1);
         anim.setDuration(9000);
-        anim.start();
 
+        anim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                endAnimationRandomPlayer();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
+        anim.start();
 
         playerNotTurn = randomNumber%2;
         playerTurn = (randomNumber+1)%2;
 
+    }
+
+    public void endAnimationRandomPlayer(){
         LoadGrid(player[playerTurn]);
         lunchButton.setBackgroundColor(ContextCompat.getColor(this,R.color.buttonNext));
         lunchButton.setText(R.string.NextButton);
@@ -164,8 +195,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 LunchMissile(player[playerTurn]);
             }
         });
-
     }
+
     public void LoadGrid(Player thisPlayer){
         for (int x = 0; x < rows.length;x++) {
             for (int y = 0; y < cols.length; y++) {
