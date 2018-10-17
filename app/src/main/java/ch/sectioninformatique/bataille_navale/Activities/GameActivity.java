@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.Models.Ship;
+import ch.sectioninformatique.bataille_navale.Models.Ship2dArray;
 import ch.sectioninformatique.bataille_navale.R;
 
 import static ch.sectioninformatique.bataille_navale.Activities.MainActivity.BUNDLE_PLAYERS_COLOR;
@@ -73,8 +74,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onSaveInstanceState(Bundle outState){
-        //outState.putParcelableArray(BUNDLE_PLAYERS, player);
-        //outState.putParcelableArray(BUNDLE_SHIPS_PLAYER, shipsPlayer);
+        outState.putParcelableArray(BUNDLE_PLAYERS, player);
+        outState.putParcelable(BUNDLE_SHIPS_PLAYER, new Ship2dArray(shipsPlayer));
         outState.putInt(BUNDLE_PHASE, phase);
         outState.putInt(BUNDLE_PLAYER_TURN, playerTurn);
         outState.putInt(BUNDLE_PLAYER_NOT_TURN, playerNotTurn);
@@ -118,8 +119,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(savedInstanceState == null) {
             statTime = System.currentTimeMillis();
         }else{
-            //player = savedInstanceState.getParcelableArray(BUNDLE_PLAYERS);
-            //shipsPlayer = savedInstanceState.getParcelableArray(BUNDLE_SHIPS_PLAYER);
+            player = (Player[]) savedInstanceState.getParcelableArray(BUNDLE_PLAYERS);
+            //shipsPlayer = savedInstanceState.getParcelable(BUNDLE_SHIPS_PLAYER); // Don't work for some reason
             phase = savedInstanceState.getInt(BUNDLE_PHASE);
             playerTurn = savedInstanceState.getInt(BUNDLE_PLAYER_TURN);
             playerNotTurn = savedInstanceState.getInt(BUNDLE_PLAYER_NOT_TURN);
