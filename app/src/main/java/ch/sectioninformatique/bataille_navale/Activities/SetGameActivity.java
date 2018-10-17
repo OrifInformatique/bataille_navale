@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -19,8 +18,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import ch.sectioninformatique.bataille_navale.Models.Case;
+import ch.sectioninformatique.bataille_navale.Models.CustomButton;
 import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.Models.Ship;
 import ch.sectioninformatique.bataille_navale.R;
@@ -34,13 +37,13 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
     
     //region variable declaration
     Player player= new Player();
-    Ship ships[] = new Ship[5];
     int numColor = 0;
-    int order = 0;
-    String cols[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-    String rows[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    String cols[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    String rows[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+    List<Ship> noPlacedShips = new ArrayList<Ship>();
+    int shipsNumber = 0;
     int gridLength = cols.length;
-    Button[][] gridButton = new Button[rows.length][cols.length];
+    CustomButton[][] gridButton = new CustomButton[rows.length][cols.length];
     public int phase = 1;
     public int nbrPlayer;
     //[no Player][x/y][which ship][]
@@ -49,6 +52,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
     private GridLayout gameGrid = null;
     private ImageButton returnButton = null;
     private Button nextButton = null;
+
+    private int xCenter = 0, yCenter = 0;
     //endregion
 
     @Override
@@ -56,15 +61,14 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_set_game);
 
-        // for (int i = 0; i < ships.length;i++) placed[i] = false;
+        /*noPlacedShips.add(new Ship((byte)2, 'U', color.ship1, 0, 0));
+        noPlacedShips.add(new Ship((byte)3, 'U', color.ship2, 0, 0));
+        noPlacedShips.add(new Ship((byte)3, 'U', color.ship3, 0, 0));
+        noPlacedShips.add(new Ship((byte)4, 'U', color.ship4, 0, 0));*/
+        noPlacedShips.add(new Ship((byte)5, 'U', color.ship5, 0, 0));
+        shipsNumber = noPlacedShips.size();
 
-        // region ship creation
-        ships[0] = new Ship((byte) 2, 'U', color.ship1,0,0);
-        ships[1] = new Ship((byte) 3, 'U', color.ship2,0,0);
-        ships[2] = new Ship((byte) 3, 'U', color.ship3,0,0);
-        ships[3] = new Ship((byte) 4, 'U', color.ship4,0,0);
-        ships[4] = new Ship((byte) 5, 'U', color.ship5,0,0);
-        //endregion
+        // for (int i = 0; i < ships.length;i++) placed[i] = false;
 
         //region variable declaration
         pseudoText = (EditText) findViewById(id.PseudoEditText);
@@ -78,10 +82,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         final Bundle extras = getIntent().getExtras();
         assert extras != null;
         nbrPlayer = (int) extras.get("param");
-        int[] tmpPlayerColor = ((int[]) extras.get("playerColor"));
-        assert tmpPlayerColor != null;
-
-        player.setColor(ContextCompat.getColor(this, tmpPlayerColor[nbrPlayer%2]));
+        player = (Player)extras.get("player"+(nbrPlayer+1));
+        assert player != null;
         //endregion
 
         //region player who plays properties
@@ -104,22 +106,14 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean allPlaced = false;
-                for (Ship ship : ships) {
-                    if(ship.isPlaced()){
-                        allPlaced = true;
-                    }
-                }
-                if (!allPlaced) {
-                    if(pseudoText.isEnabled()){
+                if(player.getPlayerGrid().getShips().size() == 0){
+                    if (pseudoText.isEnabled()) {
                         AlertReturnButton();
-                    }else{
-                        GridReset();
-                        gameGrid.setVisibility(View.INVISIBLE);
-                        pseudoText.setEnabled(true);
                     }
                 } else {
-                    DeleteLastShip();
+                    GridReset();
+                    gameGrid.setVisibility(View.INVISIBLE);
+                    pseudoText.setEnabled(true);
                 }
             }
         });
@@ -132,59 +126,19 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 if (testGrid()) {
                     if (nbrPlayer == 0) {
 
-                        Intent intent = getIntent();
-                        finish();
+                        Intent intent = new Intent(SetGameActivity.this, SetGameActivity.class);
                         intent.putExtra("param", 1);
 
-                        byte[] shipLength = new byte[ships.length];
-                        char[] shipOrientation = new char[ships.length];
-                        int[] shipColor = new int[ships.length];
-                        int[] shipStartX = new int[ships.length];
-                        int[] shipStartY = new int[ships.length];
-
-                        for (int i = 0; i < ships.length; i++) {
-                            shipLength[i] = ships[i].getNbCases();
-                            shipOrientation[i] = ships[i].getDefaultOrientation();
-                            shipColor[i] = ships[i].getColorShip();
-                            shipStartX[i] = ships[i].getX();
-                            shipStartY[i] = ships[i].getY();
-                        }
-
-                        intent.putExtra("playerColor", (int[]) extras.get("playerColor"));
-                        intent.putExtra("playerName", "" + player.getName());
-                        intent.putExtra("shipLength", shipLength);
-                        intent.putExtra("shipOrientation", shipOrientation);
-                        intent.putExtra("shipColor", shipColor);
-                        intent.putExtra("shipStartX", shipStartX);
-                        intent.putExtra("shipStartY", shipStartY);
+                        intent.putExtra("player1", player);
+                        intent.putExtra("player2", (Player) extras.get("player2"));
 
                         startActivityForResult(intent, 1);
+                        finish();
                     } else if (nbrPlayer == 2) {
 
                         Intent intent = new Intent(SetGameActivity.this, MultiplayersGameActivity.class);
 
-                        byte[] shipLength = new byte[ships.length];
-                        char[] shipOrientation = new char[ships.length];
-                        int[] shipColor = new int[ships.length];
-                        int[] shipStartX = new int[ships.length];
-                        int[] shipStartY = new int[ships.length];
-
-                        for (int i = 0; i < ships.length; i++) {
-                            shipLength[i] = ships[i].getNbCases();
-                            shipOrientation[i] = ships[i].getDefaultOrientation();
-                            shipColor[i] = ships[i].getColorShip();
-                            shipStartX[i] = ships[i].getX();
-                            shipStartY[i] = ships[i].getY();
-                        }
-
-                        intent.putExtra("playerColor",  (int[]) extras.get("playerColor"));
-                        intent.putExtra("player1Name",  ""+player.getName());
-                        intent.putExtra("p1shipLength", shipLength);
-                        intent.putExtra("p1shipOrientation", shipOrientation);
-                        intent.putExtra("p1shipColor",  shipColor);
-                        intent.putExtra("p1shipStartX", shipStartX);
-                        intent.putExtra("p1shipStartY", shipStartY);
-                        intent.putExtra("ServerURL", extras.getString("ServerURL"));
+                        intent.putExtra("player", player);
 
                         startActivityForResult(intent, 1);
                         finish();
@@ -193,34 +147,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                         assert extras != null;
                         Intent intent = new Intent(SetGameActivity.this, GameActivity.class);
 
-
-                        byte[] shipLength = new byte[ships.length];
-                        char[] shipOrientation = new char[ships.length];
-                        int[] shipColor = new int[ships.length];
-                        int[] shipStartX = new int[ships.length];
-                        int[] shipStartY = new int[ships.length];
-
-                        for (int i = 0; i < ships.length; i++) {
-                            shipLength[i] = ships[i].getNbCases();
-                            shipOrientation[i] = ships[i].getDefaultOrientation();
-                            shipColor[i] = ships[i].getColorShip();
-                            shipStartX[i] = ships[i].getX();
-                            shipStartY[i] = ships[i].getY();
-                        }
-
-                        intent.putExtra("playerColor",  (int[]) extras.get("playerColor"));
-                        intent.putExtra("player1Name",  (String) extras.get("playerName"));
-                        intent.putExtra("player2Name",  ""+player.getName());
-                        intent.putExtra("p1shipLength", (byte[]) extras.get("shipLength"));
-                        intent.putExtra("p2shipLength", shipLength);
-                        intent.putExtra("p1shipOrientation", (char[]) extras.get("shipOrientation"));
-                        intent.putExtra("p2shipOrientation", shipOrientation);
-                        intent.putExtra("p1shipColor",  (int[]) extras.get("shipColor"));
-                        intent.putExtra("p2shipColor",  shipColor);
-                        intent.putExtra("p1shipStartX", (int[]) extras.get("shipStartX"));
-                        intent.putExtra("p2shipStartX", shipStartX);
-                        intent.putExtra("p1shipStartY", (int[]) extras.get("shipStartY"));
-                        intent.putExtra("p2shipStartY", shipStartY);
+                        intent.putExtra("player1", (Player) extras.get("player1"));
+                        intent.putExtra("player2", player);
 
                         startActivityForResult(intent, 1);
                         finish();
@@ -249,35 +177,39 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        Button thisButton = (Button) v;
+        CustomButton thisButton = (CustomButton) v;
         if (phase == 1) {
-            if (getResources().getColor(color.cellVoid) == ((ColorDrawable) thisButton.getBackground()).getColor()) {
+            if (player.getPlayerGrid().getCase(thisButton.getGridX(), thisButton.getGridY()).getEtat() == Case.Etat.Libre) {
                 thisButton.setBackgroundResource(color.cellStartShip);
-                for (int x = 0; x < gridLength; x++) {
-                    for (int y = 0; y < gridLength; y++) {
-                        if (thisButton.getId() == gridButton[x][y].getId()) {
-                            setAuthorizedCases(x, y);
-                            phase = 2;
-                        }
-                    }
-                }
+                xCenter = thisButton.getGridX();
+                yCenter = thisButton.getGridY();
+                player.getPlayerGrid().getCase(xCenter, yCenter).setEtat(Case.Etat.Center);
+                setAuthorizedCases(thisButton.getGridX(), thisButton.getGridY());
+                phase = 2;
             }
 
         } else if (phase == 2) {
-            if (((ColorDrawable) thisButton.getBackground()).getColor() == getResources().getColor(color.cellStartShip) || ((ColorDrawable) thisButton.getBackground()).getColor() == getResources().getColor(color.cellVoid)) {
-                GridClean();
-                phase = 1;
-            } else if (((ColorDrawable) thisButton.getBackground()).getColor() == getResources().getColor(color.cellProposal)) {
-                completeShip(thisButton);
-                GridClean();
-                phase = 1;
+            if (player.getPlayerGrid().getCase(thisButton.getGridX(), thisButton.getGridY()).getEtat() == Case.Etat.Placable) {
+                completeShip(xCenter, yCenter, thisButton.getGridX(), thisButton.getGridY());
+                CleanBackground();
+            } else if (player.getPlayerGrid().getCase(thisButton.getGridX(), thisButton.getGridY()).getEtat() == Case.Etat.Libre
+                    || player.getPlayerGrid().getCase(thisButton.getGridX(), thisButton.getGridY()).getEtat() == Case.Etat.Center) {
+                CleanBackground();
             }
-
+            phase = 1;
         }
     }
 
     public void onBackPressed(){
         returnButton.performClick();
+    }
+
+    public void TotalGridReset(){
+        while(player.getPlayerGrid().getShips().size() > 0) {
+            Ship tempShip = player.getPlayerGrid().getShips().get(0);
+            noPlacedShips.add(tempShip);
+            player.getPlayerGrid().getShips().remove(0);
+        }
     }
 
     public void AlertReturnButton(){
@@ -294,89 +226,100 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 .create()
                 .show();
     }
-    public boolean testPossibleShip(int x1, int y1, int x2, int y2) {// cette fonction vérifie que toutes les cases entre le point x1 y1 et x2 y2 ne sont pas des cases ship
-        boolean ok = true;
-        while (x2 != x1 || y2 != y1) {
-            String a = "" + ((ColorDrawable) gridButton[x2][y2].getBackground()).getColor();
-            for (Ship ship : ships) {
-                String b = "" + getResources().getColor(ship.getColorShip());
-                if (Objects.equals(a, b)) {
-                    ok = false;
-                }
-            }
-            if (x2 > x1) {
-                x2--;
-            } else if (x2 < x1) {
-                x2++;
-            } else if (y2 > y1) {
-                y2--;
-            } else if (y2 < y1) {
-                y2++;
-            }
-        }
-        return ok;
-    }
 
     public void setAuthorizedCases(int x, int y) {
-        for (int i = ships.length - 1; i >= 0; i--) {
-            int shipLength = ships[i].getNbCases();
-            if ((x + shipLength - 1) <= gridLength - 1 && (x + shipLength - 1) >= 0) {
-                if (testPossibleShip(x, y, (x + shipLength - 1), y)) {
-                    if (ships[i].isPlaced()) {
-                        gridButton[x + shipLength - 1][y].setBackgroundResource(color.cellNoProposal);
-                    } else {
-                        gridButton[x + shipLength - 1][y].setBackgroundResource(color.cellProposal);
-                    }
-                } else if (((ColorDrawable) gridButton[x + shipLength - 1][y].getBackground()).getColor() == getResources().getColor(color.cellVoid)) {
-                    gridButton[x + shipLength - 1][y].setBackgroundResource(color.cellNoAccessible);
-                }
-            }
-            if ((x + 1 - shipLength) <= gridLength - 1 && (x + 1 - shipLength) >= 0) {
-                if (testPossibleShip(x, y, (x - shipLength + 1), y)) {
-                    if (ships[i].isPlaced()) {
-                        gridButton[x + (1 - shipLength)][y].setBackgroundResource(color.cellNoProposal);
-                    } else {
-                        gridButton[x + (1 - shipLength)][y].setBackgroundResource(color.cellProposal);
-                    }
-                } else if (((ColorDrawable) gridButton[x + (1 - shipLength)][y].getBackground()).getColor() == getResources().getColor(color.cellVoid)) {
-                    gridButton[x + (1 - shipLength)][y].setBackgroundResource(color.cellNoAccessible);
-                }
-            }
-            if ((y + shipLength - 1) <= gridLength - 1 && (y + shipLength - 1) >= 0) {
-                if (testPossibleShip(x, y, x, (y + shipLength - 1))) {
-                    if (ships[i].isPlaced()) {
-                        gridButton[x][y + (shipLength - 1)].setBackgroundResource(color.cellNoProposal);
-                    } else {
-                        gridButton[x][y + (shipLength - 1)].setBackgroundResource(color.cellProposal);
-                    }
-                } else if (((ColorDrawable) gridButton[x][y + (shipLength - 1)].getBackground()).getColor() == getResources().getColor(color.cellVoid)) {
-                    gridButton[x][y + (shipLength - 1)].setBackgroundResource(color.cellNoAccessible);
-                }
-            }
-            if ((y + 1 - shipLength) <= gridLength - 1 && (y + 1 - shipLength) >= 0) {
-                if (testPossibleShip(x, y, x, (y - shipLength + 1))) {
-                    if (ships[i].isPlaced()) {
-                        gridButton[x][y + (1 - shipLength)].setBackgroundResource(color.cellNoProposal);
-                    } else {
-                        gridButton[x][y + (1 - shipLength)].setBackgroundResource(color.cellProposal);
-                    }
-                } else if (((ColorDrawable) gridButton[x][y + (1 - shipLength)].getBackground()).getColor() == getResources().getColor(color.cellVoid)) {
-                    gridButton[x][y + (1 - shipLength)].setBackgroundResource(color.cellNoAccessible);
+
+        for(int xa = Ship.getNbMinCases() + x - 1; xa <= Ship.getNbMaxCases() + x - 1; xa++){
+            if(xa >= 0 && xa < cols.length){
+                if(player.getPlayerGrid().getCase(xa, y).getEtat() == Case.Etat.Libre){
+                    gridButton[xa][y].setBackgroundResource(color.cellNoProposal);
+                    player.getPlayerGrid().getCase(xa,y).setEtat(Case.Etat.NoPlacable);
                 }
             }
         }
-    }
-
-    public void GridClean() {
-        for (int y = 0; y < gridLength; y++) {
-            for (int x = 0; x < gridLength; x++) {
-                int colorCase = ((ColorDrawable) gridButton[x][y].getBackground()).getColor();
-                if (colorCase == getResources().getColor(color.cellProposal)
-                        || colorCase == getResources().getColor(color.cellStartShip)
-                        || colorCase == getResources().getColor(color.cellNoAccessible)
-                        || colorCase == getResources().getColor(color.cellNoProposal)) {
-                    gridButton[x][y].setBackgroundResource(color.cellVoid);
+        for(int xa = x - Ship.getNbMinCases() + 1; xa >= x - Ship.getNbMaxCases() + 1; xa--){
+            if(xa >= 0 && xa < cols.length){
+                if(player.getPlayerGrid().getCase(xa, y).getEtat() == Case.Etat.Libre){
+                    gridButton[xa][y].setBackgroundResource(color.cellNoProposal);
+                    player.getPlayerGrid().getCase(xa,y).setEtat(Case.Etat.NoPlacable);
                 }
+            }
+        }
+        for(int ya = Ship.getNbMinCases() + y - 1; ya <= Ship.getNbMaxCases() + y - 1; ya++){
+            if(ya >= 0 && ya < rows.length){
+                if(player.getPlayerGrid().getCase(x, ya).getEtat() == Case.Etat.Libre){
+                    gridButton[x][ya].setBackgroundResource(color.cellNoProposal);
+                    player.getPlayerGrid().getCase(x,ya).setEtat(Case.Etat.NoPlacable);
+                }
+            }
+        }
+        for(int ya = y - Ship.getNbMinCases() + 1; ya >= y - Ship.getNbMaxCases() + 1; ya--){
+            if(ya >= 0 && ya < rows.length){
+                if(player.getPlayerGrid().getCase(x, ya).getEtat() == Case.Etat.Libre){
+                    gridButton[x][ya].setBackgroundResource(color.cellNoProposal);
+                    player.getPlayerGrid().getCase(x,ya).setEtat(Case.Etat.NoPlacable);
+                }
+            }
+        }
+        for (Ship ship : noPlacedShips) {
+            boolean collision = false;
+            for(int xa = Ship.getNbMinCases() + x - 1; xa <= ship.getNbCases() + x - 1 && !collision; xa++){
+                if(xa >= 0 && xa < cols.length) {
+                    if(player.getPlayerGrid().getCase(xa, y).getEtat() == Case.Etat.Placed){
+                        collision = true;
+                    }
+                } else {
+                    collision = true;
+                }
+            }
+            if(!collision){
+                gridButton[ship.getNbCases() + x - 1][y].setBackgroundResource(color.cellProposal);
+                player.getPlayerGrid().getCase(ship.getNbCases() + x - 1, y).setEtat(Case.Etat.Placable);
+            }
+            //--------------------------------------------------------------------------------------
+            collision = false;
+            for(int xa = x - Ship.getNbMinCases() + 1; xa >= x - ship.getNbCases() + 1 && !collision; xa--){
+                if(xa >= 0 && xa < cols.length) {
+                    if(player.getPlayerGrid().getCase(xa, y).getEtat() == Case.Etat.Placed){
+                        collision = true;
+                    }
+                } else {
+                    collision = true;
+                }
+            }
+            if(!collision){
+                gridButton[x - ship.getNbCases() + 1][y].setBackgroundResource(color.cellProposal);
+                player.getPlayerGrid().getCase(x - ship.getNbCases() + 1, y).setEtat(Case.Etat.Placable);
+            }
+            //--------------------------------------------------------------------------------------
+            collision = false;
+            for(int ya = Ship.getNbMinCases() + y - 1; ya <= ship.getNbCases() + y - 1 && !collision; ya++){
+                if(ya >= 0 && ya < cols.length) {
+                    if(player.getPlayerGrid().getCase(x, ya).getEtat() == Case.Etat.Placed){
+                        collision = true;
+                    }
+                } else {
+                    collision = true;
+                }
+            }
+            if(!collision){
+                gridButton[x][ship.getNbCases() + y - 1].setBackgroundResource(color.cellProposal);
+                player.getPlayerGrid().getCase(x, ship.getNbCases() + y - 1).setEtat(Case.Etat.Placable);
+            }
+            //--------------------------------------------------------------------------------------
+            collision = false;
+            for(int ya = y - Ship.getNbMinCases() + 1; ya >= y - ship.getNbCases() + 1 && !collision; ya--){
+                if(ya >= 0 && ya < cols.length) {
+                    if(player.getPlayerGrid().getCase(x, ya).getEtat() == Case.Etat.Placed){
+                        collision = true;
+                    }
+                } else {
+                    collision = true;
+                }
+            }
+            if(!collision){
+                gridButton[x][y - ship.getNbCases() + 1].setBackgroundResource(color.cellProposal);
+                player.getPlayerGrid().getCase(x, y - ship.getNbCases() + 1).setEtat(Case.Etat.Placable);
             }
         }
     }
@@ -391,107 +334,103 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
         phase = 1;
-        for (int i = 0; i < ships.length; i++) {
-            ships[i].setPlaced(false);
-        }
+        player.getPlayerGrid().getShips().clear();
     }
 
-    public void completeShip(Button thisButton) {
-        int shipStartX = 0;
-        int shipStartY = 0;
-        int shipEndX = 0;
-        int shipEndY = 0;
+    public void GridClean() {
+        TotalGridReset();
 
         for (int y = 0; y < gridLength; y++) {
             for (int x = 0; x < gridLength; x++) {
-                if (((ColorDrawable) gridButton[x][y].getBackground()).getColor() == getResources().getColor(color.cellStartShip)) {
-                    shipStartX = x;
-                    shipStartY = y;
-                } else if (gridButton[x][y].getId() == thisButton.getId()) {
-                    shipEndX = x;
-                    shipEndY = y;
+                player.getPlayerGrid().getCase(x,y).setEtat(Case.Etat.Libre);
+                gridButton[x][y].setBackgroundResource(color.cellVoid);
+            }
+        }
+
+        phase = 1;
+    }
+
+    public void CleanBackground(){
+        for (int y = 0; y < gridLength; y++) {
+            for (int x = 0; x < gridLength; x++) {
+                if(player.getPlayerGrid().getCase(x,y).getEtat() == Case.Etat.Placable
+                || player.getPlayerGrid().getCase(x,y).getEtat() == Case.Etat.NoPlacable
+                || player.getPlayerGrid().getCase(x,y).getEtat() == Case.Etat.Center){
+                        player.getPlayerGrid().getCase(x,y).setEtat(Case.Etat.Libre);
+                        gridButton[x][y].setBackgroundResource(color.cellVoid);
                 }
             }
         }
-        Ship theShip = null;
-        int shipLength = Math.abs((shipStartX - shipEndX) + (shipStartY - shipEndY)) + 1;
-        int test = 0;
+        phase = 1;
+    }
 
-        for (int i = 0; i < ships.length; i++) {
-            Ship aShip = ships[i];
-            if (aShip.getNbCases() == shipLength) {
-                if (!ships[i].isPlaced()) {
-                    theShip = ships[i];
-                    test = i;
-                }
+    public void completeShip(int x1, int y1, int x2, int y2) {
+        int shipLength = 0;
+        char shipOrientation = ' ';
+        if(x1 < x2){ // Right
+            shipLength = x2 - x1 + 1;
+            shipOrientation = 'R';
+        } else if(x1 > x2){ // Left
+            shipLength = x1 - x2 + 1;
+            shipOrientation = 'L';
+        } else if(y1 < y2){ // Down
+            shipLength = y2 - y1 + 1;
+            shipOrientation = 'D';
+        } else if(y1 > y2){ // Up
+            shipLength = y1 - y2 + 1;
+            shipOrientation = 'U';
+        }
+
+        int index = 0;
+        for(int i = 0; i < noPlacedShips.size(); i++) {
+            if (shipLength == noPlacedShips.get(i).getNbCases()) {
+                index = i;
             }
         }
-        assert theShip != null;
-        if (shipStartX == shipEndX) {
-            if (shipStartY < shipEndY) {
-                theShip.setX(shipStartX);
-                theShip.setY(shipStartY);
-                for (int i = shipStartY; i <= shipEndY; i++) {
-                    gridButton[shipStartX][i].setBackgroundResource(theShip.getColorShip());
-                    theShip.setDefaultOrientation('U');
-                    ships[test].setPlaced(true);
-                    SetNextOrder(theShip);
 
+        Ship tempShip = noPlacedShips.get(index);
+        player.getPlayerGrid().getShips().add(tempShip);
+        noPlacedShips.remove(index);
+
+        switch (shipOrientation){
+            case 'R':
+                for(int x = x1; x <= x2; x++){
+                    player.getPlayerGrid().getCase(x,y1).setEtat(Case.Etat.Placed);
+                    gridButton[x][y1].setBackgroundResource(tempShip.getColorShip());
                 }
-                numColor++;
-            } else {
-                theShip.setX(shipStartX);
-                theShip.setY(shipStartY);
-                for (int i = shipStartY; i >= shipEndY; i--) {
-                    gridButton[shipStartX][i].setBackgroundResource(theShip.getColorShip());
-                    theShip.setDefaultOrientation('D');
-                    ships[test].setPlaced(true);
-                    SetNextOrder(theShip);
+                break;
+            case 'L':
+                for(int x = x1; x >= x2; x--){
+                    player.getPlayerGrid().getCase(x,y1).setEtat(Case.Etat.Placed);
+                    gridButton[x][y1].setBackgroundResource(tempShip.getColorShip());
                 }
-                numColor++;
-            }
-        } else {
-            if (shipStartX < shipEndX) {
-                theShip.setX(shipStartX);
-                theShip.setY(shipStartY);
-                for (int i = shipStartX; i <= shipEndX; i++) {
-                    gridButton[i][shipStartY].setBackgroundResource(theShip.getColorShip());
-                    theShip.setDefaultOrientation('R');
-                    ships[test].setPlaced(true);
-                    SetNextOrder(theShip);
+                break;
+            case 'D':
+                for(int y = y1; y <= y2; y++){
+                    player.getPlayerGrid().getCase(x1,y).setEtat(Case.Etat.Placed);
+                    gridButton[x1][y].setBackgroundResource(tempShip.getColorShip());
                 }
-                numColor++;
-            } else {
-                theShip.setX(shipStartX);
-                theShip.setY(shipStartY);
-                for (int i = shipStartX; i >= shipEndX; i--) {
-                    gridButton[i][shipStartY].setBackgroundResource(theShip.getColorShip());
-                    theShip.setDefaultOrientation('L');
-                    ships[test].setPlaced(true);
-                    SetNextOrder(theShip);
+                break;
+            case 'U':
+                for(int y = y1; y >= y2; y--){
+                    player.getPlayerGrid().getCase(x1,y).setEtat(Case.Etat.Placed);
+                    gridButton[x1][y].setBackgroundResource(tempShip.getColorShip());
                 }
-                numColor++;
-            }
+                break;
         }
     }
 
     public boolean testGrid() {
-        final TextView helpText = (TextView) findViewById(id.SetShipHelpMessagePlayer);
-        int i = 0;
-        for (Ship ship : ships) {
-            if(ship.isPlaced()){
-                i++;
-            }
-        }
+        int i = player.getPlayerGrid().getShips().size();
         //retourne True si il n'y a plus de bateaux a placer
-        helpText.setText(i + "/" + ships.length);
-        return ships.length - i == 0;
+        helpText.setText(i + "/" + shipsNumber);
+        return i == shipsNumber;
     }
 
-    public static Button[][] constructGrid(GridLayout gameGrid,Activity thisActivity) {
+    public static CustomButton[][] constructGrid(GridLayout gameGrid,Activity thisActivity) {
         String cols[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
         String rows[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-        Button[][] gridButton = new Button[rows.length][cols.length];
+        CustomButton[][] gridButton = new CustomButton[rows.length][cols.length];
         //region variable declaration
         int indexCell = 0;
         int cellSideNumber = rows.length + 1;
@@ -559,7 +498,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             cellGrid[indexCell] = columnOfNumber[Row];
             indexCell++;
             for (int Col = 0; Col < cols.length; Col++) {
-                gridButton[Row][Col] = new Button(thisActivity);
+                gridButton[Row][Col] = new CustomButton(thisActivity);
                 gridButton[Row][Col].setTag("btnGridSet_" + cols[Row] + rows[Col]);
                 gridButton[Row][Col].setId(Integer.parseInt(Row + "00" + Col));
                 gridButton[Row][Col].setHeight((int) side);
@@ -568,6 +507,8 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 gridButton[Row][Col].setBackgroundColor(thisActivity.getResources().getColor(color.cellVoid));
                 gridButton[Row][Col].setOnClickListener((View.OnClickListener) thisActivity);
                 gridButton[Row][Col].setLayoutParams(cellLP);
+                gridButton[Row][Col].setGridX(Row);
+                gridButton[Row][Col].setGridY(Col);
                 cellGrid[indexCell] = gridButton[Row][Col];
                 indexCell++;
             }
@@ -596,75 +537,5 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         //endregion
 
         return gridButton;
-    }
-
-    public void SetNextOrder(Ship ship){
-        order++;
-        ship.setOrder(order);
-    }
-
-    public void DeleteLastShip(){
-        int maxOrder = 0;
-        for (Ship ship : ships) {
-            int shipOrder = ship.getOrder();
-            if(shipOrder > maxOrder){
-                maxOrder = shipOrder;
-            }
-        }
-
-        for (Ship ship : ships) {
-            if(maxOrder == ship.getOrder()){
-                ship.setOrder(0);
-
-                int shipStartX = ship.getX();
-                int shipStartY = ship.getY();
-
-                int shipEndX = 0;
-                int shipEndY = 0;
-
-                int shipLength = ship.getNbCases();
-
-                switch (ship.getDefaultOrientation()){
-                    case 'R': shipEndX = shipStartX + shipLength;
-                              shipEndY = shipStartY;
-                              break;
-                    case 'L': shipEndX = shipStartX - shipLength;
-                              shipEndY = shipStartY;
-                              break;
-                    case 'U': shipEndY = shipStartY - shipLength;
-                              shipEndX = shipStartX;
-                              break;
-                    case 'D': shipEndY = shipStartY + shipLength;
-                              shipEndX = shipStartX;
-                              break;
-                }
-
-                if (shipStartX == shipEndX) {
-                    if (shipStartY < shipEndY) {
-                        for (int i = shipStartY; i <= shipEndY; i++) {
-                            gridButton[shipStartX][i].setBackgroundResource(color.cellVoid);
-                            ship.setPlaced(false);
-                        }
-                    } else {
-                        for (int i = shipStartY; i >= shipEndY; i--) {
-                            gridButton[shipStartX][i].setBackgroundResource(color.cellVoid);
-                            ship.setPlaced(false);
-                        }
-                    }
-                } else {
-                    if (shipStartX < shipEndX) {
-                        for (int i = shipStartX; i <= shipEndX; i++) {
-                            gridButton[i][shipStartY].setBackgroundResource(color.cellVoid);
-                            ship.setPlaced(false);
-                        }
-                    } else {
-                        for (int i = shipStartX; i >= shipEndX; i--) {
-                            gridButton[i][shipStartY].setBackgroundResource(color.cellVoid);
-                            ship.setPlaced(false);
-                        }
-                    }
-                }
-            }
-        }
     }
 }

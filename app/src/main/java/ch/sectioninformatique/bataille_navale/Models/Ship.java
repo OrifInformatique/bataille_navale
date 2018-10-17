@@ -2,20 +2,16 @@ package ch.sectioninformatique.bataille_navale.Models;
 
 import android.util.Log;
 
+import java.io.Serializable;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
-public class Ship {
+public class Ship implements Serializable {
     // Attributes
-    /**
-     * That Ship's maximal number of Cases.
-     */
-    private final int nbMinCases = 2;
-    /**
-     * That Ship's minimal number of Cases.
-     */
-    private final int nbMaxCases = 5;
+    private static final int nbMinCases = 2;
+    private static final int nbMaxCases = 5;
     /**
      * That Ship's number of occupied Cases.
      */
@@ -41,9 +37,6 @@ public class Ship {
      */
     private int x;
     private int y;
-
-    private int order = 0;
-    private boolean placed = false;
 
     // Constructors
     public Ship(){
@@ -73,6 +66,20 @@ public class Ship {
         this.y = y;
     }
 
+    /**
+     * That Ship's maximal number of Cases.
+     */
+    public static int getNbMinCases() {
+        return nbMinCases;
+    }
+
+    /**
+     * That Ship's minimal number of Cases.
+     */
+    public static int getNbMaxCases() {
+        return nbMaxCases;
+    }
+
     // Setters
     public void setNbCases(byte setNbCases){
         this.nbCases = setNbCases;
@@ -98,14 +105,6 @@ public class Ship {
         this.y = y;
     }
 
-    public void setOrder(int y){
-        this.order = order;
-    }
-
-    public void setPlaced(boolean placed){
-        this.placed = placed;
-    }
-
     // Getters
     public byte getNbCases(){
         return this.nbCases;
@@ -126,14 +125,6 @@ public class Ship {
     public int getX(){return  this.x;}
 
     public int getY(){return  this.y;}
-
-    public int getOrder(){
-        return  this.order;
-    }
-
-    public boolean isPlaced(){
-        return  this.placed;
-    }
 
     // Methods
 

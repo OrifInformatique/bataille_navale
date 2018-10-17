@@ -22,6 +22,7 @@ import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import ch.sectioninformatique.bataille_navale.Models.Case;
 import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.Models.Ship;
 import ch.sectioninformatique.bataille_navale.R;
@@ -346,7 +347,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         for (int x = 0; x < rows.length;x++) {
             for (int y = 0; y < cols.length; y++) {
                 if (playerNotTurn == 0) {
-                    if (!thisPlayer.getPlayerGrid().getCase(x, y).getTouched()) {
+                    if (thisPlayer.getPlayerGrid().getCase(x, y).getEtat() != Case.Etat.Touched) {
                         if (thisPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {
                             gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, player[playerNotTurn].getPlayerGrid().getCase(x, y).getShip().getColorShip()));
                         } else {
@@ -361,7 +362,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                         }
                     }
                 } else {
-                    if (!thisPlayer.getPlayerGrid().getCase(x, y).getTouched()) {
+                    if (thisPlayer.getPlayerGrid().getCase(x, y).getEtat() != Case.Etat.Touched) {
                         gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellVoid));
                     } else {
                         if (thisPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {

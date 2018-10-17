@@ -1,15 +1,30 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
-public class Grid {
+public class Grid implements Serializable {
     // Attributes
     /**
      * That Grid's 10x10 Array of Cases
      */
     private Case[][] CasesGrid;
+
+    /**
+     * The ships of the player
+     */
+    private List<Ship> ships = new ArrayList<Ship>();
+
+    /**
+     * The max length of the ArrayList
+     */
+    private int shipsMaxLength = 5;
+
     /**
      * That Gird's vertical and horizontal dimensions
      */
@@ -32,6 +47,10 @@ public class Grid {
      */
     public Case getCase(int vertical,int horizontal){
         return this.CasesGrid[vertical][horizontal];
+    }
+
+    public List<Ship> getShips() {
+        return ships;
     }
 
     // Methods
@@ -141,5 +160,16 @@ public class Grid {
             }
             j++;
         }
+    }
+
+    /**
+     * The max length of the ship
+     */
+    public int getShipsMaxLength() {
+        return shipsMaxLength;
+    }
+
+    public void setShipsMaxLength(int shipsMaxLength) {
+        this.shipsMaxLength = shipsMaxLength;
     }
 }

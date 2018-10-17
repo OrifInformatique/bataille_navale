@@ -18,6 +18,8 @@ import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import ch.sectioninformatique.bataille_navale.Models.Case;
+import ch.sectioninformatique.bataille_navale.Models.CustomButton;
 import ch.sectioninformatique.bataille_navale.Models.Player;
 import ch.sectioninformatique.bataille_navale.Models.Ship;
 import ch.sectioninformatique.bataille_navale.R;
@@ -28,12 +30,10 @@ import static ch.sectioninformatique.bataille_navale.R.layout;
 public class GameActivity extends AppCompatActivity implements View.OnClickListener{
     String cols[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     String rows[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    int nbrShip = 5;
     Player[] player = {new Player(), new Player()};
-    Ship[][] shipsPlayer = new Ship[player.length][nbrShip];
     int phase =1;
     GridLayout gameGrid;
-    Button[][] gridButton = new Button[10][10];
+    CustomButton[][] gridButton = new CustomButton[10][10];
     int playerTurn = 0;
     int playerNotTurn = 1;
     TextView infoText;
@@ -169,7 +169,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void LoadGrid(Player thisPlayer){
         for (int x = 0; x < rows.length;x++) {
             for (int y = 0; y < cols.length; y++) {
-                if(!thisPlayer.getPlayerGrid().getCase(x,y).getTouched()){
+                if(thisPlayer.getPlayerGrid().getCase(x,y).getEtat() != Case.Etat.Touched){
                     gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this,R.color.cellVoid));
                 }else{
                     if (thisPlayer.getPlayerGrid().getCase(x,y).isShipPlaced()){
@@ -194,95 +194,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         final Bundle extras = getIntent().getExtras();
         assert extras != null;
 
-        byte[] tapShipLength1 = ((byte[]) extras.get("p1shipLength"));
-        byte[] tapShipLength2 = ((byte[]) extras.get("p2shipLength"));
-        char[] tmpShipOr1 =     ((char[]) extras.get("p1shipOrientation"));
-        char[] tmpShipOr2 =     ((char[]) extras.get("p2shipOrientation"));
-        int[] tmpShipColor1 =   ((int[]) extras.get("p1shipColor"));
-        int[] tmpShipColor2 =   ((int[]) extras.get("p2shipColor"));
-        int[] tmpShipStartX1 =  ((int[]) extras.get("p1shipStartX"));
-        int[] tmpShipStartX2 =  ((int[]) extras.get("p2shipStartX"));
-        int[] tmpShipStartY1 =  ((int[]) extras.get("p1shipStartY"));
-        int[] tmpShipStartY2 =  ((int[]) extras.get("p2shipStartY"));
-
-        assert tapShipLength1 != null;
-        assert tapShipLength2 != null;
-        assert tmpShipOr1 != null;
-        assert tmpShipOr2 != null;
-        assert tmpShipColor1 != null;
-        assert tmpShipColor2 != null;
-        assert tmpShipStartX1 != null;
-        assert tmpShipStartX2 != null;
-        assert tmpShipStartY1 != null;
-        assert tmpShipStartY2 != null;
-
-        for (int i = 0; i< nbrShip; i++){
-
-            int[] tmp2 = ((int[])extras.get("playerColor"));
-            assert tmp2 != null;
-            int[] tmp3 = ((int[])extras.get("playerColor"));
-            assert tmp3 != null;
-            shipsPlayer[0][i]= new Ship(tapShipLength1[i],tmpShipOr1[i],tmpShipColor1[i],tmpShipStartX1[i],tmpShipStartY1[i]);
-            shipsPlayer[1][i]= new Ship(tapShipLength2[i],tmpShipOr2[i],tmpShipColor2[i],tmpShipStartX2[i],tmpShipStartY2[i]);
-            shipsPlayer[0][i].setNbHit((byte)0);
-            shipsPlayer[1][i].setNbHit((byte)0);
-        }
-        player[0].setName((String) extras.get("player1Name"));
-        player[1].setName((String) extras.get("player2Name"));
-
-        int[] tmpColor =  ((int[])extras.get("playerColor"));
-
-        if (tmpColor != null) {
-            player[0].setColor(tmpColor[0]);
-            player[1].setColor(tmpColor[1]);
-        }else{
-            player[0].setColor(getResources().getColor(R.color.color1));
-            player[1].setColor(getResources().getColor(R.color.color2));
-        }
-        for (int i = 0; i < player.length; i++) {
-            for (int s = 0; s < nbrShip; s++) {
-                switch (shipsPlayer[i][s].getDefaultOrientation()) {
-                    case 'U':
-                        for (int y = shipsPlayer[i][s].getY(); y < (shipsPlayer[i][s].getY() + shipsPlayer[i][s].getNbCases()); y++) {
-                            player[i].getPlayerGrid().getCase(shipsPlayer[i][s].getX(), y).setShip(shipsPlayer[i][s]);
-                        }
-                        break;
-                    case 'R':
-                        for (int x = shipsPlayer[i][s].getX(); x < (shipsPlayer[i][s].getX() + shipsPlayer[i][s].getNbCases()); x++) {
-                            player[i].getPlayerGrid().getCase(x, shipsPlayer[i][s].getY()).setShip(shipsPlayer[i][s]);
-                        }
-                        break;
-                    case 'D':
-                        for (int y = shipsPlayer[i][s].getY(); y > (shipsPlayer[i][s].getY() - shipsPlayer[i][s].getNbCases()); y--) {
-                            player[i].getPlayerGrid().getCase(shipsPlayer[i][s].getX(), y).setShip(shipsPlayer[i][s]);
-                        }
-                        break;
-                    case 'L':
-                        for (int x = shipsPlayer[i][s].getX(); x > (shipsPlayer[i][s].getX() - shipsPlayer[i][s].getNbCases()); x--) {
-                            player[i].getPlayerGrid().getCase(x, shipsPlayer[i][s].getY()).setShip(shipsPlayer[i][s]);
-                        }
-                        break;
-                    default://error;
-                }
-            }
-        }
+        player[0] = (Player)extras.get("player1");
+        player[1] = (Player)extras.get("player2");
     }
     public boolean CheckWin(){
-        int counter = rows.length*cols.length;
-        for (Ship aShip : shipsPlayer[playerTurn]){
-            counter+=aShip.getNbCases();
-        }
-
-        for (int x = 0; x < rows.length; x++){
-            for(int y = 0; y < cols.length; y++){
-                if (player[playerTurn].getPlayerGrid().getCase(x,y).isShipPlaced()){
-                    if(player[playerTurn].getPlayerGrid().getCase(x,y).getShip().isSinking()){
-                        counter--;
-                    }
-                }
-            }
-        }
-        return counter == 0;
+        return player[playerTurn].getPlayerGrid().getShips().size() == 0;
 
     }
     public void EnableButton(boolean enabled){
@@ -340,6 +256,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }
+            targetPlayer.getPlayerGrid().getCase()
             anim.start();
 
             LoadGrid(player[playerTurn]);

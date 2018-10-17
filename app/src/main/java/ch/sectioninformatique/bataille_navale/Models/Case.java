@@ -1,15 +1,26 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
-public class Case {
+public class Case implements Serializable{
+    public enum Etat{
+        Libre,
+        Center,
+        Placable,
+        NoPlacable,
+        Placed,
+        Touched;
+    }
+
+
     // Attributes
-    /**
-     * Describe if that Case has been already touched.
-     */
-    private boolean touched;
+
+    private Etat etat = Etat.Libre;
+
     /**
      * That Case's Ship, is null if don't contain a Ship.
      */
@@ -17,18 +28,16 @@ public class Case {
 
     // Constructors
     Case(){
-        this.touched = false;
         this.ship = null;
     }
 
     public Case(Ship ship){
-        this.touched = false;
         this.ship = ship;
     }
     
     // Setters
-    public void setTouched(boolean setTouched){
-        this.touched = setTouched;
+    public void setEtat(Etat setEtat){
+        this.etat = setEtat;
     }
     
     public void setShip(Ship setShip){
@@ -36,8 +45,8 @@ public class Case {
     }
     
     // Getters
-    public boolean getTouched(){
-        return this.touched;
+    public Etat getEtat(){
+        return this.etat;
     }
     
     public Ship getShip(){
@@ -53,7 +62,7 @@ public class Case {
      * @return The Ship who is on the Case, null if don't contain a Ship.
      */
     public Ship touchedCase(){
-        this.touched = true;
+        this.etat = Etat.Touched;
 
         if(this.ship != null){
             this.ship.hitShip();

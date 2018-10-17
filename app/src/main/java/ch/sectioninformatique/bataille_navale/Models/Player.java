@@ -1,10 +1,12 @@
 package ch.sectioninformatique.bataille_navale.Models;
 
+import java.io.Serializable;
+
 /**
  * Created by ToRe on 01.09.2017.
  */
 
-public class Player {
+public class Player implements Serializable {
     // Attributes
     /**
      * That Player's Name.
