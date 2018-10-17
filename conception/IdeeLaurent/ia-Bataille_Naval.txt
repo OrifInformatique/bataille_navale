@@ -1,0 +1,12 @@
+ia-Bataille_Naval
+
+chaque cases (les 100 cases) ont un score de 0 au début de la partie
+quand une case fait un raté, les quatre(ou moins) cases qui la touche soustrait leurs score de -1
+quand une case fait un touché, les quatre(ou moins) cases qui la touche augmente leurs score de 2
+quand une case fait un coulé suite à un touché, toutes les case qui colle le bateau obtiennent un score de -1
+
+quand vient le moment de choisir une case (aléatoirement),
+on créer une liste qui contient toutes les cases qui ont un score de 2 (ou plus), si à la fin il est vide on met les cases avec un score de 1, puis de 0, puis de -1...
+
+puis on tire la case aléatoirement dans cette liste 
+la case tirée obtien un score de -5, et on résou si elle est Touchée ou Ratée

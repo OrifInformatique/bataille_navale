@@ -26,11 +26,10 @@ proguard/
 # Log Files
 *.log
 
-# Android Studio Navigation editor temp files
+# Android Studio
 .navigation/
-
-# Android Studio captures folder
 captures/
+.gradle
 
 # Intellij
 **/*.iml
@@ -44,6 +43,9 @@ captures/
 .idea/gradle.xml
 .idea/dictionaries
 .idea/libraries
+.DS_Store
+/build
+.externalNativeBuild
 **/.DS_Store
 
 # Keystore files
@@ -59,3 +61,4 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+conception/IdeeRemy/~$steIdeesRemy.docx

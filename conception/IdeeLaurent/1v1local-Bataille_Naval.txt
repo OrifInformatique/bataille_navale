@@ -1,0 +1,10 @@
+1v1local-Bataille_Naval
+
+Le premier joueur place ses bateaux,
+Une fois qu'il a fini il appuie sur le bouton valider
+Qui vas directement vers la deuxième grille (qui est vide)
+Un message avertissant le joueur qu'il peut passer le mobile à son ami
+Qui complète à son tour discrètement sa grille 
+Quand le deuxième joueur a fini, la partie commence avec les 2 grilles qui s'affichent 
+(On peut aussi rétrécir la grille du joueur qui ne joue pas)
+(Peut-être une sélection de la case et un bouton valider pour éviter les erreurs de tactile)

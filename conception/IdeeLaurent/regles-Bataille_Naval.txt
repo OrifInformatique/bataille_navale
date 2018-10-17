@@ -1,0 +1,14 @@
+﻿regles-Bataille_Naval
+
+Le joueur doit placer discrètement ses bateau sur un grillage De 10 * 10,
+Numérotée de 1 à 10 et de A à J,
+Il à différents bateaux: 
+    - 1 porte-avion (5 cases)
+    - 1 croiseur (4 cases)
+    - 2 sous-marins (3 cases)
+    - 1 torpilleur (2 cases)
+
+Une fois que le joueur à placé ses bateaux il peut commencer en tirant sur une case du grillage de l'adversaire sans savoir ou sont ses bateaux (adversaire) si ‘il touche un bateau adverse il peut rejouer, sinon c'est à l'adversaire de continuer.
+
+La partie s'arrête quand un des grillage n'as plus que des bateaux coulés
+Le gagnant est celui qui a mis le dernier coup
