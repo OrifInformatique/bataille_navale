@@ -7,14 +7,17 @@ import java.io.Serializable;
  */
 
 public class Case implements Serializable{
+
+
     public enum Etat{
         Libre,
         Center,
         Placable,
         NoPlacable,
-        Placed,
-        Touched;
+        Placed;
     }
+
+    private boolean touched = false;
 
 
     // Attributes
@@ -34,12 +37,12 @@ public class Case implements Serializable{
     public Case(Ship ship){
         this.ship = ship;
     }
-    
+
     // Setters
     public void setEtat(Etat setEtat){
         this.etat = setEtat;
     }
-    
+
     public void setShip(Ship setShip){
         this.ship = setShip;
     }
@@ -48,7 +51,7 @@ public class Case implements Serializable{
     public Etat getEtat(){
         return this.etat;
     }
-    
+
     public Ship getShip(){
         return this.ship;
     }
@@ -62,7 +65,7 @@ public class Case implements Serializable{
      * @return The Ship who is on the Case, null if don't contain a Ship.
      */
     public Ship touchedCase(){
-        this.etat = Etat.Touched;
+        touched = true;
 
         if(this.ship != null){
             this.ship.hitShip();
@@ -71,7 +74,10 @@ public class Case implements Serializable{
         return this.ship;
     }
 
+    public boolean isTouched() {
+        return touched;
+    }
 
 
-    public boolean isShipPlaced(){ return (this.ship != null); }
+    public boolean isShipPlaced(){ return (ship != null); }
 }

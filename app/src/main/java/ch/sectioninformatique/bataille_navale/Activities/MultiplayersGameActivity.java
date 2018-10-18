@@ -347,7 +347,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
         for (int x = 0; x < rows.length;x++) {
             for (int y = 0; y < cols.length; y++) {
                 if (playerNotTurn == 0) {
-                    if (thisPlayer.getPlayerGrid().getCase(x, y).getEtat() != Case.Etat.Touched) {
+                    if (thisPlayer.getPlayerGrid().getCase(x, y).getEtat() != Case.Etat.Placed) {
                         if (thisPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {
                             gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, player[playerNotTurn].getPlayerGrid().getCase(x, y).getShip().getColorShip()));
                         } else {
@@ -362,7 +362,7 @@ public class MultiplayersGameActivity extends AppCompatActivity implements View.
                         }
                     }
                 } else {
-                    if (thisPlayer.getPlayerGrid().getCase(x, y).getEtat() != Case.Etat.Touched) {
+                    if (thisPlayer.getPlayerGrid().getCase(x, y).getEtat() != Case.Etat.Placed) {
                         gridButton[x][y].setBackgroundColor(ContextCompat.getColor(this, R.color.cellVoid));
                     } else {
                         if (thisPlayer.getPlayerGrid().getCase(x, y).isShipPlaced()) {

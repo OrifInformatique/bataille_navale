@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -61,10 +62,10 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_set_game);
 
-        /*noPlacedShips.add(new Ship((byte)2, 'U', color.ship1, 0, 0));
+        noPlacedShips.add(new Ship((byte)2, 'U', color.ship1, 0, 0));
         noPlacedShips.add(new Ship((byte)3, 'U', color.ship2, 0, 0));
         noPlacedShips.add(new Ship((byte)3, 'U', color.ship3, 0, 0));
-        noPlacedShips.add(new Ship((byte)4, 'U', color.ship4, 0, 0));*/
+        noPlacedShips.add(new Ship((byte)4, 'U', color.ship4, 0, 0));
         noPlacedShips.add(new Ship((byte)5, 'U', color.ship5, 0, 0));
         shipsNumber = noPlacedShips.size();
 
@@ -87,7 +88,7 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         //endregion
 
         //region player who plays properties
-        gameGrid.setBackgroundColor(player.getColor());
+        gameGrid.setBackgroundColor(ContextCompat.getColor(this,player.getColor()));
         gameGrid.requestLayout();
         if (nbrPlayer == 1) {
             helpText.setText(getResources().getText(string.InputNamePlayer2));
@@ -124,6 +125,9 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View v) {
                 if (testGrid()) {
+
+                    FinaliseGrid();
+
                     if (nbrPlayer == 0) {
 
                         Intent intent = new Intent(SetGameActivity.this, SetGameActivity.class);
@@ -174,6 +178,34 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         });
         //endregion
     }
+
+    public void FinaliseGrid(){
+        for (Ship ship : player.getPlayerGrid().getShips()) {
+            switch (ship.getDefaultOrientation()){
+                case 'R':
+                    for(int x = ship.getX(); x < ship.getX()+ship.getNbCases(); x++){
+                        player.getPlayerGrid().getCase(x,ship.getY()).setShip(ship);
+                    }
+                    break;
+                case 'L':
+                    for(int x = ship.getX()-ship.getNbCases()+1; x <= ship.getX(); x++){
+                        player.getPlayerGrid().getCase(x,ship.getY()).setShip(ship);
+                    }
+                    break;
+                case 'D':
+                    for(int y = ship.getY(); y < ship.getY()+ship.getNbCases(); y++){
+                        player.getPlayerGrid().getCase(ship.getX(), y).setShip(ship);
+                    }
+                    break;
+                case 'U':
+                    for(int y = ship.getY()-ship.getNbCases()+1; y <= ship.getY(); y++){
+                        player.getPlayerGrid().getCase(ship.getX(), y).setShip(ship);
+                    }
+                    break;
+            }
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -389,6 +421,9 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         Ship tempShip = noPlacedShips.get(index);
+        tempShip.setDefaultOrientation(shipOrientation);
+        tempShip.setX(x1);
+        tempShip.setY(y1);
         player.getPlayerGrid().getShips().add(tempShip);
         noPlacedShips.remove(index);
 
