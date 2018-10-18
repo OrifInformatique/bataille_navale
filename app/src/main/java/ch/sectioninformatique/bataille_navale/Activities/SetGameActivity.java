@@ -110,11 +110,42 @@ public class SetGameActivity extends AppCompatActivity implements View.OnClickLi
                 if(player.getPlayerGrid().getShips().size() == 0){
                     if (pseudoText.isEnabled()) {
                         AlertReturnButton();
+                    } else {
+                        gameGrid.setVisibility(View.INVISIBLE);
+                        pseudoText.setEnabled(true);
                     }
                 } else {
-                    GridReset();
-                    gameGrid.setVisibility(View.INVISIBLE);
-                    pseudoText.setEnabled(true);
+                    Ship tempShip = player.getPlayerGrid().getShips().get(player.getPlayerGrid().getShips().size()-1);
+
+                    switch (tempShip.getDefaultOrientation()){
+                        case 'R':
+                            for(int x = tempShip.getX(); x < tempShip.getX()+tempShip.getNbCases(); x++){
+                                player.getPlayerGrid().getCase(x,tempShip.getY()).setEtat(Case.Etat.Libre);
+                                gridButton[x][tempShip.getY()].setBackgroundResource(color.cellVoid);
+                            }
+                            break;
+                        case 'L':
+                            for(int x = tempShip.getX()-tempShip.getNbCases()+1; x <= tempShip.getX(); x++){
+                                player.getPlayerGrid().getCase(x,tempShip.getY()).setEtat(Case.Etat.Libre);
+                                gridButton[x][tempShip.getY()].setBackgroundResource(color.cellVoid);
+                            }
+                            break;
+                        case 'D':
+                            for(int y = tempShip.getY(); y < tempShip.getY()+tempShip.getNbCases(); y++){
+                                player.getPlayerGrid().getCase(tempShip.getY(),y).setEtat(Case.Etat.Libre);
+                                gridButton[tempShip.getY()][y].setBackgroundResource(color.cellVoid);
+                            }
+                            break;
+                        case 'U':
+                            for(int y = tempShip.getY()-tempShip.getNbCases()+1; y <= tempShip.getY(); y++){
+                                player.getPlayerGrid().getCase(tempShip.getY(),y).setEtat(Case.Etat.Libre);
+                                gridButton[tempShip.getY()][y].setBackgroundResource(color.cellVoid);
+                            }
+                            break;
+                    }
+
+                    noPlacedShips.add(tempShip);
+                    player.getPlayerGrid().getShips().remove(player.getPlayerGrid().getShips().size()-1);
                 }
             }
         });
