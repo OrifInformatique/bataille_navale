@@ -29,18 +29,22 @@ public class Ship2dArray implements Parcelable {
         out.writeInt(numOfArrays);
         for(int i = 0; i < numOfArrays; i++){
             out.writeTypedArray(shipsPlayer[i], flags);
+            //out.writeParcelableArray(shipsPlayer[i],flags);
         }
     }
 
-    protected Ship2dArray(Parcel in){
+    private Ship2dArray(Parcel in){
         int numOfArrays = in.readInt();
         shipsPlayer = new Ship[numOfArrays][];
         for(int i = 0;i < numOfArrays; i++){
             shipsPlayer[i] = in.createTypedArray(Ship.CREATOR);
+            //shipsPlayer[i] = (Ship[]) in.readParcelableArray(Ship.class.getClassLoader());
         }
     }
 
-    public static final Creator<Ship2dArray> CREATOR = new Creator<Ship2dArray>() {
+    // The four possibilities seems to work without noticeable differences
+
+    public static final Parcelable.Creator<Ship2dArray> CREATOR = new Parcelable.Creator<Ship2dArray>() {
         @Override
         public Ship2dArray createFromParcel(Parcel parcel) {
             return new Ship2dArray(parcel);

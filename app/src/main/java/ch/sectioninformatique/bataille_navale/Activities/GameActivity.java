@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -120,7 +121,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             statTime = System.currentTimeMillis();
         }else{
             player = (Player[]) savedInstanceState.getParcelableArray(BUNDLE_PLAYERS);
-            //shipsPlayer = savedInstanceState.getParcelable(BUNDLE_SHIPS_PLAYER); // Don't work for some reason
+            /*
+            TODO :
+                Converting ShipsPlayer to multiples Parcelables one-dimensional arrays
+                Parcelable[]when it need to been saved on the Bundle and fusing the
+                Parcelable[] back to shipsPlayer.
+            */
+            shipsPlayer = savedInstanceState.getParcelable(BUNDLE_SHIPS_PLAYER); // Don't work for some reason
             phase = savedInstanceState.getInt(BUNDLE_PHASE);
             playerTurn = savedInstanceState.getInt(BUNDLE_PLAYER_TURN);
             playerNotTurn = savedInstanceState.getInt(BUNDLE_PLAYER_NOT_TURN);
